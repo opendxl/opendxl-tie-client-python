@@ -1,2 +1,2 @@
 # opendxl-tie-client-python
-OpenDXL Client for McAfee Threat Intelligence Exchange (TIE)
+McAfee Threat Intelligence Exchange (TIE) client library for use with the OpenDXL Python Client
