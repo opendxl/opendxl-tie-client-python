@@ -12,8 +12,8 @@ __version__ = "0.1.0"
 
 def get_version():
     """
-    Returns the version of the McAfee Threat Intelligence Exchange(TIE) DXL Client library
+    Returns the version of the McAfee Threat Intelligence Exchange (TIE) DXL Client library
 
-    :return: The version of the McAfee Threat Intelligence Exchange(TIE) DXL Client library
+    :return: The version of the McAfee Threat Intelligence Exchange (TIE) DXL Client library
     """
     return __version__
