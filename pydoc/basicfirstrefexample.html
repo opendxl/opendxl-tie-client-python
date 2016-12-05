@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic First Reference Example &#8212; McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation" href="index.html" />
+    <link rel="prev" title="Basic Set Reputation Example" href="basicsetreputationexample.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="basicsetreputationexample.html" title="Basic Set Reputation Example"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basic-first-reference-example">
+<h1>Basic First Reference Example<a class="headerlink" href="#basic-first-reference-example" title="Permalink to this headline">¶</a></h1>
+<p>This sample demonstrates invoking the McAfee Threat Intelligence Exchange (TIE) DXL service to retrieve the
+set of systems which have referenced (typically executed) a file (as identified by hashes).</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The samples configuration step has been completed (see <a class="reference internal" href="sampleconfig.html"><span class="doc">Samples Configuration</span></a>)</li>
+<li>A McAfee Threat Intelligence Exchange (TIE) Service is available on the DXL fabric</li>
+</ul>
+</div>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>Modify the example to include the hashes of the file you want to use for the lookup.</p>
+<p>For example:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">FILE_SHA1</span> <span class="o">=</span> <span class="s2">&quot;7eb0139d2175739b3ccb0d1110067820be6abd29&quot;</span>
+<span class="n">FILE_MD5</span> <span class="o">=</span> <span class="s2">&quot;f2c7bb8acc97f92e987a2d4087d021b1&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>This sample is equivalent to running the, <cite>&#8220;Where Has File Run&#8221;</cite> action in the <cite>&#8220;TIE Reputations&#8221;</cite> page within
+ePO.</p>
+<p>A simple way to determine a valid set of hashes to use with this sample is detailed below:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Open ePO and navigate to the <cite>&#8220;TIE Reputations&#8221;</cite> page.</li>
+<li>Select the <cite>&#8220;File Search&#8221;</cite> tab</li>
+<li>Select a <cite>file</cite> in the list</li>
+<li>Click the <cite>&#8220;Actions&#8221;</cite> button at the bottom left and select <cite>&#8220;Where Has File Run&#8221;</cite></li>
+<li>The <cite>&#8220;Where Has File Run&#8221;</cite> results page is displayed. The GUIDs associated with the systems in this list are
+what will be displayed when the sample is executed.</li>
+<li>Close the <cite>&#8220;Where Has File Run&#8221;</cite> results</li>
+<li>Click on the same <cite>file</cite> to display its associated reputation information</li>
+<li>In the <cite>&#8220;File Reputations Information&#8221;</cite> page copy the <cite>&#8220;SHA-1 Hash&#8221;</cite> and <cite>&#8220;MD5 Hash&#8221;</cite> values and paste them
+into the sample prior to running (as shown in the example above)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="running">
+<h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p>To run this sample execute the <code class="docutils literal"><span class="pre">sample/basic/basic_first_ref_example.py</span></code> script as follows:</p>
+<blockquote>
+<div><pre class="literal-block">
+c:\dxltieclient-python-sdk-0.1.0&gt;python sample/basic/basic_first_ref_example.py
+</pre>
+</div></blockquote>
+<p>The output should appear similar to the following:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Systems</span> <span class="n">that</span> <span class="n">have</span> <span class="n">referenced</span> <span class="n">the</span> <span class="nb">file</span><span class="p">:</span>
+
+    <span class="p">{</span><span class="mi">3</span><span class="n">a6f574a</span><span class="o">-</span><span class="mf">3e6</span><span class="n">f</span><span class="o">-</span><span class="mi">436</span><span class="n">d</span><span class="o">-</span><span class="n">acd4</span><span class="o">-</span><span class="n">bcde336b054d</span><span class="p">}:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mo">07</span> <span class="mi">13</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">52</span>
+    <span class="p">{</span><span class="n">d48d3d1a</span><span class="o">-</span><span class="mf">915e-11</span><span class="n">e6</span><span class="o">-</span><span class="mi">323</span><span class="n">a</span><span class="o">-</span><span class="mo">000</span><span class="n">c2992f5d9</span><span class="p">}:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">12</span> <span class="mi">16</span><span class="p">:</span><span class="mi">57</span><span class="p">:</span><span class="mi">54</span>
+    <span class="p">{</span><span class="mi">68125</span><span class="n">cd6</span><span class="o">-</span><span class="n">a5d8</span><span class="o">-</span><span class="mf">11e6</span><span class="o">-</span><span class="mf">348e-000</span><span class="n">c29663178</span><span class="p">}:</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span> <span class="mi">09</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">32</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The sample outputs the GUIDs for systems that have referenced the file. The first time each system referenced the
+file is also displayed.</p>
+</div>
+<div class="section" id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
+<p>The majority of the sample code is shown below:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create the client</span>
+<span class="k">with</span> <span class="n">DxlClient</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+
+    <span class="c1"># Connect to the fabric</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+    <span class="c1"># Create the McAfee Threat Intelligence Exchange (TIE) client</span>
+    <span class="n">tie_client</span> <span class="o">=</span> <span class="n">TieClient</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+
+    <span class="c1"># Get the list of systems that have referenced the file</span>
+    <span class="n">system_list</span> <span class="o">=</span> \
+        <span class="n">tie_client</span><span class="o">.</span><span class="n">get_file_first_references</span><span class="p">({</span>
+            <span class="n">HashType</span><span class="o">.</span><span class="n">SHA1</span><span class="p">:</span> <span class="n">FILE_SHA1</span><span class="p">,</span>
+            <span class="n">HashType</span><span class="o">.</span><span class="n">MD5</span><span class="p">:</span> <span class="n">FILE_MD5</span>
+        <span class="p">})</span>
+
+    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Systems that have referenced the file:</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="k">for</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">system_list</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">system</span><span class="p">[</span><span class="n">FirstRefProp</span><span class="o">.</span><span class="n">SYSTEM_GUID</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> \
+              <span class="n">FirstRefProp</span><span class="o">.</span><span class="n">to_localtime_string</span><span class="p">(</span><span class="n">system</span><span class="p">[</span><span class="n">FirstRefProp</span><span class="o">.</span><span class="n">DATE</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Once a connection is established to the DXL fabric, a <a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient" title="dxltieclient.client.TieClient"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.client.TieClient</span></code></a> instance is created
+which will be used to communicate with the TIE DXL services.</p>
+<p>A call is made to the <a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.get_file_first_references" title="dxltieclient.client.TieClient.get_file_first_references"><code class="xref py py-func docutils literal"><span class="pre">dxltieclient.client.TieClient.get_file_first_references()</span></code></a> method of the
+<a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient" title="dxltieclient.client.TieClient"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.client.TieClient</span></code></a> instance along with the hash values that are used to identify the file.</p>
+<p>The list of returned systems are iterated, displaying the system&#8217;s GUID along with the first time
+the system referenced the file.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Basic First Reference Example</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#running">Running</a></li>
+<li><a class="reference internal" href="#details">Details</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="basicsetreputationexample.html"
+                        title="previous chapter">Basic Set Reputation Example</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/basicfirstrefexample.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="basicsetreputationexample.html" title="Basic Set Reputation Example"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, McAfee Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

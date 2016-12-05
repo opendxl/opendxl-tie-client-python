@@ -1,0 +1,1283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dxltieclient.constants module &#8212; McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation" href="index.html" />
+    <link rel="up" title="dxltieclient package" href="dxltieclient.html" />
+    <link rel="next" title="Samples Configuration" href="sampleconfig.html" />
+    <link rel="prev" title="dxltieclient.client module" href="dxltieclient.client.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sampleconfig.html" title="Samples Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dxltieclient.client.html" title="dxltieclient.client module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="dxltieclient.html" accesskey="U">dxltieclient package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-dxltieclient.constants">
+<span id="dxltieclient-constants-module"></span><h1>dxltieclient.constants module<a class="headerlink" href="#module-dxltieclient.constants" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="dxltieclient.constants.AtdAttrib">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">AtdAttrib</code><a class="headerlink" href="#dxltieclient.constants.AtdAttrib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attributes associated with <cite>file reputations</cite> returned by the Advanced Threat Defense (ATD)
+<cite>reputation provider</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="9%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Numeric</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GAM_SCORE</td>
+<td>4194962</td>
+<td><p class="first">The <cite>trust score</cite> reported by the Gateway Anti-Malware (GAM)</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.AtdTrustLevel" title="dxltieclient.constants.AtdTrustLevel"><code class="xref py py-class docutils literal"><span class="pre">AtdTrustLevel</span></code></a> constants class for the list of
+ATD <cite>trust levels</cite></p>
+</td>
+</tr>
+<tr class="row-odd"><td>AV_ENGINE_SCORE</td>
+<td>4195218</td>
+<td><p class="first">The <cite>trust score</cite> reported by the Anti-Virus engine</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.AtdTrustLevel" title="dxltieclient.constants.AtdTrustLevel"><code class="xref py py-class docutils literal"><span class="pre">AtdTrustLevel</span></code></a> constants class for the list of
+ATD <cite>trust levels</cite></p>
+</td>
+</tr>
+<tr class="row-even"><td>SANDBOX_SCORE</td>
+<td>4195474</td>
+<td><p class="first">The <cite>trust score</cite> as a result of the sandbox evaluation</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.AtdTrustLevel" title="dxltieclient.constants.AtdTrustLevel"><code class="xref py py-class docutils literal"><span class="pre">AtdTrustLevel</span></code></a> constants class for the list of
+ATD <cite>trust levels</cite></p>
+</td>
+</tr>
+<tr class="row-odd"><td>VERDICT</td>
+<td>4195730</td>
+<td><p class="first">The overall verdict (taking into consideration all available
+information)</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.AtdTrustLevel" title="dxltieclient.constants.AtdTrustLevel"><code class="xref py py-class docutils literal"><span class="pre">AtdTrustLevel</span></code></a> constants class for the list of
+ATD <cite>trust levels</cite></p>
+</td>
+</tr>
+<tr class="row-even"><td>BEHAVIORS</td>
+<td>4197784</td>
+<td>An encoded structure that contains observed behaviors of the
+file.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdAttrib.AV_ENGINE_SCORE">
+<code class="descname">AV_ENGINE_SCORE</code><em class="property"> = '4195218'</em><a class="headerlink" href="#dxltieclient.constants.AtdAttrib.AV_ENGINE_SCORE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdAttrib.BEHAVIORS">
+<code class="descname">BEHAVIORS</code><em class="property"> = '4197784'</em><a class="headerlink" href="#dxltieclient.constants.AtdAttrib.BEHAVIORS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdAttrib.GAM_SCORE">
+<code class="descname">GAM_SCORE</code><em class="property"> = '4194962'</em><a class="headerlink" href="#dxltieclient.constants.AtdAttrib.GAM_SCORE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdAttrib.SANDBOX_SCORE">
+<code class="descname">SANDBOX_SCORE</code><em class="property"> = '4195474'</em><a class="headerlink" href="#dxltieclient.constants.AtdAttrib.SANDBOX_SCORE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdAttrib.VERDICT">
+<code class="descname">VERDICT</code><em class="property"> = '4195730'</em><a class="headerlink" href="#dxltieclient.constants.AtdAttrib.VERDICT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.AtdTrustLevel">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">AtdTrustLevel</code><a class="headerlink" href="#dxltieclient.constants.AtdTrustLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constants that are used to indicate the <cite>trust level</cite> of a file or certificate as returned by the
+Advanced Threat Defense (ATD) <cite>reputation provider</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="9%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Trust Level</th>
+<th class="head">Numeric</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>KNOWN_TRUSTED</td>
+<td>-1</td>
+<td>It is a trusted file or certificate.</td>
+</tr>
+<tr class="row-odd"><td>MOST_LIKELY_TRUSTED</td>
+<td>0</td>
+<td>It is almost certain that the file or certificate is trusted.</td>
+</tr>
+<tr class="row-even"><td>MIGHT_BE_TRUSTED</td>
+<td>1</td>
+<td>It seems to be a benign file or certificate.</td>
+</tr>
+<tr class="row-odd"><td>UNKNOWN</td>
+<td>2</td>
+<td>The reputation provider has encountered the file or
+certificate before but the provider can&#8217;t determine its
+reputation at the moment.</td>
+</tr>
+<tr class="row-even"><td>MIGHT_BE_MALICIOUS</td>
+<td>3</td>
+<td>It seems to be a suspicious file or certificate.</td>
+</tr>
+<tr class="row-odd"><td>MOST_LIKELY_MALICIOUS</td>
+<td>4</td>
+<td>It is almost certain that the file or certificate is
+malicious.</td>
+</tr>
+<tr class="row-even"><td>KNOWN_MALICIOUS</td>
+<td>5</td>
+<td>It is a malicious file or certificate.</td>
+</tr>
+<tr class="row-odd"><td>NOT_SET</td>
+<td>-2</td>
+<td>The file or certificate&#8217;s reputation hasn&#8217;t been determined
+yet.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdTrustLevel.KNOWN_MALICIOUS">
+<code class="descname">KNOWN_MALICIOUS</code><em class="property"> = 5</em><a class="headerlink" href="#dxltieclient.constants.AtdTrustLevel.KNOWN_MALICIOUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdTrustLevel.KNOWN_TRUSTED">
+<code class="descname">KNOWN_TRUSTED</code><em class="property"> = -1</em><a class="headerlink" href="#dxltieclient.constants.AtdTrustLevel.KNOWN_TRUSTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdTrustLevel.MIGHT_BE_MALICIOUS">
+<code class="descname">MIGHT_BE_MALICIOUS</code><em class="property"> = 3</em><a class="headerlink" href="#dxltieclient.constants.AtdTrustLevel.MIGHT_BE_MALICIOUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdTrustLevel.MIGHT_BE_TRUSTED">
+<code class="descname">MIGHT_BE_TRUSTED</code><em class="property"> = 1</em><a class="headerlink" href="#dxltieclient.constants.AtdTrustLevel.MIGHT_BE_TRUSTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdTrustLevel.MOST_LIKELY_MALICIOUS">
+<code class="descname">MOST_LIKELY_MALICIOUS</code><em class="property"> = 4</em><a class="headerlink" href="#dxltieclient.constants.AtdTrustLevel.MOST_LIKELY_MALICIOUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdTrustLevel.MOST_LIKELY_TRUSTED">
+<code class="descname">MOST_LIKELY_TRUSTED</code><em class="property"> = 0</em><a class="headerlink" href="#dxltieclient.constants.AtdTrustLevel.MOST_LIKELY_TRUSTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdTrustLevel.NOT_SET">
+<code class="descname">NOT_SET</code><em class="property"> = -2</em><a class="headerlink" href="#dxltieclient.constants.AtdTrustLevel.NOT_SET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.AtdTrustLevel.UNKNOWN">
+<code class="descname">UNKNOWN</code><em class="property"> = 2</em><a class="headerlink" href="#dxltieclient.constants.AtdTrustLevel.UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.CertEnterpriseAttrib">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">CertEnterpriseAttrib</code><a class="headerlink" href="#dxltieclient.constants.CertEnterpriseAttrib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.EnterpriseAttrib" title="dxltieclient.constants.EnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.EnterpriseAttrib</span></code></a></p>
+<p>Attributes associated with <cite>certificate reputations</cite> returned by the Enterprise <cite>reputation provider</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="9%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Numeric</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>FIRST_CONTACT</td>
+<td>2109589</td>
+<td>The time the certificate was first seen (Epoch time string)</td>
+</tr>
+<tr class="row-odd"><td>PREVALENCE</td>
+<td>2109333</td>
+<td>The count of unique systems that have executed a file that is
+associated with the certificate (via signing)</td>
+</tr>
+<tr class="row-even"><td>HAS_FILE_OVERRIDES</td>
+<td>2122901</td>
+<td>Whether one or more files associated with the certificate is
+overriding its reputation</td>
+</tr>
+<tr class="row-odd"><td>IS_PREVALENT</td>
+<td>2125972</td>
+<td>Whether the certificate is considered to be <cite>prevalent</cite> within
+the enterprise</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertEnterpriseAttrib.FIRST_CONTACT">
+<code class="descname">FIRST_CONTACT</code><em class="property"> = '2109589'</em><a class="headerlink" href="#dxltieclient.constants.CertEnterpriseAttrib.FIRST_CONTACT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertEnterpriseAttrib.HAS_FILE_OVERRIDES">
+<code class="descname">HAS_FILE_OVERRIDES</code><em class="property"> = '2122901'</em><a class="headerlink" href="#dxltieclient.constants.CertEnterpriseAttrib.HAS_FILE_OVERRIDES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertEnterpriseAttrib.IS_PREVALENT">
+<code class="descname">IS_PREVALENT</code><em class="property"> = '2125972'</em><a class="headerlink" href="#dxltieclient.constants.CertEnterpriseAttrib.IS_PREVALENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertEnterpriseAttrib.PREVALENCE">
+<code class="descname">PREVALENCE</code><em class="property"> = '2109333'</em><a class="headerlink" href="#dxltieclient.constants.CertEnterpriseAttrib.PREVALENCE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.CertGtiAttrib">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">CertGtiAttrib</code><a class="headerlink" href="#dxltieclient.constants.CertGtiAttrib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.GtiAttrib" title="dxltieclient.constants.GtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.GtiAttrib</span></code></a></p>
+<p>Attributes associated with <cite>certificate reputations</cite> returned by the Global Threat Intelligence (GTI)
+<cite>reputation provider</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="9%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Numeric</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>FIRST_CONTACT</td>
+<td>2109077</td>
+<td>The time the certificate was first seen (Epoch time string)</td>
+</tr>
+<tr class="row-odd"><td>PREVALENCE</td>
+<td>2108821</td>
+<td>The number of times the certificate has been requested.</td>
+</tr>
+<tr class="row-even"><td>REVOKED</td>
+<td>2117524</td>
+<td>Whether the certificate has been revoked</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertGtiAttrib.FIRST_CONTACT">
+<code class="descname">FIRST_CONTACT</code><em class="property"> = '2109077'</em><a class="headerlink" href="#dxltieclient.constants.CertGtiAttrib.FIRST_CONTACT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertGtiAttrib.PREVALENCE">
+<code class="descname">PREVALENCE</code><em class="property"> = '2108821'</em><a class="headerlink" href="#dxltieclient.constants.CertGtiAttrib.PREVALENCE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertGtiAttrib.REVOKED">
+<code class="descname">REVOKED</code><em class="property"> = '2117524'</em><a class="headerlink" href="#dxltieclient.constants.CertGtiAttrib.REVOKED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.CertProvider">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">CertProvider</code><a class="headerlink" href="#dxltieclient.constants.CertProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constants that are used to indicate the <cite>provider</cite> of a particular <cite>certificate reputation</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="11%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Provider</th>
+<th class="head">Numeric</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GTI</td>
+<td>2</td>
+<td>Global Threat Intelligence (GTI)</td>
+</tr>
+<tr class="row-odd"><td>ENTERPRISE</td>
+<td>4</td>
+<td>Enterprise reputation (specific to the local enterprise)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertProvider.ENTERPRISE">
+<code class="descname">ENTERPRISE</code><em class="property"> = 4</em><a class="headerlink" href="#dxltieclient.constants.CertProvider.ENTERPRISE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertProvider.GTI">
+<code class="descname">GTI</code><em class="property"> = 2</em><a class="headerlink" href="#dxltieclient.constants.CertProvider.GTI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.EnterpriseAttrib">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">EnterpriseAttrib</code><a class="headerlink" href="#dxltieclient.constants.EnterpriseAttrib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.EpochMixin</span></code></a></p>
+<p>Attributes associated with <cite>reputations</cite> (for files and certificates) returned by
+the Enterprise <cite>reputation provider</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="9%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Numeric</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>SERVER_VERSION</td>
+<td>2139285</td>
+<td><p class="first">The version of the TIE server that returned the <cite>reputations</cite>
+(encoded version string)</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EnterpriseAttrib.to_version_tuple" title="dxltieclient.constants.EnterpriseAttrib.to_version_tuple"><code class="xref py py-func docutils literal"><span class="pre">to_version_tuple()</span></code></a> and <a class="reference internal" href="#dxltieclient.constants.EnterpriseAttrib.to_version_string" title="dxltieclient.constants.EnterpriseAttrib.to_version_string"><code class="xref py py-func docutils literal"><span class="pre">to_version_string()</span></code></a>
+helper methods used to parse the encoded version string.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.EnterpriseAttrib.SERVER_VERSION">
+<code class="descname">SERVER_VERSION</code><em class="property"> = '2139285'</em><a class="headerlink" href="#dxltieclient.constants.EnterpriseAttrib.SERVER_VERSION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="dxltieclient.constants.EnterpriseAttrib.to_version_string">
+<em class="property">static </em><code class="descname">to_version_string</code><span class="sig-paren">(</span><em>version_attrib</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.constants.EnterpriseAttrib.to_version_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a version string corresponding to the specified encoded version string</p>
+<p>For example: <code class="docutils literal"><span class="pre">1.4.0.190</span></code></p>
+<p><strong>Example Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ent_rep</span> <span class="o">=</span> <span class="n">reputations_dict</span><span class="p">[</span><span class="n">FileProvider</span><span class="o">.</span><span class="n">ENTERPRISE</span><span class="p">]</span>
+<span class="n">ent_rep_attribs</span> <span class="o">=</span> <span class="n">ent_rep</span><span class="p">[</span><span class="n">ReputationProp</span><span class="o">.</span><span class="n">ATTRIBUTES</span><span class="p">]</span>
+<span class="n">version_string</span> <span class="o">=</span> <span class="n">EnterpriseAttrib</span><span class="o">.</span><span class="n">to_version_string</span><span class="p">(</span>
+    <span class="n">ent_rep_attribs</span><span class="p">[</span><span class="n">EnterpriseAttrib</span><span class="o">.</span><span class="n">SERVER_VERSION</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>version_attrib</strong> &#8211; The encoded version string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A version string corresponding to the specified encoded version string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="dxltieclient.constants.EnterpriseAttrib.to_version_tuple">
+<em class="property">static </em><code class="descname">to_version_tuple</code><span class="sig-paren">(</span><em>version_attrib</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.constants.EnterpriseAttrib.to_version_tuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <code class="docutils literal"><span class="pre">tuple</span></code> of version values corresponding to the specified encoded version string</p>
+<p>For example: <code class="docutils literal"><span class="pre">(1L,</span> <span class="pre">4L,</span> <span class="pre">0L,</span> <span class="pre">190L)</span></code></p>
+<p><strong>Example Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ent_rep</span> <span class="o">=</span> <span class="n">reputations_dict</span><span class="p">[</span><span class="n">FileProvider</span><span class="o">.</span><span class="n">ENTERPRISE</span><span class="p">]</span>
+<span class="n">ent_rep_attribs</span> <span class="o">=</span> <span class="n">ent_rep</span><span class="p">[</span><span class="n">ReputationProp</span><span class="o">.</span><span class="n">ATTRIBUTES</span><span class="p">]</span>
+<span class="n">version_tuple</span> <span class="o">=</span> <span class="n">EnterpriseAttrib</span><span class="o">.</span><span class="n">to_version_tuple</span><span class="p">(</span>
+    <span class="n">ent_rep_attribs</span><span class="p">[</span><span class="n">EnterpriseAttrib</span><span class="o">.</span><span class="n">SERVER_VERSION</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Result</strong></p>
+<blockquote>
+<div><p>This method will return a <code class="docutils literal"><span class="pre">tuple</span></code> containing the server version values in the
+following order:</p>
+<ul class="simple">
+<li>The major version</li>
+<li>The minor version</li>
+<li>The patch version</li>
+<li>The build version</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>version_attrib</strong> &#8211; The encoded version string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <code class="docutils literal"><span class="pre">tuple</span></code> corresponding to the specified encoded version string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.EpochMixin">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">EpochMixin</code><a class="headerlink" href="#dxltieclient.constants.EpochMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mixin (helper) class that provides utility methods for parsing properties/attributes that
+contain Epoch times as strings.</p>
+<dl class="staticmethod">
+<dt id="dxltieclient.constants.EpochMixin.to_localtime">
+<em class="property">static </em><code class="descname">to_localtime</code><span class="sig-paren">(</span><em>epoch_string</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.constants.EpochMixin.to_localtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the specified Epoch string to local time.</p>
+<p><strong>Example Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ent_rep</span> <span class="o">=</span> <span class="n">reputations_dict</span><span class="p">[</span><span class="n">FileProvider</span><span class="o">.</span><span class="n">ENTERPRISE</span><span class="p">]</span>
+<span class="n">ent_rep_attribs</span> <span class="o">=</span> <span class="n">ent_rep</span><span class="p">[</span><span class="n">ReputationProp</span><span class="o">.</span><span class="n">ATTRIBUTES</span><span class="p">]</span>
+<span class="n">local_time</span> <span class="o">=</span> <span class="n">FileEnterpriseAttrib</span><span class="o">.</span><span class="n">to_localtime</span><span class="p">(</span>
+    <span class="n">ent_rep_attribs</span><span class="p">[</span><span class="n">FileEnterpriseAttrib</span><span class="o">.</span><span class="n">FIRST_CONTACT</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>epoch_string</strong> &#8211; Time as an Epoch string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Time in local time</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="dxltieclient.constants.EpochMixin.to_localtime_string">
+<em class="property">static </em><code class="descname">to_localtime_string</code><span class="sig-paren">(</span><em>epoch_string</em>, <em>format='%Y-%m-%d %H:%M:%S'</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.constants.EpochMixin.to_localtime_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the specified Epoch string to a local time string.</p>
+<p><strong>Example Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ent_rep</span> <span class="o">=</span> <span class="n">reputations_dict</span><span class="p">[</span><span class="n">FileProvider</span><span class="o">.</span><span class="n">ENTERPRISE</span><span class="p">]</span>
+<span class="n">ent_rep_attribs</span> <span class="o">=</span> <span class="n">ent_rep</span><span class="p">[</span><span class="n">ReputationProp</span><span class="o">.</span><span class="n">ATTRIBUTES</span><span class="p">]</span>
+<span class="n">local_time_string</span> <span class="o">=</span> <span class="n">FileEnterpriseAttrib</span><span class="o">.</span><span class="n">to_localtime_string</span><span class="p">(</span>
+    <span class="n">ent_rep_attribs</span><span class="p">[</span><span class="n">FileEnterpriseAttrib</span><span class="o">.</span><span class="n">FIRST_CONTACT</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>epoch_string</strong> &#8211; Time as an Epoch string</li>
+<li><strong>format</strong> &#8211; The format to use to convert time to a string (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Time as a local time string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">FileEnterpriseAttrib</code><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.EnterpriseAttrib" title="dxltieclient.constants.EnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.EnterpriseAttrib</span></code></a></p>
+<p>Attributes associated with <cite>files reputations</cite> returned by the Enterprise <cite>reputation provider</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="9%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Numeric</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>FIRST_CONTACT</td>
+<td>2102165</td>
+<td><p class="first">The time the file was first seen (Epoch time string)</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to
+parse the Epoch time string.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>PREVALENCE</td>
+<td>2101652</td>
+<td>The count of unique systems that have executed the file</td>
+</tr>
+<tr class="row-even"><td>ENTERPRISE_SIZE</td>
+<td>2111893</td>
+<td>The count of systems within the local enterprise</td>
+</tr>
+<tr class="row-odd"><td>MIN_LOCAL_REP</td>
+<td>2112148</td>
+<td>The lowest reputation found locally on a system</td>
+</tr>
+<tr class="row-even"><td>MAX_LOCAL_REP</td>
+<td>2112404</td>
+<td>The highest reputation found locally on a system</td>
+</tr>
+<tr class="row-odd"><td>AVG_LOCAL_REP</td>
+<td>2112660</td>
+<td>The average reputation found locally on systems</td>
+</tr>
+<tr class="row-even"><td>PARENT_MIN_LOCAL_REP</td>
+<td>2112916</td>
+<td>The lowest reputation for the parent found locally on a system</td>
+</tr>
+<tr class="row-odd"><td>PARENT_MAX_LOCAL_REP</td>
+<td>2113172</td>
+<td>The highest reputation for the parent found locally on a system</td>
+</tr>
+<tr class="row-even"><td>PARENT_AVG_LOCAL_REP</td>
+<td>2113428</td>
+<td>The average reputation for the parent found locally on systems</td>
+</tr>
+<tr class="row-odd"><td>FILE_NAME_COUNT</td>
+<td>2114965</td>
+<td>The count of unique file names for the file</td>
+</tr>
+<tr class="row-even"><td>DETECTION_COUNT</td>
+<td>2113685</td>
+<td>The count of detections for the file or certificate</td>
+</tr>
+<tr class="row-odd"><td>LAST_DETECTION_TIME</td>
+<td>2113942</td>
+<td><p class="first">The last time a detection occurred (Epoch time string)</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to
+parse the Epoch time string.</p>
+</td>
+</tr>
+<tr class="row-even"><td>IS_PREVALENT</td>
+<td>2123156</td>
+<td>Whether the file is considered to be <cite>prevalent</cite> within the
+enterprise</td>
+</tr>
+<tr class="row-odd"><td>CHILD_FILE_REPS</td>
+<td>2138520</td>
+<td><p class="first">The child file reputations (aggregate string)</p>
+<p class="last">Use the <a class="reference internal" href="#dxltieclient.constants.FileEnterpriseAttrib.to_aggregate_tuple" title="dxltieclient.constants.FileEnterpriseAttrib.to_aggregate_tuple"><code class="xref py py-func docutils literal"><span class="pre">to_aggregate_tuple()</span></code></a> helper function to parse this
+attribute</p>
+</td>
+</tr>
+<tr class="row-even"><td>PARENT_FILE_REPS</td>
+<td>2138264</td>
+<td><p class="first">The parent file reputations (aggregate string)</p>
+<p class="last">Use the <a class="reference internal" href="#dxltieclient.constants.FileEnterpriseAttrib.to_aggregate_tuple" title="dxltieclient.constants.FileEnterpriseAttrib.to_aggregate_tuple"><code class="xref py py-func docutils literal"><span class="pre">to_aggregate_tuple()</span></code></a> helper function to parse this
+attribute</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.AVG_LOCAL_REP">
+<code class="descname">AVG_LOCAL_REP</code><em class="property"> = '2112660'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.AVG_LOCAL_REP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.CHILD_FILE_REPS">
+<code class="descname">CHILD_FILE_REPS</code><em class="property"> = '2138520'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.CHILD_FILE_REPS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.DETECTION_COUNT">
+<code class="descname">DETECTION_COUNT</code><em class="property"> = '2113685'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.DETECTION_COUNT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.ENTERPRISE_SIZE">
+<code class="descname">ENTERPRISE_SIZE</code><em class="property"> = '2111893'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.ENTERPRISE_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.FILE_NAME_COUNT">
+<code class="descname">FILE_NAME_COUNT</code><em class="property"> = '2114965'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.FILE_NAME_COUNT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.FIRST_CONTACT">
+<code class="descname">FIRST_CONTACT</code><em class="property"> = '2102165'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.FIRST_CONTACT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.IS_PREVALENT">
+<code class="descname">IS_PREVALENT</code><em class="property"> = '2123156'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.IS_PREVALENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.LAST_DETECTION_TIME">
+<code class="descname">LAST_DETECTION_TIME</code><em class="property"> = '2113942'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.LAST_DETECTION_TIME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.MAX_LOCAL_REP">
+<code class="descname">MAX_LOCAL_REP</code><em class="property"> = '2112404'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.MAX_LOCAL_REP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.MIN_LOCAL_REP">
+<code class="descname">MIN_LOCAL_REP</code><em class="property"> = '2112148'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.MIN_LOCAL_REP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.PARENT_AVG_LOCAL_REP">
+<code class="descname">PARENT_AVG_LOCAL_REP</code><em class="property"> = '2113428'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.PARENT_AVG_LOCAL_REP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.PARENT_FILE_REPS">
+<code class="descname">PARENT_FILE_REPS</code><em class="property"> = '2138264'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.PARENT_FILE_REPS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.PARENT_MAX_LOCAL_REP">
+<code class="descname">PARENT_MAX_LOCAL_REP</code><em class="property"> = '2113172'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.PARENT_MAX_LOCAL_REP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.PARENT_MIN_LOCAL_REP">
+<code class="descname">PARENT_MIN_LOCAL_REP</code><em class="property"> = '2112916'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.PARENT_MIN_LOCAL_REP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.PREVALENCE">
+<code class="descname">PREVALENCE</code><em class="property"> = '2101652'</em><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.PREVALENCE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="dxltieclient.constants.FileEnterpriseAttrib.to_aggregate_tuple">
+<em class="property">static </em><code class="descname">to_aggregate_tuple</code><span class="sig-paren">(</span><em>aggregate_attrib</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib.to_aggregate_tuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <cite>tuple</cite> containing the values from the specified aggregate string.</p>
+<p>For example: <code class="docutils literal"><span class="pre">(2,</span> <span class="pre">100,</span> <span class="pre">50,</span> <span class="pre">100,</span> <span class="pre">75.0)</span></code></p>
+<p><strong>Example Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ent_rep</span> <span class="o">=</span> <span class="n">reputations_dict</span><span class="p">[</span><span class="n">FileProvider</span><span class="o">.</span><span class="n">ENTERPRISE</span><span class="p">]</span>
+<span class="n">ent_rep_attribs</span> <span class="o">=</span> <span class="n">ent_rep</span><span class="p">[</span><span class="n">ReputationProp</span><span class="o">.</span><span class="n">ATTRIBUTES</span><span class="p">]</span>
+<span class="n">aggregate_tuple</span> <span class="o">=</span> <span class="n">FileEnterpriseAttrib</span><span class="o">.</span><span class="n">to_aggregate_tuple</span><span class="p">(</span>
+    <span class="n">ent_rep_attribs</span><span class="p">[</span><span class="n">FileEnterpriseAttrib</span><span class="o">.</span><span class="n">CHILD_FILE_REPS</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>Result</strong></p>
+<blockquote>
+<div><p>This method will return a <code class="docutils literal"><span class="pre">tuple</span></code> containing the values that were in the aggregate
+string in the following order:</p>
+<ul class="simple">
+<li>The count of files</li>
+<li>The maximum <cite>trust level</cite> found across the files</li>
+<li>The minimum <cite>trust level</cite> found across the files</li>
+<li>The <cite>trust level</cite> for the last file</li>
+<li>The average <cite>trust level</cite> across the files</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>aggregate_attrib</strong> &#8211; The aggregate string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <cite>tuple</cite> containing the values in the specified aggregate string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.FileGtiAttrib">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">FileGtiAttrib</code><a class="headerlink" href="#dxltieclient.constants.FileGtiAttrib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.GtiAttrib" title="dxltieclient.constants.GtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.GtiAttrib</span></code></a></p>
+<p>Attributes associated with <cite>files reputations</cite> returned by the Global Threat Intelligence (GTI)
+<cite>reputation provider</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="9%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Numeric</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>FIRST_CONTACT</td>
+<td>2101908</td>
+<td><p class="first">The time the file was first seen (Epoch time string)</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to
+parse the Epoch time string.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>PREVALENCE</td>
+<td>2102421</td>
+<td>The number of times the file has been requested.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileGtiAttrib.FIRST_CONTACT">
+<code class="descname">FIRST_CONTACT</code><em class="property"> = '2101908'</em><a class="headerlink" href="#dxltieclient.constants.FileGtiAttrib.FIRST_CONTACT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileGtiAttrib.PREVALENCE">
+<code class="descname">PREVALENCE</code><em class="property"> = '2102421'</em><a class="headerlink" href="#dxltieclient.constants.FileGtiAttrib.PREVALENCE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.FileProvider">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">FileProvider</code><a class="headerlink" href="#dxltieclient.constants.FileProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constants that are used to indicate the <cite>provider</cite> of a particular <cite>file reputation</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="11%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Provider</th>
+<th class="head">Numeric</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GTI</td>
+<td>1</td>
+<td>Global Threat Intelligence (GTI)</td>
+</tr>
+<tr class="row-odd"><td>ENTERPRISE</td>
+<td>3</td>
+<td>Enterprise reputation (specific to the local enterprise)</td>
+</tr>
+<tr class="row-even"><td>ATD</td>
+<td>5</td>
+<td>McAfee Advanced Threat Defense (ATD)</td>
+</tr>
+<tr class="row-odd"><td>MWG</td>
+<td>7</td>
+<td>McAfee Web Gateway (MWG)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileProvider.ATD">
+<code class="descname">ATD</code><em class="property"> = 5</em><a class="headerlink" href="#dxltieclient.constants.FileProvider.ATD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileProvider.ENTERPRISE">
+<code class="descname">ENTERPRISE</code><em class="property"> = 3</em><a class="headerlink" href="#dxltieclient.constants.FileProvider.ENTERPRISE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileProvider.GTI">
+<code class="descname">GTI</code><em class="property"> = 1</em><a class="headerlink" href="#dxltieclient.constants.FileProvider.GTI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileProvider.MWG">
+<code class="descname">MWG</code><em class="property"> = 7</em><a class="headerlink" href="#dxltieclient.constants.FileProvider.MWG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.FirstRefProp">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">FirstRefProp</code><a class="headerlink" href="#dxltieclient.constants.FirstRefProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.EpochMixin</span></code></a></p>
+<p>The properties that are available in a <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) for each system that has referenced a
+file or certificate.</p>
+<p>For more information, see the &#8220;first reference&#8221; methods:</p>
+<dl class="docutils">
+<dt>For files:</dt>
+<dd><a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.get_file_first_references" title="dxltieclient.client.TieClient.get_file_first_references"><code class="xref py py-func docutils literal"><span class="pre">dxltieclient.client.TieClient.get_file_first_references()</span></code></a></dd>
+<dt>For certificates:</dt>
+<dd><p class="first"><a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.get_certificate_first_references" title="dxltieclient.client.TieClient.get_certificate_first_references"><code class="xref py py-func docutils literal"><span class="pre">dxltieclient.client.TieClient.get_certificate_first_references()</span></code></a></p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>DATE</td>
+<td><p class="first">The time the system first referenced the file or certificate
+(Epoch time string)</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to parse the
+Epoch time string.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>SYSTEM_GUID</td>
+<td>The GUID of the system that referenced the file or certificate</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="dxltieclient.constants.FirstRefProp.DATE">
+<code class="descname">DATE</code><em class="property"> = 'date'</em><a class="headerlink" href="#dxltieclient.constants.FirstRefProp.DATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.FirstRefProp.SYSTEM_GUID">
+<code class="descname">SYSTEM_GUID</code><em class="property"> = 'agentGuid'</em><a class="headerlink" href="#dxltieclient.constants.FirstRefProp.SYSTEM_GUID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.GtiAttrib">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">GtiAttrib</code><a class="headerlink" href="#dxltieclient.constants.GtiAttrib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attributes associated with <cite>reputations</cite> (for files and certificates) returned by
+the Global Threat Intelligence (GTI) <cite>reputation provider</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="9%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Numeric</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ORIGINAL_RESPONSE</td>
+<td>2120340</td>
+<td>The raw response as returned by the
+Global Threat Intelligence (GTI) <cite>reputation provider</cite></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.GtiAttrib.ORIGINAL_RESPONSE">
+<code class="descname">ORIGINAL_RESPONSE</code><em class="property"> = '2120340'</em><a class="headerlink" href="#dxltieclient.constants.GtiAttrib.ORIGINAL_RESPONSE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.HashType">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">HashType</code><a class="headerlink" href="#dxltieclient.constants.HashType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constants that are used to indicate <cite>hash type</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>MD5</td>
+<td>The MD5 algorithm (128-bit)</td>
+</tr>
+<tr class="row-odd"><td>SHA1</td>
+<td>The Secure Hash Algorithm 1 (SHA-1) (160-bit)</td>
+</tr>
+<tr class="row-even"><td>SHA256</td>
+<td>The Secure Hash Algorithm 2, 256 bit digest (SHA-256)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.HashType.MD5">
+<code class="descname">MD5</code><em class="property"> = 'md5'</em><a class="headerlink" href="#dxltieclient.constants.HashType.MD5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.HashType.SHA1">
+<code class="descname">SHA1</code><em class="property"> = 'sha1'</em><a class="headerlink" href="#dxltieclient.constants.HashType.SHA1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.HashType.SHA256">
+<code class="descname">SHA256</code><em class="property"> = 'sha256'</em><a class="headerlink" href="#dxltieclient.constants.HashType.SHA256" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.ReputationProp">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">ReputationProp</code><a class="headerlink" href="#dxltieclient.constants.ReputationProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The standard set of properties that are included with each <cite>reputation</cite>.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>PROVIDER_ID</td>
+<td><p class="first">The identifier of the particular <cite>provider</cite> that provided this</p>
+<p>See the <a class="reference internal" href="#dxltieclient.constants.FileProvider" title="dxltieclient.constants.FileProvider"><code class="xref py py-class docutils literal"><span class="pre">FileProvider</span></code></a> constants class for the list of
+<cite>file reputation providers</cite>.</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.CertProvider" title="dxltieclient.constants.CertProvider"><code class="xref py py-class docutils literal"><span class="pre">CertProvider</span></code></a> constants class for the list of
+<cite>certificate reputation providers</cite>.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>TRUST_LEVEL</td>
+<td><p class="first">The <cite>trust level</cite> for the reputation subject (file, certificate, etc.)</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.TrustLevel" title="dxltieclient.constants.TrustLevel"><code class="xref py py-class docutils literal"><span class="pre">TrustLevel</span></code></a> constants class for the standard set of
+<cite>trust levels</cite>.</p>
+</td>
+</tr>
+<tr class="row-even"><td>CREATE_DATE</td>
+<td><p class="first">The time this reputation was created (Epoch time string)</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper
+methods used to parse the Epoch time string.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>ATTRIBUTES</td>
+<td><p class="first">A provider-specific set of attributes associated with the reputation.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#dxltieclient.constants.FileEnterpriseAttrib" title="dxltieclient.constants.FileEnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">FileEnterpriseAttrib</span></code></a></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Attributes associated with the <cite>Enterprise</cite> reputation provider for
+files</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><a class="reference internal" href="#dxltieclient.constants.FileGtiAttrib" title="dxltieclient.constants.FileGtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">FileGtiAttrib</span></code></a></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Attributes associated with the <cite>Global Threat Intelligence (GTI)</cite>
+reputation provider for files</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><a class="reference internal" href="#dxltieclient.constants.AtdAttrib" title="dxltieclient.constants.AtdAttrib"><code class="xref py py-class docutils literal"><span class="pre">AtdAttrib</span></code></a></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Attributes associated with the <cite>Advanced Threat Defense (ATD)</cite>
+reputation provider</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><a class="reference internal" href="#dxltieclient.constants.CertEnterpriseAttrib" title="dxltieclient.constants.CertEnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">CertEnterpriseAttrib</span></code></a></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Attributes associated with the <cite>Enterprise</cite> reputation provider for
+certificates</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><a class="reference internal" href="#dxltieclient.constants.CertGtiAttrib" title="dxltieclient.constants.CertGtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">CertGtiAttrib</span></code></a></li>
+</ul>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Attributes associated with the <cite>Global Threat Intelligence (GTI)</cite>
+reputation provider for certificates</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.ReputationProp.ATTRIBUTES">
+<code class="descname">ATTRIBUTES</code><em class="property"> = 'attributes'</em><a class="headerlink" href="#dxltieclient.constants.ReputationProp.ATTRIBUTES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.ReputationProp.CREATE_DATE">
+<code class="descname">CREATE_DATE</code><em class="property"> = 'createDate'</em><a class="headerlink" href="#dxltieclient.constants.ReputationProp.CREATE_DATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.ReputationProp.PROVIDER_ID">
+<code class="descname">PROVIDER_ID</code><em class="property"> = 'providerId'</em><a class="headerlink" href="#dxltieclient.constants.ReputationProp.PROVIDER_ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.ReputationProp.TRUST_LEVEL">
+<code class="descname">TRUST_LEVEL</code><em class="property"> = 'trustLevel'</em><a class="headerlink" href="#dxltieclient.constants.ReputationProp.TRUST_LEVEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.TrustLevel">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">TrustLevel</code><a class="headerlink" href="#dxltieclient.constants.TrustLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constants that are used to indicate the <cite>trust level</cite> of a file or certificate.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="9%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Trust Level</th>
+<th class="head">Numeric</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>KNOWN_TRUSTED_INSTALLER</td>
+<td>100</td>
+<td>It is a trusted installer.</td>
+</tr>
+<tr class="row-odd"><td>KNOWN_TRUSTED</td>
+<td>99</td>
+<td>It is a trusted file or certificate.</td>
+</tr>
+<tr class="row-even"><td>MOST_LIKELY_TRUSTED</td>
+<td>85</td>
+<td>It is almost certain that the file or certificate is trusted.</td>
+</tr>
+<tr class="row-odd"><td>MIGHT_BE_TRUSTED</td>
+<td>70</td>
+<td>It seems to be a benign file or certificate.</td>
+</tr>
+<tr class="row-even"><td>UNKNOWN</td>
+<td>50</td>
+<td>The reputation provider has encountered the file or
+certificate before but the provider can&#8217;t determine its
+reputation at the moment.</td>
+</tr>
+<tr class="row-odd"><td>MIGHT_BE_MALICIOUS</td>
+<td>30</td>
+<td>It seems to be a suspicious file or certificate.</td>
+</tr>
+<tr class="row-even"><td>MOST_LIKELY_MALICIOUS</td>
+<td>15</td>
+<td>It is almost certain that the file or certificate is
+malicious.</td>
+</tr>
+<tr class="row-odd"><td>KNOWN_MALICIOUS</td>
+<td>1</td>
+<td>It is a malicious file or certificate.</td>
+</tr>
+<tr class="row-even"><td>NOT_SET</td>
+<td>0</td>
+<td>The file or certificate&#8217;s reputation hasn&#8217;t been determined
+yet.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.TrustLevel.KNOWN_MALICIOUS">
+<code class="descname">KNOWN_MALICIOUS</code><em class="property"> = 1</em><a class="headerlink" href="#dxltieclient.constants.TrustLevel.KNOWN_MALICIOUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.TrustLevel.KNOWN_TRUSTED">
+<code class="descname">KNOWN_TRUSTED</code><em class="property"> = 99</em><a class="headerlink" href="#dxltieclient.constants.TrustLevel.KNOWN_TRUSTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.TrustLevel.KNOWN_TRUSTED_INSTALLER">
+<code class="descname">KNOWN_TRUSTED_INSTALLER</code><em class="property"> = 100</em><a class="headerlink" href="#dxltieclient.constants.TrustLevel.KNOWN_TRUSTED_INSTALLER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.TrustLevel.MIGHT_BE_MALICIOUS">
+<code class="descname">MIGHT_BE_MALICIOUS</code><em class="property"> = 30</em><a class="headerlink" href="#dxltieclient.constants.TrustLevel.MIGHT_BE_MALICIOUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.TrustLevel.MIGHT_BE_TRUSTED">
+<code class="descname">MIGHT_BE_TRUSTED</code><em class="property"> = 70</em><a class="headerlink" href="#dxltieclient.constants.TrustLevel.MIGHT_BE_TRUSTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.TrustLevel.MOST_LIKELY_MALICIOUS">
+<code class="descname">MOST_LIKELY_MALICIOUS</code><em class="property"> = 15</em><a class="headerlink" href="#dxltieclient.constants.TrustLevel.MOST_LIKELY_MALICIOUS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.TrustLevel.MOST_LIKELY_TRUSTED">
+<code class="descname">MOST_LIKELY_TRUSTED</code><em class="property"> = 85</em><a class="headerlink" href="#dxltieclient.constants.TrustLevel.MOST_LIKELY_TRUSTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.TrustLevel.NOT_SET">
+<code class="descname">NOT_SET</code><em class="property"> = 0</em><a class="headerlink" href="#dxltieclient.constants.TrustLevel.NOT_SET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.TrustLevel.UNKNOWN">
+<code class="descname">UNKNOWN</code><em class="property"> = 50</em><a class="headerlink" href="#dxltieclient.constants.TrustLevel.UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dxltieclient.client.html"
+                        title="previous chapter">dxltieclient.client module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sampleconfig.html"
+                        title="next chapter">Samples Configuration</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/dxltieclient.constants.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sampleconfig.html" title="Samples Configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dxltieclient.client.html" title="dxltieclient.client module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="dxltieclient.html" >dxltieclient package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, McAfee Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>
