@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic Reputation Change Callback Example &#8212; McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation" href="index.html" />
+    <link rel="prev" title="Basic First Reference Example" href="basicfirstrefexample.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="basicfirstrefexample.html" title="Basic First Reference Example"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basic-reputation-change-callback-example">
+<h1>Basic Reputation Change Callback Example<a class="headerlink" href="#basic-reputation-change-callback-example" title="Permalink to this headline">¶</a></h1>
+<p>This sample demonstrates registering a <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.ReputationChangeCallback" title="dxltieclient.callbacks.ReputationChangeCallback"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.callbacks.ReputationChangeCallback</span></code></a> with the
+DXL fabric to receive <cite>reputation change</cite> events sent by the McAfee Threat Intelligence Exchange (TIE) DXL service
+when the <cite>reputation</cite> of a file or certificate changes.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The samples configuration step has been completed (see <a class="reference internal" href="sampleconfig.html"><span class="doc">Samples Configuration</span></a>)</li>
+<li>A McAfee Threat Intelligence Exchange (TIE) Service is available on the DXL fabric</li>
+</ul>
+</div>
+<div class="section" id="running">
+<h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p>To run this sample execute the <code class="docutils literal"><span class="pre">sample/basic/basic_reputation_change_callback_example.py</span></code> script as follows:</p>
+<blockquote>
+<div><pre class="literal-block">
+c:\dxltieclient-python-sdk-0.1.0&gt;python sample/basic/basic_reputation_change_callback_example.py
+</pre>
+</div></blockquote>
+<p>The output should appear similar to the following:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Waiting</span> <span class="k">for</span> <span class="n">reputation</span> <span class="n">change</span> <span class="n">events</span><span class="o">...</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>At this point the sample is listening for both file and certificate reputation events from the DXL fabric.</p>
+</div>
+<div class="section" id="force-reputation-change">
+<h2>Force Reputation Change<a class="headerlink" href="#force-reputation-change" title="Permalink to this headline">¶</a></h2>
+<p>The next step is to force a reputation change for a file or certificate via ePO. The steps to accomplish this are
+listed below:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Open ePO and navigate to the <cite>&#8220;TIE Reputations&#8221;</cite> page.</li>
+<li>Select the <cite>&#8220;File Search&#8221;</cite> or <cite>&#8220;Certificate Search&#8221;</cite> tab</li>
+<li>Select a <cite>file</cite> or <cite>certificate</cite> in the list</li>
+<li>Click the <cite>&#8220;Actions&#8221;</cite> button at the bottom left and select a new &#8220;Enterprise&#8221; reputation
+(for example, <cite>Known Trusted</cite>)</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>NOTE: It is safest to select a file (or certificate) that has a &#8220;GTI&#8221; Reputation of <cite>Known Trusted</cite> and simply
+set the &#8220;Enterprise&#8221; reputation to be the same (<cite>Known Trusted</cite>).</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Remove the override by clicking on the <cite>&#8220;Actions&#8221;</cite> button again and selecting <cite>&#8220;Remove Override&#8221;</cite></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="reputation-change-output">
+<h2>Reputation Change Output<a class="headerlink" href="#reputation-change-output" title="Permalink to this headline">¶</a></h2>
+<p>After the reputation change has occurred the reputation change information should appear within the console that the
+sample is running (similar to the output below):</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Reputation</span> <span class="n">change</span> <span class="n">on</span> <span class="n">topic</span><span class="p">:</span> <span class="o">/</span><span class="n">mcafee</span><span class="o">/</span><span class="n">event</span><span class="o">/</span><span class="n">tie</span><span class="o">/</span><span class="nb">file</span><span class="o">/</span><span class="n">repchange</span><span class="o">/</span><span class="n">broadcast</span>
+<span class="p">{</span>
+    <span class="s2">&quot;hashes&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;md5&quot;</span><span class="p">:</span> <span class="s2">&quot;f2c7bb8acc97f92e987a2d4087d01221&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sha1&quot;</span><span class="p">:</span> <span class="s2">&quot;7eb0139d2175739b3ccb0d1110067820be6abd2b&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;newReputations&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;2120340&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;createDate&quot;</span><span class="p">:</span> <span class="mi">1480551590</span><span class="p">,</span>
+            <span class="s2">&quot;providerId&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;trustLevel&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;2101652&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;2102165&quot;</span><span class="p">:</span> <span class="s2">&quot;1480551374&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;2111893&quot;</span><span class="p">:</span> <span class="s2">&quot;244&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;2114965&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;2139285&quot;</span><span class="p">:</span> <span class="s2">&quot;73183493944770750&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;createDate&quot;</span><span class="p">:</span> <span class="mi">1480551374</span><span class="p">,</span>
+            <span class="s2">&quot;providerId&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;trustLevel&quot;</span><span class="p">:</span> <span class="mi">99</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;oldReputations&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;2120340&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;createDate&quot;</span><span class="p">:</span> <span class="mi">1480551590</span><span class="p">,</span>
+            <span class="s2">&quot;providerId&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;trustLevel&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;2101652&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;2102165&quot;</span><span class="p">:</span> <span class="s2">&quot;1480551374&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;2111893&quot;</span><span class="p">:</span> <span class="s2">&quot;244&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;2114965&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;2139285&quot;</span><span class="p">:</span> <span class="s2">&quot;73183493944770750&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;createDate&quot;</span><span class="p">:</span> <span class="mi">1480551374</span><span class="p">,</span>
+            <span class="s2">&quot;providerId&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;trustLevel&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;updateTime&quot;</span><span class="p">:</span> <span class="mi">1481222923</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The first line displays the DXL topic that the event was received on. In this particular case it is,
+&#8220;<code class="docutils literal"><span class="pre">/mcafee/event/tie/file/repchange/broadcast</span></code>&#8221;, which indicates that this is a <cite>file</cite> reputation change event.</p>
+<p>The <cite>reputation change</cite> information is separated into 4 distinct sections:</p>
+<blockquote>
+<div><p><strong>Hash values</strong></p>
+<blockquote>
+<div>A <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) of hashes that identify the file or certificate whose reputation has
+changed.</div></blockquote>
+<p><strong>New reputations</strong></p>
+<blockquote>
+<div>The new <cite>Reputations</cite> for the file or certificate whose reputation has changed as a
+Python <code class="docutils literal"><span class="pre">dict</span></code> (dictionary).</div></blockquote>
+<p><strong>Old reputations</strong></p>
+<blockquote>
+<div>The previous <cite>Reputations</cite> for the file or certificate whose reputation has changed as a
+Python <code class="docutils literal"><span class="pre">dict</span></code> (dictionary).</div></blockquote>
+<p><strong>Change time</strong></p>
+<blockquote>
+<div>The time the reputation change occurred.</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
+<p>The majority of the sample code is shown below:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyReputationChangeCallback</span><span class="p">(</span><span class="n">ReputationChangeCallback</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    My reputation change callback</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">on_reputation_change</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rep_change_dict</span><span class="p">,</span> <span class="n">original_event</span><span class="p">):</span>
+        <span class="c1"># Display the DXL topic that the event was received on</span>
+        <span class="k">print</span> <span class="s2">&quot;Reputation change on topic: &quot;</span> <span class="o">+</span> <span class="n">original_event</span><span class="o">.</span><span class="n">destination_topic</span>
+
+        <span class="c1"># Dump the dictionary</span>
+        <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">rep_change_dict</span><span class="p">,</span>
+                         <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">))</span>
+
+<span class="c1"># Create the client</span>
+<span class="k">with</span> <span class="n">DxlClient</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+
+    <span class="c1"># Connect to the fabric</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+    <span class="c1"># Create the McAfee Threat Intelligence Exchange (TIE) client</span>
+    <span class="n">tie_client</span> <span class="o">=</span> <span class="n">TieClient</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+
+    <span class="c1"># Create reputation change callback</span>
+    <span class="n">rep_change_callback</span> <span class="o">=</span> <span class="n">MyReputationChangeCallback</span><span class="p">()</span>
+
+    <span class="c1"># Register callbacks with client to receive both file and certificate</span>
+    <span class="c1"># reputation change events</span>
+    <span class="n">tie_client</span><span class="o">.</span><span class="n">add_file_reputation_change_callback</span><span class="p">(</span><span class="n">rep_change_callback</span><span class="p">)</span>
+    <span class="n">tie_client</span><span class="o">.</span><span class="n">add_certificate_reputation_change_callback</span><span class="p">(</span><span class="n">rep_change_callback</span><span class="p">)</span>
+
+    <span class="c1"># Wait forever</span>
+    <span class="k">print</span> <span class="s2">&quot;Waiting for reputation change events...&quot;</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>A derived class from <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.ReputationChangeCallback" title="dxltieclient.callbacks.ReputationChangeCallback"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.callbacks.ReputationChangeCallback</span></code></a> is defined which
+overrides the <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.ReputationChangeCallback.on_reputation_change" title="dxltieclient.callbacks.ReputationChangeCallback.on_reputation_change"><code class="xref py py-func docutils literal"><span class="pre">dxltieclient.callbacks.ReputationChangeCallback.on_reputation_change()</span></code></a> method to handle
+reputation change events. When a reputation change event occurs this method will display the topic that
+the event was received on and dump the reputation change details.</p>
+<p>Once a connection is established to the DXL fabric, a <a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient" title="dxltieclient.client.TieClient"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.client.TieClient</span></code></a> instance is created
+which will be used to communicate with the TIE DXL services.</p>
+<p>An instance of the derived callback is constructed and registered with both the
+<a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.add_file_reputation_change_callback" title="dxltieclient.client.TieClient.add_file_reputation_change_callback"><code class="xref py py-func docutils literal"><span class="pre">dxltieclient.client.TieClient.add_file_reputation_change_callback()</span></code></a> and
+<a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.add_certificate_reputation_change_callback" title="dxltieclient.client.TieClient.add_certificate_reputation_change_callback"><code class="xref py py-func docutils literal"><span class="pre">dxltieclient.client.TieClient.add_certificate_reputation_change_callback()</span></code></a> methods to
+receive file and certificate reputation change events.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Basic Reputation Change Callback Example</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#running">Running</a></li>
+<li><a class="reference internal" href="#force-reputation-change">Force Reputation Change</a></li>
+<li><a class="reference internal" href="#reputation-change-output">Reputation Change Output</a></li>
+<li><a class="reference internal" href="#details">Details</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="basicfirstrefexample.html"
+                        title="previous chapter">Basic First Reference Example</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/basicreputationchangecallback.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="basicfirstrefexample.html" title="Basic First Reference Example"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, McAfee Inc.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

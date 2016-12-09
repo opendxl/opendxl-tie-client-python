@@ -103,15 +103,17 @@ c:\dxltieclient-python-sdk-0.1.0&gt;python sample/basic/basic_set_reputation_exa
     <span class="c1"># Create the McAfee Threat Intelligence Exchange (TIE) client</span>
     <span class="n">tie_client</span> <span class="o">=</span> <span class="n">TieClient</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
 
-    <span class="c1"># Set the enterprise reputation (trust level) for notepad.exe to Known Trusted</span>
+    <span class="c1"># Set the Enterprise reputation for notepad.exe to Known Trusted</span>
     <span class="n">tie_client</span><span class="o">.</span><span class="n">set_file_reputation</span><span class="p">(</span>
-        <span class="n">TrustLevel</span><span class="o">.</span><span class="n">KNOWN_TRUSTED</span><span class="p">,</span>
-        <span class="p">{</span>
+        <span class="n">TrustLevel</span><span class="o">.</span><span class="n">KNOWN_TRUSTED</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">HashType</span><span class="o">.</span><span class="n">MD5</span><span class="p">:</span> <span class="s2">&quot;f2c7bb8acc97f92e987a2d4087d021b1&quot;</span><span class="p">,</span>
             <span class="n">HashType</span><span class="o">.</span><span class="n">SHA1</span><span class="p">:</span> <span class="s2">&quot;7eb0139d2175739b3ccb0d1110067820be6abd29&quot;</span><span class="p">,</span>
-            <span class="n">HashType</span><span class="o">.</span><span class="n">MD5</span><span class="p">:</span> <span class="s2">&quot;f2c7bb8acc97f92e987a2d4087d021b1&quot;</span>
+            <span class="n">HashType</span><span class="o">.</span><span class="n">SHA256</span><span class="p">:</span> <span class="s2">&quot;142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2&quot;</span>
         <span class="p">},</span>
         <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;notepad.exe&quot;</span><span class="p">,</span>
         <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;Reputation set via OpenDXL&quot;</span><span class="p">)</span>
+
+    <span class="k">print</span> <span class="s2">&quot;Succeeded.&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>

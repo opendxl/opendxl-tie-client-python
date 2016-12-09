@@ -90,9 +90,9 @@ c:\dxltieclient-python-sdk-0.1.0&gt;python sample/basic/basic_get_reputation_exa
     <span class="p">},</span>
     <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;2101652&quot;</span><span class="p">:</span> <span class="s2">&quot;126&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2101652&quot;</span><span class="p">:</span> <span class="s2">&quot;233&quot;</span><span class="p">,</span>
             <span class="s2">&quot;2102165&quot;</span><span class="p">:</span> <span class="s2">&quot;1476902802&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;2111893&quot;</span><span class="p">:</span> <span class="s2">&quot;135&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2111893&quot;</span><span class="p">:</span> <span class="s2">&quot;242&quot;</span><span class="p">,</span>
             <span class="s2">&quot;2114965&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
             <span class="s2">&quot;2139285&quot;</span><span class="p">:</span> <span class="s2">&quot;73183493944770750&quot;</span>
         <span class="p">},</span>
@@ -114,9 +114,9 @@ c:\dxltieclient-python-sdk-0.1.0&gt;python sample/basic/basic_get_reputation_exa
     <span class="p">},</span>
     <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;2101652&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2101652&quot;</span><span class="p">:</span> <span class="s2">&quot;120&quot;</span><span class="p">,</span>
             <span class="s2">&quot;2102165&quot;</span><span class="p">:</span> <span class="s2">&quot;1476902803&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;2111893&quot;</span><span class="p">:</span> <span class="s2">&quot;135&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2111893&quot;</span><span class="p">:</span> <span class="s2">&quot;242&quot;</span><span class="p">,</span>
             <span class="s2">&quot;2114965&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
             <span class="s2">&quot;2139285&quot;</span><span class="p">:</span> <span class="s2">&quot;73183493944770750&quot;</span>
         <span class="p">},</span>
@@ -157,22 +157,27 @@ with the GTI response (<code class="docutils literal"><span class="pre">&quot;tr
     <span class="c1">#</span>
     <span class="n">reputations_dict</span> <span class="o">=</span> \
         <span class="n">tie_client</span><span class="o">.</span><span class="n">get_file_reputation</span><span class="p">({</span>
+            <span class="n">HashType</span><span class="o">.</span><span class="n">MD5</span><span class="p">:</span> <span class="s2">&quot;f2c7bb8acc97f92e987a2d4087d021b1&quot;</span><span class="p">,</span>
             <span class="n">HashType</span><span class="o">.</span><span class="n">SHA1</span><span class="p">:</span> <span class="s2">&quot;7eb0139d2175739b3ccb0d1110067820be6abd29&quot;</span><span class="p">,</span>
-            <span class="n">HashType</span><span class="o">.</span><span class="n">MD5</span><span class="p">:</span> <span class="s2">&quot;f2c7bb8acc97f92e987a2d4087d021b1&quot;</span>
+            <span class="n">HashType</span><span class="o">.</span><span class="n">SHA256</span><span class="p">:</span> <span class="s2">&quot;142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2&quot;</span>
         <span class="p">})</span>
     <span class="k">print</span> <span class="s2">&quot;Notepad.exe reputations:&quot;</span>
-    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">reputations_dict</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">reputations_dict</span><span class="p">,</span>
+                     <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
 
     <span class="c1">#</span>
     <span class="c1"># Request and display reputation for EICAR</span>
     <span class="c1">#</span>
     <span class="n">reputations_dict</span> <span class="o">=</span> \
         <span class="n">tie_client</span><span class="o">.</span><span class="n">get_file_reputation</span><span class="p">({</span>
+            <span class="n">HashType</span><span class="o">.</span><span class="n">MD5</span><span class="p">:</span> <span class="s2">&quot;44d88612fea8a8f36de82e1278abb02f&quot;</span><span class="p">,</span>
             <span class="n">HashType</span><span class="o">.</span><span class="n">SHA1</span><span class="p">:</span> <span class="s2">&quot;3395856ce81f2b7382dee72602f798b642f14140&quot;</span><span class="p">,</span>
-            <span class="n">HashType</span><span class="o">.</span><span class="n">MD5</span><span class="p">:</span> <span class="s2">&quot;44d88612fea8a8f36de82e1278abb02f&quot;</span>
+            <span class="n">HashType</span><span class="o">.</span><span class="n">SHA256</span><span class="p">:</span> <span class="s2">&quot;275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f&quot;</span>
+
         <span class="p">})</span>
     <span class="k">print</span> <span class="s2">&quot;EICAR reputations:&quot;</span>
-    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">reputations_dict</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">))</span>
+    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">reputations_dict</span><span class="p">,</span>
+                     <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div></blockquote>

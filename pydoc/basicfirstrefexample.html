@@ -26,6 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Basic Reputation Change Callback Example" href="basicreputationchangecallback.html" />
     <link rel="prev" title="Basic Set Reputation Example" href="basicsetreputationexample.html" /> 
   </head>
   <body role="document">
@@ -38,6 +39,9 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="basicreputationchangecallback.html" title="Basic Reputation Change Callback Example"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="basicsetreputationexample.html" title="Basic Set Reputation Example"
              accesskey="P">previous</a> |</li>
@@ -66,8 +70,9 @@ set of systems which have referenced (typically executed) a file (as identified 
 <p>Modify the example to include the hashes of the file you want to use for the lookup.</p>
 <p>For example:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">FILE_SHA1</span> <span class="o">=</span> <span class="s2">&quot;7eb0139d2175739b3ccb0d1110067820be6abd29&quot;</span>
-<span class="n">FILE_MD5</span> <span class="o">=</span> <span class="s2">&quot;f2c7bb8acc97f92e987a2d4087d021b1&quot;</span>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">FILE_MD5</span> <span class="o">=</span> <span class="s2">&quot;f2c7bb8acc97f92e987a2d4087d021b1&quot;</span>
+<span class="n">FILE_SHA1</span> <span class="o">=</span> <span class="s2">&quot;7eb0139d2175739b3ccb0d1110067820be6abd29&quot;</span>
+<span class="n">FILE_SHA256</span> <span class="o">=</span> <span class="s2">&quot;142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2&quot;</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -84,8 +89,8 @@ ePO.</p>
 what will be displayed when the sample is executed.</li>
 <li>Close the <cite>&#8220;Where Has File Run&#8221;</cite> results</li>
 <li>Click on the same <cite>file</cite> to display its associated reputation information</li>
-<li>In the <cite>&#8220;File Reputations Information&#8221;</cite> page copy the <cite>&#8220;SHA-1 Hash&#8221;</cite> and <cite>&#8220;MD5 Hash&#8221;</cite> values and paste them
-into the sample prior to running (as shown in the example above)</li>
+<li>In the <cite>&#8220;File Reputations Information&#8221;</cite> page copy the <cite>&#8220;MD5 Hash&#8221;</cite>, <cite>&#8220;SHA-1 Hash&#8221;</cite>, and <cite>&#8220;SHA-256 Hash&#8221;</cite> values and
+paste them into the sample prior to running (as shown in the example above)</li>
 </ul>
 </div></blockquote>
 </div>
@@ -126,14 +131,15 @@ file is also displayed.</p>
     <span class="c1"># Get the list of systems that have referenced the file</span>
     <span class="n">system_list</span> <span class="o">=</span> \
         <span class="n">tie_client</span><span class="o">.</span><span class="n">get_file_first_references</span><span class="p">({</span>
+            <span class="n">HashType</span><span class="o">.</span><span class="n">MD5</span><span class="p">:</span> <span class="n">FILE_MD5</span><span class="p">,</span>
             <span class="n">HashType</span><span class="o">.</span><span class="n">SHA1</span><span class="p">:</span> <span class="n">FILE_SHA1</span><span class="p">,</span>
-            <span class="n">HashType</span><span class="o">.</span><span class="n">MD5</span><span class="p">:</span> <span class="n">FILE_MD5</span>
+            <span class="n">HashType</span><span class="o">.</span><span class="n">SHA256</span><span class="p">:</span> <span class="n">FILE_SHA256</span>
         <span class="p">})</span>
 
     <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Systems that have referenced the file:</span><span class="se">\n</span><span class="s2">&quot;</span>
     <span class="k">for</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">system_list</span><span class="p">:</span>
         <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">system</span><span class="p">[</span><span class="n">FirstRefProp</span><span class="o">.</span><span class="n">SYSTEM_GUID</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> \
-              <span class="n">FirstRefProp</span><span class="o">.</span><span class="n">to_localtime_string</span><span class="p">(</span><span class="n">system</span><span class="p">[</span><span class="n">FirstRefProp</span><span class="o">.</span><span class="n">DATE</span><span class="p">])</span>
+                <span class="n">FirstRefProp</span><span class="o">.</span><span class="n">to_localtime_string</span><span class="p">(</span><span class="n">system</span><span class="p">[</span><span class="n">FirstRefProp</span><span class="o">.</span><span class="n">DATE</span><span class="p">])</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -166,6 +172,9 @@ the system referenced the file.</p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="basicsetreputationexample.html"
                         title="previous chapter">Basic Set Reputation Example</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="basicreputationchangecallback.html"
+                        title="next chapter">Basic Reputation Change Callback Example</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -196,6 +205,9 @@ the system referenced the file.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="basicreputationchangecallback.html" title="Basic Reputation Change Callback Example"
+             >next</a> |</li>
         <li class="right" >
           <a href="basicsetreputationexample.html" title="Basic Set Reputation Example"
              >previous</a> |</li>

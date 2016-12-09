@@ -246,6 +246,7 @@ yet.</td>
 <em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">CertEnterpriseAttrib</code><a class="headerlink" href="#dxltieclient.constants.CertEnterpriseAttrib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.EnterpriseAttrib" title="dxltieclient.constants.EnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.EnterpriseAttrib</span></code></a></p>
 <p>Attributes associated with <cite>certificate reputations</cite> returned by the Enterprise <cite>reputation provider</cite>.</p>
+<p>This class extends the attributes defined in the <a class="reference internal" href="#dxltieclient.constants.EnterpriseAttrib" title="dxltieclient.constants.EnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">EnterpriseAttrib</span></code></a> class.</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -262,7 +263,10 @@ yet.</td>
 <tbody valign="top">
 <tr class="row-even"><td>FIRST_CONTACT</td>
 <td>2109589</td>
-<td>The time the certificate was first seen (Epoch time string)</td>
+<td><p class="first">The time the certificate was first seen (Epoch time)</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to
+parse the Epoch time.</p>
+</td>
 </tr>
 <tr class="row-odd"><td>PREVALENCE</td>
 <td>2109333</td>
@@ -310,6 +314,7 @@ the enterprise</td>
 <dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.GtiAttrib" title="dxltieclient.constants.GtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.GtiAttrib</span></code></a></p>
 <p>Attributes associated with <cite>certificate reputations</cite> returned by the Global Threat Intelligence (GTI)
 <cite>reputation provider</cite>.</p>
+<p>This class extends the attributes defined in the <a class="reference internal" href="#dxltieclient.constants.GtiAttrib" title="dxltieclient.constants.GtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">GtiAttrib</span></code></a> class.</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -326,7 +331,10 @@ the enterprise</td>
 <tbody valign="top">
 <tr class="row-even"><td>FIRST_CONTACT</td>
 <td>2109077</td>
-<td>The time the certificate was first seen (Epoch time string)</td>
+<td><p class="first">The time the certificate was first seen (Epoch time)</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to
+parse the Epoch time.</p>
+</td>
 </tr>
 <tr class="row-odd"><td>PREVALENCE</td>
 <td>2108821</td>
@@ -393,6 +401,108 @@ the enterprise</td>
 <dl class="attribute">
 <dt id="dxltieclient.constants.CertProvider.GTI">
 <code class="descname">GTI</code><em class="property"> = 2</em><a class="headerlink" href="#dxltieclient.constants.CertProvider.GTI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.CertRepChangeEventProp">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">CertRepChangeEventProp</code><a class="headerlink" href="#dxltieclient.constants.CertRepChangeEventProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.RepChangeEventProp" title="dxltieclient.constants.RepChangeEventProp"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.RepChangeEventProp</span></code></a></p>
+<p>The standard set of properties that are included with a <cite>certificate reputation change event</cite>.</p>
+<p>This class extends the properties defined in the <a class="reference internal" href="#dxltieclient.constants.RepChangeEventProp" title="dxltieclient.constants.RepChangeEventProp"><code class="xref py py-class docutils literal"><span class="pre">RepChangeEventProp</span></code></a> class.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>PUBLIC_KEY_SHA1</td>
+<td>The SHA-1 of the certificate&#8217;s public key</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertRepChangeEventProp.PUBLIC_KEY_SHA1">
+<code class="descname">PUBLIC_KEY_SHA1</code><em class="property"> = 'publicKeySha1'</em><a class="headerlink" href="#dxltieclient.constants.CertRepChangeEventProp.PUBLIC_KEY_SHA1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.CertReputationOverriddenProp">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">CertReputationOverriddenProp</code><a class="headerlink" href="#dxltieclient.constants.CertReputationOverriddenProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The set of properties associated with the <code class="docutils literal"><span class="pre">OVERRIDDEN</span></code> property of a <cite>certificate reputation</cite>
+(see <a class="reference internal" href="#dxltieclient.constants.CertReputationProp" title="dxltieclient.constants.CertReputationProp"><code class="xref py py-class docutils literal"><span class="pre">CertReputationProp</span></code></a>).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>FILES</td>
+<td>The <code class="docutils literal"><span class="pre">list</span></code> of files that currently override the certificate
+identified by their <code class="docutils literal"><span class="pre">&quot;hashes&quot;</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>TRUNCATED</td>
+<td>Whether the <code class="docutils literal"><span class="pre">list</span></code> of files has been truncated (indicated by a <code class="docutils literal"><span class="pre">1</span></code>).</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertReputationOverriddenProp.FILES">
+<code class="descname">FILES</code><em class="property"> = 'files'</em><a class="headerlink" href="#dxltieclient.constants.CertReputationOverriddenProp.FILES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertReputationOverriddenProp.TRUNCATED">
+<code class="descname">TRUNCATED</code><em class="property"> = 'truncated'</em><a class="headerlink" href="#dxltieclient.constants.CertReputationOverriddenProp.TRUNCATED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.CertReputationProp">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">CertReputationProp</code><a class="headerlink" href="#dxltieclient.constants.CertReputationProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.ReputationProp" title="dxltieclient.constants.ReputationProp"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.ReputationProp</span></code></a></p>
+<p>The standard set of properties that are included with each <cite>certificate reputation</cite>.</p>
+<p>This class extends the properties defined in the <a class="reference internal" href="#dxltieclient.constants.ReputationProp" title="dxltieclient.constants.ReputationProp"><code class="xref py py-class docutils literal"><span class="pre">ReputationProp</span></code></a> class.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>OVERRIDDEN</td>
+<td><p class="first">Includes the list of files that are currently overriding the
+reputation of this certificate.</p>
+<p class="last">The value associated with this property is a <code class="docutils literal"><span class="pre">dict</span></code> (dictionary)
+containing the properties listed in the
+<a class="reference internal" href="#dxltieclient.constants.CertReputationOverriddenProp" title="dxltieclient.constants.CertReputationOverriddenProp"><code class="xref py py-class docutils literal"><span class="pre">CertReputationOverriddenProp</span></code></a> constants class.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="dxltieclient.constants.CertReputationProp.OVERRIDDEN">
+<code class="descname">OVERRIDDEN</code><em class="property"> = 'overridden'</em><a class="headerlink" href="#dxltieclient.constants.CertReputationProp.OVERRIDDEN" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -502,11 +612,11 @@ following order:</p>
 <dt id="dxltieclient.constants.EpochMixin">
 <em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">EpochMixin</code><a class="headerlink" href="#dxltieclient.constants.EpochMixin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mixin (helper) class that provides utility methods for parsing properties/attributes that
-contain Epoch times as strings.</p>
+contain Epoch times.</p>
 <dl class="staticmethod">
 <dt id="dxltieclient.constants.EpochMixin.to_localtime">
-<em class="property">static </em><code class="descname">to_localtime</code><span class="sig-paren">(</span><em>epoch_string</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.constants.EpochMixin.to_localtime" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts the specified Epoch string to local time.</p>
+<em class="property">static </em><code class="descname">to_localtime</code><span class="sig-paren">(</span><em>epoch_time</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.constants.EpochMixin.to_localtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the specified Epoch time to local time.</p>
 <p><strong>Example Usage</strong></p>
 <blockquote>
 <div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ent_rep</span> <span class="o">=</span> <span class="n">reputations_dict</span><span class="p">[</span><span class="n">FileProvider</span><span class="o">.</span><span class="n">ENTERPRISE</span><span class="p">]</span>
@@ -520,7 +630,7 @@ contain Epoch times as strings.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>epoch_string</strong> &#8211; Time as an Epoch string</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>epoch_time</strong> &#8211; Time as an Epoch time</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Time in local time</td>
 </tr>
@@ -530,8 +640,8 @@ contain Epoch times as strings.</p>
 
 <dl class="staticmethod">
 <dt id="dxltieclient.constants.EpochMixin.to_localtime_string">
-<em class="property">static </em><code class="descname">to_localtime_string</code><span class="sig-paren">(</span><em>epoch_string</em>, <em>format='%Y-%m-%d %H:%M:%S'</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.constants.EpochMixin.to_localtime_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts the specified Epoch string to a local time string.</p>
+<em class="property">static </em><code class="descname">to_localtime_string</code><span class="sig-paren">(</span><em>epoch_time</em>, <em>format='%Y-%m-%d %H:%M:%S'</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.constants.EpochMixin.to_localtime_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the specified Epoch time to a local time string.</p>
 <p><strong>Example Usage</strong></p>
 <blockquote>
 <div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ent_rep</span> <span class="o">=</span> <span class="n">reputations_dict</span><span class="p">[</span><span class="n">FileProvider</span><span class="o">.</span><span class="n">ENTERPRISE</span><span class="p">]</span>
@@ -546,7 +656,7 @@ contain Epoch times as strings.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>epoch_string</strong> &#8211; Time as an Epoch string</li>
+<li><strong>epoch_time</strong> &#8211; Time as an Epoch time</li>
 <li><strong>format</strong> &#8211; The format to use to convert time to a string (optional)</li>
 </ul>
 </td>
@@ -564,7 +674,8 @@ contain Epoch times as strings.</p>
 <dt id="dxltieclient.constants.FileEnterpriseAttrib">
 <em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">FileEnterpriseAttrib</code><a class="headerlink" href="#dxltieclient.constants.FileEnterpriseAttrib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.EnterpriseAttrib" title="dxltieclient.constants.EnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.EnterpriseAttrib</span></code></a></p>
-<p>Attributes associated with <cite>files reputations</cite> returned by the Enterprise <cite>reputation provider</cite>.</p>
+<p>Attributes associated with <cite>file reputations</cite> returned by the Enterprise <cite>reputation provider</cite>.</p>
+<p>This class extends the attributes defined in the <a class="reference internal" href="#dxltieclient.constants.EnterpriseAttrib" title="dxltieclient.constants.EnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">EnterpriseAttrib</span></code></a> class.</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -581,7 +692,7 @@ contain Epoch times as strings.</p>
 <tbody valign="top">
 <tr class="row-even"><td>FIRST_CONTACT</td>
 <td>2102165</td>
-<td><p class="first">The time the file was first seen (Epoch time string)</p>
+<td><p class="first">The time the file was first seen (Epoch time)</p>
 <p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to
 parse the Epoch time string.</p>
 </td>
@@ -628,9 +739,9 @@ parse the Epoch time string.</p>
 </tr>
 <tr class="row-odd"><td>LAST_DETECTION_TIME</td>
 <td>2113942</td>
-<td><p class="first">The last time a detection occurred (Epoch time string)</p>
+<td><p class="first">The last time a detection occurred (Epoch time)</p>
 <p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to
-parse the Epoch time string.</p>
+parse the Epoch time.</p>
 </td>
 </tr>
 <tr class="row-even"><td>IS_PREVALENT</td>
@@ -774,8 +885,9 @@ string in the following order:</p>
 <dt id="dxltieclient.constants.FileGtiAttrib">
 <em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">FileGtiAttrib</code><a class="headerlink" href="#dxltieclient.constants.FileGtiAttrib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.GtiAttrib" title="dxltieclient.constants.GtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.GtiAttrib</span></code></a></p>
-<p>Attributes associated with <cite>files reputations</cite> returned by the Global Threat Intelligence (GTI)
+<p>Attributes associated with <cite>file reputations</cite> returned by the Global Threat Intelligence (GTI)
 <cite>reputation provider</cite>.</p>
+<p>This class extends the attributes defined in the <a class="reference internal" href="#dxltieclient.constants.GtiAttrib" title="dxltieclient.constants.GtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">GtiAttrib</span></code></a> class.</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -792,9 +904,9 @@ string in the following order:</p>
 <tbody valign="top">
 <tr class="row-even"><td>FIRST_CONTACT</td>
 <td>2101908</td>
-<td><p class="first">The time the file was first seen (Epoch time string)</p>
+<td><p class="first">The time the file was first seen (Epoch time)</p>
 <p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to
-parse the Epoch time string.</p>
+parse the Epoch time.</p>
 </td>
 </tr>
 <tr class="row-odd"><td>PREVALENCE</td>
@@ -876,18 +988,60 @@ parse the Epoch time string.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="dxltieclient.constants.FileRepChangeEventProp">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">FileRepChangeEventProp</code><a class="headerlink" href="#dxltieclient.constants.FileRepChangeEventProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.RepChangeEventProp" title="dxltieclient.constants.RepChangeEventProp"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.RepChangeEventProp</span></code></a></p>
+<p>The standard set of properties that are included with a <cite>file reputation change event</cite>.</p>
+<p>This class extends the properties defined in the <a class="reference internal" href="#dxltieclient.constants.RepChangeEventProp" title="dxltieclient.constants.RepChangeEventProp"><code class="xref py py-class docutils literal"><span class="pre">RepChangeEventProp</span></code></a> class.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>RELATIONSHIPS</td>
+<td>Contains information regarding the certificate associated with this
+file (if such a relationship exists).</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.FileRepChangeEventProp.RELATIONSHIPS">
+<code class="descname">RELATIONSHIPS</code><em class="property"> = 'relationships'</em><a class="headerlink" href="#dxltieclient.constants.FileRepChangeEventProp.RELATIONSHIPS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="dxltieclient.constants.FileReputationProp">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">FileReputationProp</code><a class="headerlink" href="#dxltieclient.constants.FileReputationProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.ReputationProp" title="dxltieclient.constants.ReputationProp"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.ReputationProp</span></code></a></p>
+<p>The standard set of properties that are included with each <cite>file reputation</cite>.</p>
+<p>This class extends the properties defined in the <a class="reference internal" href="#dxltieclient.constants.ReputationProp" title="dxltieclient.constants.ReputationProp"><code class="xref py py-class docutils literal"><span class="pre">ReputationProp</span></code></a> class.</p>
+</dd></dl>
+
+<dl class="class">
 <dt id="dxltieclient.constants.FirstRefProp">
 <em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">FirstRefProp</code><a class="headerlink" href="#dxltieclient.constants.FirstRefProp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.EpochMixin</span></code></a></p>
 <p>The properties that are available in a <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) for each system that has referenced a
 file or certificate.</p>
 <p>For more information, see the &#8220;first reference&#8221; methods:</p>
-<dl class="docutils">
+<blockquote>
+<div><dl class="docutils">
 <dt>For files:</dt>
 <dd><a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.get_file_first_references" title="dxltieclient.client.TieClient.get_file_first_references"><code class="xref py py-func docutils literal"><span class="pre">dxltieclient.client.TieClient.get_file_first_references()</span></code></a></dd>
 <dt>For certificates:</dt>
-<dd><p class="first"><a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.get_certificate_first_references" title="dxltieclient.client.TieClient.get_certificate_first_references"><code class="xref py py-func docutils literal"><span class="pre">dxltieclient.client.TieClient.get_certificate_first_references()</span></code></a></p>
-<table border="1" class="last docutils">
+<dd><a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.get_certificate_first_references" title="dxltieclient.client.TieClient.get_certificate_first_references"><code class="xref py py-func docutils literal"><span class="pre">dxltieclient.client.TieClient.get_certificate_first_references()</span></code></a></dd>
+</dl>
+<table border="1" class="docutils">
 <colgroup>
 <col width="17%" />
 <col width="83%" />
@@ -900,9 +1054,9 @@ file or certificate.</p>
 <tbody valign="top">
 <tr class="row-even"><td>DATE</td>
 <td><p class="first">The time the system first referenced the file or certificate
-(Epoch time string)</p>
+(Epoch time)</p>
 <p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to parse the
-Epoch time string.</p>
+Epoch time.</p>
 </td>
 </tr>
 <tr class="row-odd"><td>SYSTEM_GUID</td>
@@ -910,8 +1064,7 @@ Epoch time string.</p>
 </tr>
 </tbody>
 </table>
-</dd>
-</dl>
+</div></blockquote>
 <dl class="attribute">
 <dt id="dxltieclient.constants.FirstRefProp.DATE">
 <code class="descname">DATE</code><em class="property"> = 'date'</em><a class="headerlink" href="#dxltieclient.constants.FirstRefProp.DATE" title="Permalink to this definition">¶</a></dt>
@@ -1004,6 +1157,70 @@ Global Threat Intelligence (GTI) <cite>reputation provider</cite></td>
 </dd></dl>
 
 <dl class="class">
+<dt id="dxltieclient.constants.RepChangeEventProp">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">RepChangeEventProp</code><a class="headerlink" href="#dxltieclient.constants.RepChangeEventProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The standard set of properties that are included with a <cite>reputation change event</cite>.</p>
+<p>See the <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.ReputationChangeCallback" title="dxltieclient.callbacks.ReputationChangeCallback"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.callbacks.ReputationChangeCallback</span></code></a> class for more information about
+reputation change events.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>HASHES</td>
+<td>A <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) of hashes that identify the file or certificate
+whose reputation has changed. The <code class="docutils literal"><span class="pre">key</span></code> in the dictionary is the
+<cite>hash type</cite> and the <code class="docutils literal"><span class="pre">value</span></code> is the <cite>hex</cite> representation of the hash
+value. See the <a class="reference internal" href="#dxltieclient.constants.HashType" title="dxltieclient.constants.HashType"><code class="xref py py-class docutils literal"><span class="pre">HashType</span></code></a> class for the list of <cite>hash type</cite>
+constants.</td>
+</tr>
+<tr class="row-odd"><td>NEW_REPUTATIONS</td>
+<td>The new <cite>Reputations</cite> for the file or certificate whose reputation has
+changed as a Python <code class="docutils literal"><span class="pre">dict</span></code> (dictionary).</td>
+</tr>
+<tr class="row-even"><td>OLD_REPUTATIONS</td>
+<td>The previous <cite>Reputations</cite> for the file or certificate whose reputation
+has changed as a Python <code class="docutils literal"><span class="pre">dict</span></code> (dictionary).</td>
+</tr>
+<tr class="row-odd"><td>UPDATE_TIME</td>
+<td><p class="first">The time the reputation change occurred (Epoch time).</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to parse the
+Epoch time.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.RepChangeEventProp.HASHES">
+<code class="descname">HASHES</code><em class="property"> = 'hashes'</em><a class="headerlink" href="#dxltieclient.constants.RepChangeEventProp.HASHES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.RepChangeEventProp.NEW_REPUTATIONS">
+<code class="descname">NEW_REPUTATIONS</code><em class="property"> = 'newReputations'</em><a class="headerlink" href="#dxltieclient.constants.RepChangeEventProp.NEW_REPUTATIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.RepChangeEventProp.OLD_REPUTATIONS">
+<code class="descname">OLD_REPUTATIONS</code><em class="property"> = 'oldReputations'</em><a class="headerlink" href="#dxltieclient.constants.RepChangeEventProp.OLD_REPUTATIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.RepChangeEventProp.UPDATE_TIME">
+<code class="descname">UPDATE_TIME</code><em class="property"> = 'updateTime'</em><a class="headerlink" href="#dxltieclient.constants.RepChangeEventProp.UPDATE_TIME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="dxltieclient.constants.ReputationProp">
 <em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">ReputationProp</code><a class="headerlink" href="#dxltieclient.constants.ReputationProp" title="Permalink to this definition">¶</a></dt>
 <dd><p>The standard set of properties that are included with each <cite>reputation</cite>.</p>
@@ -1034,58 +1251,31 @@ Global Threat Intelligence (GTI) <cite>reputation provider</cite></td>
 </td>
 </tr>
 <tr class="row-even"><td>CREATE_DATE</td>
-<td><p class="first">The time this reputation was created (Epoch time string)</p>
+<td><p class="first">The time this reputation was created (Epoch time)</p>
 <p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper
-methods used to parse the Epoch time string.</p>
+methods used to parse the Epoch time.</p>
 </td>
 </tr>
 <tr class="row-odd"><td>ATTRIBUTES</td>
-<td><p class="first">A provider-specific set of attributes associated with the reputation.</p>
-<ul class="simple">
-<li><a class="reference internal" href="#dxltieclient.constants.FileEnterpriseAttrib" title="dxltieclient.constants.FileEnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">FileEnterpriseAttrib</span></code></a></li>
-</ul>
-<blockquote>
-<div><ul class="simple">
-<li>Attributes associated with the <cite>Enterprise</cite> reputation provider for
-files</li>
-</ul>
-</div></blockquote>
-<ul class="simple">
-<li><a class="reference internal" href="#dxltieclient.constants.FileGtiAttrib" title="dxltieclient.constants.FileGtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">FileGtiAttrib</span></code></a></li>
-</ul>
-<blockquote>
-<div><ul class="simple">
-<li>Attributes associated with the <cite>Global Threat Intelligence (GTI)</cite>
-reputation provider for files</li>
-</ul>
-</div></blockquote>
-<ul class="simple">
-<li><a class="reference internal" href="#dxltieclient.constants.AtdAttrib" title="dxltieclient.constants.AtdAttrib"><code class="xref py py-class docutils literal"><span class="pre">AtdAttrib</span></code></a></li>
-</ul>
-<blockquote>
-<div><ul class="simple">
-<li>Attributes associated with the <cite>Advanced Threat Defense (ATD)</cite>
-reputation provider</li>
-</ul>
-</div></blockquote>
-<ul class="simple">
-<li><a class="reference internal" href="#dxltieclient.constants.CertEnterpriseAttrib" title="dxltieclient.constants.CertEnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">CertEnterpriseAttrib</span></code></a></li>
-</ul>
-<blockquote>
-<div><ul class="simple">
-<li>Attributes associated with the <cite>Enterprise</cite> reputation provider for
-certificates</li>
-</ul>
-</div></blockquote>
-<ul class="simple">
-<li><a class="reference internal" href="#dxltieclient.constants.CertGtiAttrib" title="dxltieclient.constants.CertGtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">CertGtiAttrib</span></code></a></li>
-</ul>
-<blockquote class="last">
-<div><ul class="simple">
-<li>Attributes associated with the <cite>Global Threat Intelligence (GTI)</cite>
-reputation provider for certificates</li>
-</ul>
-</div></blockquote>
+<td><p class="first">A provider-specific set of attributes associated with the reputation
+as a Python <code class="docutils literal"><span class="pre">dict</span></code> (dictionary)</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#dxltieclient.constants.FileEnterpriseAttrib" title="dxltieclient.constants.FileEnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">FileEnterpriseAttrib</span></code></a></dt>
+<dd>Attributes associated with the <cite>Enterprise</cite> reputation provider for
+files</dd>
+<dt><a class="reference internal" href="#dxltieclient.constants.FileGtiAttrib" title="dxltieclient.constants.FileGtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">FileGtiAttrib</span></code></a></dt>
+<dd>Attributes associated with the <cite>Global Threat Intelligence (GTI)</cite>
+reputation provider for files</dd>
+<dt><a class="reference internal" href="#dxltieclient.constants.AtdAttrib" title="dxltieclient.constants.AtdAttrib"><code class="xref py py-class docutils literal"><span class="pre">AtdAttrib</span></code></a></dt>
+<dd>Attributes associated with the <cite>Advanced Threat Defense (ATD)</cite>
+reputation provider</dd>
+<dt><a class="reference internal" href="#dxltieclient.constants.CertEnterpriseAttrib" title="dxltieclient.constants.CertEnterpriseAttrib"><code class="xref py py-class docutils literal"><span class="pre">CertEnterpriseAttrib</span></code></a></dt>
+<dd>Attributes associated with the <cite>Enterprise</cite> reputation provider for
+certificates</dd>
+<dt><a class="reference internal" href="#dxltieclient.constants.CertGtiAttrib" title="dxltieclient.constants.CertGtiAttrib"><code class="xref py py-class docutils literal"><span class="pre">CertGtiAttrib</span></code></a></dt>
+<dd>Attributes associated with the <cite>Global Threat Intelligence (GTI)</cite>
+reputation provider for certificates</dd>
+</dl>
 </td>
 </tr>
 </tbody>
