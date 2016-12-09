@@ -38,11 +38,20 @@ Configuration
 
 Basic
 
-.. toctree::
-    :maxdepth: 1
 
-    basicgetreputationexample
-    basicsetreputationexample
-    basicfirstrefexample
-    basicreputationchangecallback
-    basicdetectioncallback
+    Service Invocations
+
+    .. toctree::
+        :maxdepth: 1
+
+        basicgetreputationexample
+        basicsetreputationexample
+        basicfirstrefexample
+
+    Events
+
+    .. toctree::
+        :maxdepth: 1
+
+        basicreputationchangecallback
+        basicdetectioncallback
