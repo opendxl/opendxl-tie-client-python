@@ -508,6 +508,89 @@ containing the properties listed in the
 </dd></dl>
 
 <dl class="class">
+<dt id="dxltieclient.constants.DetectionEventProp">
+<em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">DetectionEventProp</code><a class="headerlink" href="#dxltieclient.constants.DetectionEventProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The standard set of properties that are included with a <cite>detection event</cite>.</p>
+<p>See the <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.DetectionCallback" title="dxltieclient.callbacks.DetectionCallback"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.callbacks.DetectionCallback</span></code></a> class for more information about
+detection events.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>AGENT_GUID</td>
+<td>The GUID of the system that the detection occurred on.</td>
+</tr>
+<tr class="row-odd"><td>HASHES</td>
+<td>A <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) of hashes that identify the file that triggered
+the detection. The <code class="docutils literal"><span class="pre">key</span></code> in the dictionary is the
+<cite>hash type</cite> and the <code class="docutils literal"><span class="pre">value</span></code> is the <cite>hex</cite> representation of the hash
+value. See the <a class="reference internal" href="#dxltieclient.constants.HashType" title="dxltieclient.constants.HashType"><code class="xref py py-class docutils literal"><span class="pre">HashType</span></code></a> class for the list of <cite>hash type</cite>
+constants.</td>
+</tr>
+<tr class="row-even"><td>DETECTION_TIME</td>
+<td><p class="first">The time the detection occurred (Epoch time).</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">EpochMixin</span></code></a> class for helper methods used to parse the
+Epoch time.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>LOCAL_REPUTATION</td>
+<td><p class="first">The local reputation determined for the file that triggered the
+detection.</p>
+<p class="last">See the <a class="reference internal" href="#dxltieclient.constants.TrustLevel" title="dxltieclient.constants.TrustLevel"><code class="xref py py-class docutils literal"><span class="pre">TrustLevel</span></code></a> constants class for the standard set of
+<cite>trust levels</cite>.</p>
+</td>
+</tr>
+<tr class="row-even"><td>NAME</td>
+<td>The name of the file that triggered the detection.</td>
+</tr>
+<tr class="row-odd"><td>REMEDIATION_ACTION</td>
+<td>A numeric value indicating the type of remediation that occurred in
+response to the detection.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="attribute">
+<dt id="dxltieclient.constants.DetectionEventProp.AGENT_GUID">
+<code class="descname">AGENT_GUID</code><em class="property"> = 'agentGuid'</em><a class="headerlink" href="#dxltieclient.constants.DetectionEventProp.AGENT_GUID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.DetectionEventProp.DETECTION_TIME">
+<code class="descname">DETECTION_TIME</code><em class="property"> = 'detectionTime'</em><a class="headerlink" href="#dxltieclient.constants.DetectionEventProp.DETECTION_TIME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.DetectionEventProp.HASHES">
+<code class="descname">HASHES</code><em class="property"> = 'hashes'</em><a class="headerlink" href="#dxltieclient.constants.DetectionEventProp.HASHES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.DetectionEventProp.LOCAL_REPUTATION">
+<code class="descname">LOCAL_REPUTATION</code><em class="property"> = 'localReputation'</em><a class="headerlink" href="#dxltieclient.constants.DetectionEventProp.LOCAL_REPUTATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.DetectionEventProp.NAME">
+<code class="descname">NAME</code><em class="property"> = 'name'</em><a class="headerlink" href="#dxltieclient.constants.DetectionEventProp.NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="dxltieclient.constants.DetectionEventProp.REMEDIATION_ACTION">
+<code class="descname">REMEDIATION_ACTION</code><em class="property"> = 'remediationAction'</em><a class="headerlink" href="#dxltieclient.constants.DetectionEventProp.REMEDIATION_ACTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="dxltieclient.constants.EnterpriseAttrib">
 <em class="property">class </em><code class="descclassname">dxltieclient.constants.</code><code class="descname">EnterpriseAttrib</code><a class="headerlink" href="#dxltieclient.constants.EnterpriseAttrib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#dxltieclient.constants.EpochMixin" title="dxltieclient.constants.EpochMixin"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.EpochMixin</span></code></a></p>

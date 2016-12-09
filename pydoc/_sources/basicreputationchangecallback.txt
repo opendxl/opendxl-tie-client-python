@@ -174,8 +174,7 @@ overrides the :func:`dxltieclient.callbacks.ReputationChangeCallback.on_reputati
 reputation change events. When a reputation change event occurs this method will display the topic that
 the event was received on and dump the reputation change details.
 
-Once a connection is established to the DXL fabric, a :class:`dxltieclient.client.TieClient` instance is created
-which will be used to communicate with the TIE DXL services.
+Once a connection is established to the DXL fabric, a :class:`dxltieclient.client.TieClient` instance is created.
 
 An instance of the derived callback is constructed and registered with both the
 :func:`dxltieclient.client.TieClient.add_file_reputation_change_callback` and

@@ -45,3 +45,4 @@ Basic
     basicsetreputationexample
     basicfirstrefexample
     basicreputationchangecallback
+    basicdetectioncallback

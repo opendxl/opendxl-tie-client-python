@@ -59,10 +59,130 @@
   <div class="section" id="module-dxltieclient.callbacks">
 <span id="dxltieclient-callbacks-module"></span><h1>dxltieclient.callbacks module<a class="headerlink" href="#module-dxltieclient.callbacks" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
+<dt id="dxltieclient.callbacks.DetectionCallback">
+<em class="property">class </em><code class="descclassname">dxltieclient.callbacks.</code><code class="descname">DetectionCallback</code><a class="headerlink" href="#dxltieclient.callbacks.DetectionCallback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dxlclient.callbacks.EventCallback</span></code></p>
+<p>Concrete instances of this class are used to receive &#8220;detection&#8221; events from the DXL fabric</p>
+<p>The following steps must be performed to create and register a detection callback
+(as shown in the example below):</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Create a derived class from <a class="reference internal" href="#dxltieclient.callbacks.DetectionCallback" title="dxltieclient.callbacks.DetectionCallback"><code class="xref py py-class docutils literal"><span class="pre">DetectionCallback</span></code></a></p>
+</li>
+<li><p class="first">Override the <a class="reference internal" href="#dxltieclient.callbacks.DetectionCallback.on_detection" title="dxltieclient.callbacks.DetectionCallback.on_detection"><code class="xref py py-func docutils literal"><span class="pre">on_detection()</span></code></a> method to handle detection events</p>
+</li>
+<li><p class="first">Register the callback with the client:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>For files:</dt>
+<dd><p class="first last"><a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.add_file_detection_callback" title="dxltieclient.client.TieClient.add_file_detection_callback"><code class="xref py py-func docutils literal"><span class="pre">dxltieclient.client.TieClient.add_file_detection_callback()</span></code></a></p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>Example Usage</strong></p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyDetectionCallback</span><span class="p">(</span><span class="n">DetectionCallback</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">on_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detection_dict</span><span class="p">,</span> <span class="n">original_event</span><span class="p">):</span>
+
+        <span class="c1"># Dump the dictionary</span>
+        <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">detection_dict</span><span class="p">,</span>
+                         <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">))</span>
+
+<span class="c1"># Create the client</span>
+<span class="k">with</span> <span class="n">DxlClient</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+
+    <span class="c1"># Connect to the fabric</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+    <span class="c1"># Create the McAfee Threat Intelligence Exchange (TIE) client</span>
+    <span class="n">tie_client</span> <span class="o">=</span> <span class="n">TieClient</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+
+    <span class="c1"># Create detection callback</span>
+    <span class="n">detection_callback</span> <span class="o">=</span> <span class="n">MyDetectionCallback</span><span class="p">()</span>
+
+    <span class="c1"># Register detection callback with the client</span>
+    <span class="n">tie_client</span><span class="o">.</span><span class="n">add_file_detection_callback</span><span class="p">(</span><span class="n">detection_callback</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="method">
+<dt id="dxltieclient.callbacks.DetectionCallback.on_detection">
+<code class="descname">on_detection</code><span class="sig-paren">(</span><em>detection_dict</em>, <em>original_event</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.callbacks.DetectionCallback.on_detection" title="Permalink to this definition">¶</a></dt>
+<dd><p>NOTE: This method must be overridden by derived classes.</p>
+<p>Each <cite>detection event</cite> that is received from the DXL fabric will cause this method to be
+invoked with the corresponding <cite>detection information</cite>.</p>
+<p><strong>Detection Information</strong></p>
+<blockquote>
+<div><p>The <cite>detection</cite> information is provided as a Python <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) via the
+<code class="docutils literal"><span class="pre">detection_dict</span></code> parameter.</p>
+<p>An example <cite>detection</cite> <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) is shown below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;agentGuid&quot;</span><span class="p">:</span> <span class="s2">&quot;{68125cd6-a5d8-11e6-348e-000c29663178}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;detectionTime&quot;</span><span class="p">:</span> <span class="mi">1481301038</span><span class="p">,</span>
+    <span class="s2">&quot;hashes&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;md5&quot;</span><span class="p">:</span> <span class="s2">&quot;eb5e2b9dc51817a086d7b97eb52410ab&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sha1&quot;</span><span class="p">:</span> <span class="s2">&quot;435dfd470f727437c7cb4f07cba1f9a1f4272656&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;sha256&quot;</span><span class="p">:</span> <span class="s2">&quot;414bb16b10ece2db2d8448cb9f313f80cb77c310ca0c19ee03c73cba0c16fedb&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;localReputation&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;TEST_MALWARE.EXE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;remediationAction&quot;</span><span class="p">:</span> <span class="mi">5</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The top level property names in the dictionary are listed in the
+<a class="reference internal" href="dxltieclient.constants.html#dxltieclient.constants.DetectionEventProp" title="dxltieclient.constants.DetectionEventProp"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.DetectionEventProp</span></code></a> constants class.</p>
+<p>The information provided in the dictionary includes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>System the detection occurred on</li>
+<li>Time the detection occurred (Epoch time)</li>
+<li>File that triggered the detection (file name and associated hashes)</li>
+<li>Reputation value that was calculated locally which triggered the detection</li>
+<li>Remediation action that occurred in response to the detection</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>detection_dict</strong> &#8211; A Python <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) containing the details of the detection</li>
+<li><strong>original_event</strong> &#8211; The original DXL event message that was received</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="dxltieclient.callbacks.DetectionCallback.on_event">
+<code class="descname">on_event</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.callbacks.DetectionCallback.on_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invoked when a DXL event has been received.</p>
+<p>NOTE: This method should not be overridden (it performs transformations to simplify TIE usage).
+Instead, the <code class="xref py py-func docutils literal"><span class="pre">on_detetion()</span></code> method must be overridden.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> &#8211; The <code class="xref py py-class docutils literal"><span class="pre">dxlclient.message.Event</span></code> message that was received</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="dxltieclient.callbacks.ReputationChangeCallback">
 <em class="property">class </em><code class="descclassname">dxltieclient.callbacks.</code><code class="descname">ReputationChangeCallback</code><a class="headerlink" href="#dxltieclient.callbacks.ReputationChangeCallback" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dxlclient.callbacks.EventCallback</span></code></p>
-<p>Concrete instances of this class are used to receive &#8220;reputation change&#8221; messages from the TIE
+<p>Concrete instances of this class are used to receive &#8220;reputation change&#8221; events from the TIE
 server when the <cite>reputation</cite> of files or certificates change.</p>
 <p>The following steps must be performed to create and register a reputation change callback
 (as shown in the example below):</p>
@@ -193,7 +313,7 @@ invoked with the corresponding <cite>reputation change information</cite>.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The top level property names in the dictionary can be found in the following constants classes
+<p>The top level property names in the dictionary are listed in the following constants classes
 (which derive from the <a class="reference internal" href="dxltieclient.constants.html#dxltieclient.constants.RepChangeEventProp" title="dxltieclient.constants.RepChangeEventProp"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.RepChangeEventProp</span></code></a> class):</p>
 <blockquote>
 <div><dl class="docutils">

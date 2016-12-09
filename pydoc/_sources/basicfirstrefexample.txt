@@ -1,5 +1,5 @@
-Basic First Reference Example
-=============================
+Basic First References Example
+==============================
 
 This sample demonstrates invoking the McAfee Threat Intelligence Exchange (TIE) DXL service to retrieve the
 set of systems which have referenced (typically executed) a file (as identified by hashes).
