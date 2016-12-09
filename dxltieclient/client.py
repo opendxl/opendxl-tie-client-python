@@ -28,9 +28,12 @@ TIE_EVENT_FILE_REPUTATION_CHANGE_TOPIC = "/mcafee/event/tie/file/repchange/broad
 # Topic used to notify that a certificate reputation has changed
 TIE_EVENT_CERT_REPUTATION_CHANGE_TOPIC = "/mcafee/event/tie/cert/repchange/broadcast"
 
+# Topic used to notify that a file detection has occurred
+TIE_EVENT_FILE_DETECTION_TOPIC = "/mcafee/event/tie/file/detection"
+
+
 TIE_EVENT_FILE_FIRST_INSTANCE_TOPIC = "/mcafee/event/tie/file/firstinstance"
 TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC = "/mcafee/event/tie/file/prevalence"
-TIE_EVENT_FILE_DETECTION_TOPIC = "/mcafee/event/tie/file/detection"
 
 
 class TieClient(object):
@@ -69,6 +72,30 @@ class TieClient(object):
         if response_timeout < self.__MIN_RESPONSE_TIMEOUT:
             raise Exception("Response timeout must be greater than or equal to " + str(self.__MIN_RESPONSE_TIMEOUT))
         self.__response_timeout = response_timeout
+
+    def add_file_detection_callback(self, detection_callback):
+        """
+        Registers a :class:`dxltieclient.callbacks.DetectionCallback` with the client to receive
+        `file detection` events.
+
+        See the :class:`dxltieclient.callbacks.DetectionCallback` class documentation for more details.
+
+        :param: detection_callback: The :class:`dxltieclient.callbacks.DetectionCallback` instance that
+            will receive `file detection` events.
+        """
+        self.__dxl_client.add_event_callback(
+            TIE_EVENT_FILE_DETECTION_TOPIC, detection_callback)
+
+    def remove_file_detection_callback(self, detection_callback):
+        """
+        Unregisters a :class:`dxltieclient.callbacks.DetectionCallback` from the client so that
+        it will no longer receive `file detection` events.
+
+        :param: detection_callback: The :class:`dxltieclient.callbacks.DetectionCallback` instance to
+            unregister.
+        """
+        self.__dxl_client.remove_event_callback(
+            TIE_EVENT_FILE_DETECTION_TOPIC, detection_callback)
 
     def add_file_reputation_change_callback(self, rep_change_callback):
         """

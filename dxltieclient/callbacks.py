@@ -7,12 +7,12 @@ import json
 
 from dxltieclient import TieClient
 from dxlclient.callbacks import EventCallback
-from constants import RepChangeEventProp, FileRepChangeEventProp, CertRepChangeEventProp
+from constants import RepChangeEventProp, FileRepChangeEventProp, CertRepChangeEventProp, DetectionEventProp
 
 
 class ReputationChangeCallback(EventCallback):
     """
-    Concrete instances of this class are used to receive "reputation change" messages from the TIE
+    Concrete instances of this class are used to receive "reputation change" events from the TIE
     server when the `reputation` of files or certificates change.
 
     The following steps must be performed to create and register a reputation change callback
@@ -173,7 +173,7 @@ class ReputationChangeCallback(EventCallback):
                     "updateTime": 1481219581
                 }
 
-            The top level property names in the dictionary can be found in the following constants classes
+            The top level property names in the dictionary are listed in the following constants classes
             (which derive from the :class:`dxltieclient.constants.RepChangeEventProp` class):
 
                 For files:
@@ -244,6 +244,112 @@ class ReputationChangeCallback(EventCallback):
                     The time the reputation change occurred (Epoch time).
 
         :param rep_change_dict: A Python ``dict`` (dictionary) containing the details of the reputation change
+        :param original_event: The original DXL event message that was received
+        """
+        raise NotImplementedError("Must be implemented in a child class.")
+
+
+class DetectionCallback(EventCallback):
+    """
+    Concrete instances of this class are used to receive "detection" events from the DXL fabric
+
+    The following steps must be performed to create and register a detection callback
+    (as shown in the example below):
+
+        * Create a derived class from :class:`DetectionCallback`
+        * Override the :func:`on_detection` method to handle detection events
+        * Register the callback with the client:
+
+            For files:
+                :func:`dxltieclient.client.TieClient.add_file_detection_callback`
+
+    **Example Usage**
+
+        .. code-block:: python
+
+            class MyDetectionCallback(DetectionCallback):
+                def on_detection(self, detection_dict, original_event):
+
+                    # Dump the dictionary
+                    print json.dumps(detection_dict,
+                                     sort_keys=True, indent=4, separators=(',', ': '))
+
+            # Create the client
+            with DxlClient(config) as client:
+
+                # Connect to the fabric
+                client.connect()
+
+                # Create the McAfee Threat Intelligence Exchange (TIE) client
+                tie_client = TieClient(client)
+
+                # Create detection callback
+                detection_callback = MyDetectionCallback()
+
+                # Register detection callback with the client
+                tie_client.add_file_detection_callback(detection_callback)
+    """
+    def on_event(self, event):
+        """
+        Invoked when a DXL event has been received.
+
+        NOTE: This method should not be overridden (it performs transformations to simplify TIE usage).
+        Instead, the :func:`on_detetion` method must be overridden.
+
+        :param event: The :class:`dxlclient.message.Event` message that was received
+        """
+        # Decode the event payload
+        detection_dict = json.loads(event.payload.decode(encoding="UTF-8"))
+
+        # Transform hashes
+        if DetectionEventProp.HASHES in detection_dict:
+            detection_dict[RepChangeEventProp.HASHES] = \
+                TieClient._transform_hashes(detection_dict[DetectionEventProp.HASHES])
+
+        # Invoke the detection method
+        self.on_detection(detection_dict, event)
+
+    def on_detection(self, detection_dict, original_event):
+        """
+        NOTE: This method must be overridden by derived classes.
+
+        Each `detection event` that is received from the DXL fabric will cause this method to be
+        invoked with the corresponding `detection information`.
+
+        **Detection Information**
+
+            The `detection` information is provided as a Python ``dict`` (dictionary) via the
+            ``detection_dict`` parameter.
+
+            An example `detection` ``dict`` (dictionary) is shown below:
+
+            .. code-block:: python
+
+                {
+                    "agentGuid": "{68125cd6-a5d8-11e6-348e-000c29663178}",
+                    "detectionTime": 1481301038,
+                    "hashes": {
+                        "md5": "eb5e2b9dc51817a086d7b97eb52410ab",
+                        "sha1": "435dfd470f727437c7cb4f07cba1f9a1f4272656",
+                        "sha256": "414bb16b10ece2db2d8448cb9f313f80cb77c310ca0c19ee03c73cba0c16fedb"
+                    },
+                    "localReputation": 1,
+                    "name": "TEST_MALWARE.EXE",
+                    "remediationAction": 5
+                }
+
+            The top level property names in the dictionary are listed in the
+            :class:`dxltieclient.constants.DetectionEventProp` constants class.
+
+            The information provided in the dictionary includes:
+
+                * System the detection occurred on
+                * Time the detection occurred (Epoch time)
+                * File that triggered the detection (file name and associated hashes)
+                * Reputation value that was calculated locally which triggered the detection
+                * Remediation action that occurred in response to the detection
+
+        :param detection_dict: A Python ``dict`` (dictionary) containing the details of the detection
         :param original_event: The original DXL event message that was received
         """
         raise NotImplementedError("Must be implemented in a child class.")

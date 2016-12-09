@@ -705,3 +705,46 @@ class CertRepChangeEventProp(RepChangeEventProp):
          +-----------------+-------------------------------------------------------------------------+
     """
     PUBLIC_KEY_SHA1 = "publicKeySha1"
+
+
+class DetectionEventProp:
+    """
+    The standard set of properties that are included with a `detection event`.
+
+    See the :class:`dxltieclient.callbacks.DetectionCallback` class for more information about
+    detection events.
+
+        +--------------------+-------------------------------------------------------------------------+
+        | Name               | Description                                                             |
+        +====================+=========================================================================+
+        | AGENT_GUID         | The GUID of the system that the detection occurred on.                  |
+        +--------------------+-------------------------------------------------------------------------+
+        | HASHES             | A ``dict`` (dictionary) of hashes that identify the file that triggered |
+        |                    | the detection. The ``key`` in the dictionary is the                     |
+        |                    | `hash type` and the ``value`` is the `hex` representation of the hash   |
+        |                    | value. See the :class:`HashType` class for the list of `hash type`      |
+        |                    | constants.                                                              |
+        +--------------------+-------------------------------------------------------------------------+
+        | DETECTION_TIME     | The time the detection occurred (Epoch time).                           |
+        |                    |                                                                         |
+        |                    | See the :class:`EpochMixin` class for helper methods used to parse the  |
+        |                    | Epoch time.                                                             |
+        +--------------------+-------------------------------------------------------------------------+
+        | LOCAL_REPUTATION   | The local reputation determined for the file that triggered the         |
+        |                    | detection.                                                              |
+        |                    |                                                                         |
+        |                    | See the :class:`TrustLevel` constants class for the standard set of     |
+        |                    | `trust levels`.                                                         |
+        +--------------------+-------------------------------------------------------------------------+
+        | NAME               | The name of the file that triggered the detection.                      |
+        +--------------------+-------------------------------------------------------------------------+
+        | REMEDIATION_ACTION | A numeric value indicating the type of remediation that occurred in     |
+        |                    | response to the detection.                                              |
+        +--------------------+-------------------------------------------------------------------------+
+    """
+    AGENT_GUID = "agentGuid"
+    HASHES = "hashes"
+    DETECTION_TIME = "detectionTime"
+    LOCAL_REPUTATION = "localReputation"
+    NAME = "name"
+    REMEDIATION_ACTION = "remediationAction"
