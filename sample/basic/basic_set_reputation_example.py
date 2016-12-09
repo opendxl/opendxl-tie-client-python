@@ -31,15 +31,14 @@ with DxlClient(config) as client:
     # Create the McAfee Threat Intelligence Exchange (TIE) client
     tie_client = TieClient(client)
 
-    # Set the enterprise reputation for notepad.exe to Known Trusted
+    # Set the Enterprise reputation for notepad.exe to Known Trusted
     tie_client.set_file_reputation(
-        TrustLevel.KNOWN_TRUSTED,
-        {
+        TrustLevel.KNOWN_TRUSTED, {
+            HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1",
             HashType.SHA1: "7eb0139d2175739b3ccb0d1110067820be6abd29",
-            HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1"
+            HashType.SHA256: "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
         },
         filename="notepad.exe",
         comment="Reputation set via OpenDXL")
 
     print "Succeeded."
-

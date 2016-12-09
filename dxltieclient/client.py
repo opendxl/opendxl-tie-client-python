@@ -6,7 +6,7 @@
 import base64
 import json
 from dxlclient import Request, Message
-from constants import FileProvider, ReputationProp, CertProvider
+from constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp
 
 # Topic used to set the reputation of a file
 TIE_SET_FILE_REPUTATION_TOPIC = "/mcafee/service/tie/file/reputation/set"
@@ -23,13 +23,14 @@ TIE_GET_FILE_FIRST_REFS = "/mcafee/service/tie/file/agents"
 # Topic used to retrieve systems that have referenced the certificate
 TIE_GET_CERT_FIRST_REFS = "/mcafee/service/tie/cert/agents"
 
-
-# TIE event topics
-TIE_EVENT_FILE_DETECTION_TOPIC = "/mcafee/event/tie/file/detection"
+# Topic used to notify that a file reputation has changed
 TIE_EVENT_FILE_REPUTATION_CHANGE_TOPIC = "/mcafee/event/tie/file/repchange/broadcast"
+# Topic used to notify that a certificate reputation has changed
+TIE_EVENT_CERT_REPUTATION_CHANGE_TOPIC = "/mcafee/event/tie/cert/repchange/broadcast"
+
 TIE_EVENT_FILE_FIRST_INSTANCE_TOPIC = "/mcafee/event/tie/file/firstinstance"
 TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC = "/mcafee/event/tie/file/prevalence"
-TIE_EVENT_CERTIFICATE_REPUTATION_CHANGE_TOPIC = "/mcafee/event/tie/cert/repchange/broadcast"
+TIE_EVENT_FILE_DETECTION_TOPIC = "/mcafee/event/tie/file/detection"
 
 
 class TieClient(object):
@@ -69,10 +70,33 @@ class TieClient(object):
             raise Exception("Response timeout must be greater than or equal to " + str(self.__MIN_RESPONSE_TIMEOUT))
         self.__response_timeout = response_timeout
 
-    def set_file_reputation(self, trust_level, hashes, filename="", comment="",
-                            provider_id=FileProvider.ENTERPRISE):
+    def add_file_reputation_change_callback(self, rep_change_callback):
         """
-        Sets the reputation  (`trust level`) of a specified file (as identified by hashes).
+        Registers a :class:`dxltieclient.callbacks.ReputationChangeCallback` with the client to receive
+        `file reputation` change events.
+
+        See the :class:`dxltieclient.callbacks.ReputationChangeCallback` class documentation for more details.
+
+        :param: rep_change_callback: The :class:`dxltieclient.callbacks.ReputationChangeCallback` instance that
+            will receive `file reputation` change events.
+        """
+        self.__dxl_client.add_event_callback(
+            TIE_EVENT_FILE_REPUTATION_CHANGE_TOPIC, rep_change_callback)
+
+    def remove_file_reputation_change_callback(self, rep_change_callback):
+        """
+        Unregisters a :class:`dxltieclient.callbacks.ReputationChangeCallback` from the client so that
+        it will no longer receive `file reputation` change events.
+
+        :param: rep_change_callback: The :class:`dxltieclient.callbacks.ReputationChangeCallback` instance to
+            unregister.
+        """
+        self.__dxl_client.remove_event_callback(
+            TIE_EVENT_FILE_REPUTATION_CHANGE_TOPIC, rep_change_callback)
+
+    def set_file_reputation(self, trust_level, hashes, filename="", comment=""):
+        """
+        Sets the "Enterprise" reputation  (`trust level`) of a specified file (as identified by hashes).
 
         .. note::
 
@@ -93,12 +117,12 @@ class TieClient(object):
 
             .. code-block:: python
 
-                # Set the enterprise reputation (trust level) for notepad.exe to Known Trusted
-                tie_client.set_file_reputation(
-                    TrustLevel.KNOWN_TRUSTED,
-                    {
+                # Set the Enterprise reputation (trust level) for notepad.exe to Known Trusted
+               tie_client.set_file_reputation(
+                    TrustLevel.KNOWN_TRUSTED, {
+                        HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1",
                         HashType.SHA1: "7eb0139d2175739b3ccb0d1110067820be6abd29",
-                        HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1"
+                        HashType.SHA256: "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
                     },
                     filename="notepad.exe",
                     comment="Reputation set via OpenDXL")
@@ -111,10 +135,6 @@ class TieClient(object):
             constants.
         :param filename: A file name to associate with the file (optional)
         :param comment: A comment to associate with the file (optional)
-        :param provider_id: The identifier of the `file reputation provider` whose reputation is to be updated
-            (defaults to the `Enterprise` reputation provider).
-            The list of `file reputation providers` can be found in the :class:`dxltieclient.constants.FileProvider`
-            constants class.
         """
         # Create the request message
         req = Request(TIE_SET_FILE_REPUTATION_TOPIC)
@@ -122,7 +142,7 @@ class TieClient(object):
         # Create a dictionary for the payload
         payload_dict = {
             "trustLevel": trust_level,
-            "providerId": provider_id,
+            "providerId": FileProvider.ENTERPRISE,
             "filename": filename,
             "comment": comment,
             "hashes": []}
@@ -151,8 +171,9 @@ class TieClient(object):
                 # Determine reputations for file (identified by hashes)
                 reputations_dict = \\
                     tie_client.get_file_reputation({
+                        HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1",
                         HashType.SHA1: "7eb0139d2175739b3ccb0d1110067820be6abd29",
-                        HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1"
+                        HashType.SHA256: "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
                     })
 
         **Reputations**
@@ -202,15 +223,15 @@ class TieClient(object):
 
                 trust_level = reputations_dict[FileProvider.ENTERPRISE][ReputationProp.TRUST_LEVEL]
 
-            Each reputation can also contain a provider-specific set of attributes. These attributes can be found
-            in the :class:`dxltieclient.constants` module:
+            Each reputation can also contain a provider-specific set of attributes as a Python ``dict`` (dictionary).
+            These attributes can be found in the :class:`dxltieclient.constants` module:
 
-              * :class:`dxltieclient.constants.FileEnterpriseAttrib`
-               * Attributes associated with the `Enterprise` reputation provider for files
-              * :class:`dxltieclient.constants.FileGtiAttrib`
-               * Attributes associated with the `Global Threat Intelligence (GTI)` reputation provider for files
-              * :class:`dxltieclient.constants.AtdAttrib`
-               * Attributes associated with the `Advanced Threat Defense (ATD)` reputation provider
+                :class:`dxltieclient.constants.FileEnterpriseAttrib`
+                    Attributes associated with the `Enterprise` reputation provider for files
+                :class:`dxltieclient.constants.FileGtiAttrib`
+                    Attributes associated with the `Global Threat Intelligence (GTI)` reputation provider for files
+                :class:`dxltieclient.constants.AtdAttrib`
+                    Attributes associated with the `Advanced Threat Defense (ATD)` reputation provider
 
             The following example shows how to access the `prevalence` attribute from the "Enterprise" reputation:
 
@@ -243,14 +264,11 @@ class TieClient(object):
         # Send the request
         response = self.__dxl_sync_request(req)
         
-        resp_dict = json.loads(response.payload.decode())
+        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
 
-        # Return the reputations list
+        # Transform reputations to be simpler to use
         if "reputations" in resp_dict:
-            reputation_dict = {}
-            for reputation in resp_dict["reputations"]:
-                reputation_dict[reputation[ReputationProp.PROVIDER_ID]] = reputation
-            return reputation_dict
+            return TieClient._transform_reputations(resp_dict["reputations"])
         else:
             return {}
 
@@ -266,8 +284,9 @@ class TieClient(object):
                 # Get the list of systems that have referenced the file
                 system_list = \\
                     tie_client.get_file_first_references({
+                        HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1",
                         HashType.SHA1: "7eb0139d2175739b3ccb0d1110067820be6abd29",
-                        HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1"
+                        HashType.SHA256: "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
                     })
 
         **Systems**
@@ -320,7 +339,7 @@ class TieClient(object):
         # Send the request
         response = self.__dxl_sync_request(req)
 
-        resp_dict = json.loads(response.payload.decode())
+        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
 
         # Return the agents list
         if "agents" in resp_dict:
@@ -328,10 +347,34 @@ class TieClient(object):
         else:
             return []
 
-    def set_certificate_reputation(self, trust_level, sha1, public_key_sha1=None, comment="",
-            provider_id=CertProvider.ENTERPRISE):
+    def add_certificate_reputation_change_callback(self, rep_change_callback):
         """
-        Sets the reputation (`trust level`) of a specified certificate (as identified by hashes).
+        Registers a :class:`dxltieclient.callbacks.ReputationChangeCallback` with the client to receive
+        `certificate reputation` change events.
+
+        See the :class:`dxltieclient.callbacks.ReputationChangeCallback` class documentation for more details.
+
+        :param: rep_change_callback: The :class:`dxltieclient.callbacks.ReputationChangeCallback` instance that
+            will receive `certificate reputation` change events.
+        """
+        self.__dxl_client.add_event_callback(
+            TIE_EVENT_CERT_REPUTATION_CHANGE_TOPIC, rep_change_callback)
+
+    def remove_certificate_reputation_change_callback(self, rep_change_callback):
+        """
+        Unregisters a :class:`dxltieclient.callbacks.ReputationChangeCallback` from the client so that
+        it will no longer receive `certificate reputation` change events.
+
+        :param: rep_change_callback: The :class:`dxltieclient.callbacks.ReputationChangeCallback` instance to
+            unregister.
+        """
+
+        self.__dxl_client.remove_event_callback(
+            TIE_EVENT_CERT_REPUTATION_CHANGE_TOPIC, rep_change_callback)
+
+    def set_certificate_reputation(self, trust_level, sha1, public_key_sha1=None, comment=""):
+        """
+        Sets the "Enterprise" reputation (`trust level`) of a specified certificate (as identified by hashes).
 
         .. note::
 
@@ -364,10 +407,6 @@ class TieClient(object):
         :param sha1: The SHA-1 of the certificate
         :param public_key_sha1: The SHA-1 of the certificate's public key (optional)
         :param comment: A comment to associate with the certificate (optional)
-        :param provider_id: The identifier of the `certificate reputation provider` whose reputation is to be updated
-            (defaults to the `Enterprise` reputation provider).
-            The list of `certificate reputation providers` can be found in the
-            :class:`dxltieclient.constants.CertProvider` constants class.
         """
         # Create the request message
         req = Request(TIE_SET_CERT_REPUTATION_TOPIC)
@@ -375,7 +414,7 @@ class TieClient(object):
         # Create a dictionary for the payload
         payload_dict = {
             "trustLevel": trust_level,
-            "providerId": provider_id,
+            "providerId": CertProvider.ENTERPRISE,
             "comment": comment,
             "hashes": [
                 {"type": "sha1", "value": base64.b64encode(sha1.decode('hex'))}
@@ -457,13 +496,13 @@ class TieClient(object):
 
                 trust_level = reputations_dict[CertProvider.ENTERPRISE][ReputationProp.TRUST_LEVEL]
 
-            Each reputation can also contain a provider-specific set of attributes. These attributes can be found
-            in the :class:`dxltieclient.constants` module:
+            Each reputation can also contain a provider-specific set of attributes as a Python ``dict`` (dictionary).
+            These attributes can be found in the :class:`dxltieclient.constants` module:
 
-              * :class:`dxltieclient.constants.CertEnterpriseAttrib`
-               * Attributes associated with the `Enterprise` reputation provider for certificates
-              * :class:`dxltieclient.constants.CertGtiAttrib`
-               * Attributes associated with the `Global Threat Intelligence (GTI)` reputation provider for certificates
+                :class:`dxltieclient.constants.CertEnterpriseAttrib`
+                    Attributes associated with the `Enterprise` reputation provider for certificates
+                :class:`dxltieclient.constants.CertGtiAttrib`
+                    Attributes associated with the `Global Threat Intelligence (GTI)` reputation provider for certificates
 
             The following example shows how to access the `prevalence` attribute from the "Enterprise" reputation:
 
@@ -485,7 +524,7 @@ class TieClient(object):
         # Create a dictionary for the payload
         payload_dict = {
             "hashes": [
-                {"type": "sha1", "value": base64.b64encode(sha1.decode('hex'))}
+                {"type": "sha1", "value": "6FRZsjwjLbPLlMelbUdnj1jo5R4="}
             ]}
 
         # Add public key SHA-1 (if specified)
@@ -498,14 +537,11 @@ class TieClient(object):
         # Send the request
         response = self.__dxl_sync_request(req)
         
-        resp_dict = json.loads(response.payload.decode())
+        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
 
-        # Return the reputations list
+        # Transform reputations to be simpler to use
         if "reputations" in resp_dict:
-            reputation_dict = {}
-            for reputation in resp_dict["reputations"]:
-                reputation_dict[reputation[ReputationProp.PROVIDER_ID]] = reputation
-            return reputation_dict
+            return TieClient._transform_reputations(resp_dict["reputations"])
         else:
             return {}
 
@@ -522,7 +558,7 @@ class TieClient(object):
                 system_list = \\
                     tie_client.get_certificate_first_references(
                         "6EAE26DB8C13182A7947982991B4321732CC3DE2",
-                        "3B87A2D6F39770160364B79A152FCC73BAE27ADF")
+                        public_key_sha1="3B87A2D6F39770160364B79A152FCC73BAE27ADF")
 
         **Systems**
 
@@ -574,7 +610,7 @@ class TieClient(object):
         # Send the request
         response = self.__dxl_sync_request(req)
 
-        resp_dict = json.loads(response.payload.decode())
+        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
 
         # Return the agents list
         if "agents" in resp_dict:
@@ -597,3 +633,50 @@ class TieClient(object):
             return res
         else:
             raise Exception("Error: " + res.error_message + " (" + str(res.error_code) + ")")
+
+    @staticmethod
+    def _base64_to_hex(base64_value):
+        """
+        Converts from a base64 value to a hex string
+        :param base64_value: The base64 value
+        :return: The corresponding hex string
+        """
+        return base64.b64decode(base64_value).encode("hex")
+
+    @staticmethod
+    def _transform_hashes(hashes):
+        """
+        Transforms the specified list of hashes in standard TIE format to a simplified form that is a
+        dictionary where the hash type is the key.
+        :param hashes: The list of hashes in standard TIE format
+        :return: The hashes in a simplified form that is a dictionary where the hash type is the key.
+        """
+        hashes_dict = {}
+        for hash_value in hashes:
+            hashes_dict[hash_value["type"]] = TieClient._base64_to_hex(hash_value["value"])
+        return hashes_dict
+
+    @staticmethod
+    def _transform_reputations(reputations):
+        """
+        Transforms the specified dictionary of reputations from the standard TIE format to a simplified
+        form (hex vs base64 hashes, etc.)
+        :param reputations: The dictionary of reputation in the standard TIE format
+        :return: The dictionary of reputations in a simplified form
+        """
+        reputations_dict = {}
+
+        for reputation in reputations:
+            reputations_dict[reputation[ReputationProp.PROVIDER_ID]] = reputation
+
+            # Transform file overrides (if applicable)
+            if CertReputationProp.OVERRIDDEN in reputation and \
+               CertReputationOverriddenProp.FILES in reputation[CertReputationProp.OVERRIDDEN]:
+                overridden_files = \
+                    reputation[CertReputationProp.OVERRIDDEN][CertReputationOverriddenProp.FILES]
+                for file_dict in overridden_files:
+                    if "hashes" in file_dict:
+                        file_dict["hashes"] = TieClient._transform_hashes(file_dict["hashes"])
+
+        return reputations_dict
+

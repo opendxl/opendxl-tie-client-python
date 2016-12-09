@@ -44,3 +44,4 @@ Basic
     basicgetreputationexample
     basicsetreputationexample
     basicfirstrefexample
+    basicreputationchangecallback

@@ -10,12 +10,12 @@ import struct
 class EpochMixin:
     """
     Mixin (helper) class that provides utility methods for parsing properties/attributes that
-    contain Epoch times as strings.
+    contain Epoch times.
     """
     @staticmethod
-    def to_localtime(epoch_string):
+    def to_localtime(epoch_time):
         """
-        Converts the specified Epoch string to local time.
+        Converts the specified Epoch time to local time.
 
         **Example Usage**
 
@@ -26,15 +26,15 @@ class EpochMixin:
                 local_time = FileEnterpriseAttrib.to_localtime(
                     ent_rep_attribs[FileEnterpriseAttrib.FIRST_CONTACT])
 
-        :param epoch_string: Time as an Epoch string
+        :param epoch_time: Time as an Epoch time
         :return: Time in local time
         """
-        return time.localtime(float(epoch_string))
+        return time.localtime(float(epoch_time))
 
     @staticmethod
-    def to_localtime_string(epoch_string, format="%Y-%m-%d %H:%M:%S"):
+    def to_localtime_string(epoch_time, format="%Y-%m-%d %H:%M:%S"):
         """
-        Converts the specified Epoch string to a local time string.
+        Converts the specified Epoch time to a local time string.
 
         **Example Usage**
 
@@ -45,11 +45,11 @@ class EpochMixin:
                 local_time_string = FileEnterpriseAttrib.to_localtime_string(
                     ent_rep_attribs[FileEnterpriseAttrib.FIRST_CONTACT])
 
-        :param epoch_string: Time as an Epoch string
+        :param epoch_time: Time as an Epoch time
         :param format: The format to use to convert time to a string (optional)
         :return: Time as a local time string
         """
-        return time.strftime(format, EpochMixin.to_localtime(epoch_string))
+        return time.strftime(format, EpochMixin.to_localtime(epoch_time))
 
 
 class HashType:
@@ -170,34 +170,95 @@ class ReputationProp:
         |               | See the :class:`TrustLevel` constants class for the standard set of     |
         |               | `trust levels`.                                                         |
         +---------------+-------------------------------------------------------------------------+
-        | CREATE_DATE   | The time this reputation was created (Epoch time string)                |
+        | CREATE_DATE   | The time this reputation was created (Epoch time)                       |
         |               |                                                                         |
         |               | See the :class:`EpochMixin` class for helper                            |
-        |               | methods used to parse the Epoch time string.                            |
+        |               | methods used to parse the Epoch time.                                   |
         +---------------+-------------------------------------------------------------------------+
-        | ATTRIBUTES    | A provider-specific set of attributes associated with the reputation.   |
+        | ATTRIBUTES    | A provider-specific set of attributes associated with the reputation    |
+        |               | as a Python ``dict`` (dictionary)                                       |
         |               |                                                                         |
-        |               | * :class:`FileEnterpriseAttrib`                                         |
-        |               |  * Attributes associated with the `Enterprise` reputation provider for  |
-        |               |    files                                                                |
-        |               | * :class:`FileGtiAttrib`                                                |
-        |               |  * Attributes associated with the `Global Threat Intelligence (GTI)`    |
-        |               |    reputation provider for files                                        |
-        |               | * :class:`AtdAttrib`                                                    |
-        |               |  * Attributes associated with the `Advanced Threat Defense (ATD)`       |
-        |               |    reputation provider                                                  |
-        |               | * :class:`CertEnterpriseAttrib`                                         |
-        |               |  * Attributes associated with the `Enterprise` reputation provider for  |
-        |               |    certificates                                                         |
-        |               | * :class:`CertGtiAttrib`                                                |
-        |               |  * Attributes associated with the `Global Threat Intelligence (GTI)`    |
-        |               |    reputation provider for certificates                                 |
+        |               | :class:`FileEnterpriseAttrib`                                           |
+        |               |     Attributes associated with the `Enterprise` reputation provider for |
+        |               |     files                                                               |
+        |               | :class:`FileGtiAttrib`                                                  |
+        |               |     Attributes associated with the `Global Threat Intelligence (GTI)`   |
+        |               |     reputation provider for files                                       |
+        |               | :class:`AtdAttrib`                                                      |
+        |               |     Attributes associated with the `Advanced Threat Defense (ATD)`      |
+        |               |     reputation provider                                                 |
+        |               | :class:`CertEnterpriseAttrib`                                           |
+        |               |     Attributes associated with the `Enterprise` reputation provider for |
+        |               |     certificates                                                        |
+        |               | :class:`CertGtiAttrib`                                                  |
+        |               |     Attributes associated with the `Global Threat Intelligence (GTI)`   |
+        |               |     reputation provider for certificates                                |
         +---------------+-------------------------------------------------------------------------+
     """
     PROVIDER_ID = "providerId"
     TRUST_LEVEL = "trustLevel"
     CREATE_DATE = "createDate"
     ATTRIBUTES = "attributes"
+
+
+class FileReputationProp(ReputationProp):
+    """
+    The standard set of properties that are included with each `file reputation`.
+
+    This class extends the properties defined in the :class:`ReputationProp` class.
+    """
+    pass
+
+"""
+            "files": [
+                {
+                    "hashes": {
+                        "md5": "fab5054707064ea9881954f98d9150c0",
+                        "sha1": "13cc7e51efdac984cb746573449c399425c478e8",
+                        "sha256": "37cf045819d636d5c41782af41e224edf6b88e4ea67394c5f0e659b4575b67ae"
+                    }
+                }
+            ],
+            "truncated": 0
+"""
+
+
+class CertReputationProp(ReputationProp):
+    """
+    The standard set of properties that are included with each `certificate reputation`.
+
+    This class extends the properties defined in the :class:`ReputationProp` class.
+
+    +---------------+-------------------------------------------------------------------------+
+    | Name          | Description                                                             |
+    +===============+=========================================================================+
+    | OVERRIDDEN    | Includes the list of files that are currently overriding the            |
+    |               | reputation of this certificate.                                         |
+    |               |                                                                         |
+    |               | The value associated with this property is a ``dict`` (dictionary)      |
+    |               | containing the properties listed in the                                 |
+    |               | :class:`CertReputationOverriddenProp` constants class.                  |
+    +---------------+-------------------------------------------------------------------------+
+    """
+    OVERRIDDEN = "overridden"
+
+
+class CertReputationOverriddenProp:
+    """
+    The set of properties associated with the ``OVERRIDDEN`` property of a `certificate reputation`
+    (see :class:`CertReputationProp`).
+
+    +---------------+--------------------------------------------------------------------------+
+    | Name          | Description                                                              |
+    +===============+==========================================================================+
+    | FILES         | The ``list`` of files that currently override the certificate            |
+    |               | identified by their ``"hashes"``.                                        |
+    +---------------+--------------------------------------------------------------------------+
+    | TRUNCATED     | Whether the ``list`` of files has been truncated (indicated by a ``1``). |
+    +---------------+--------------------------------------------------------------------------+
+    """
+    FILES = "files"
+    TRUNCATED = "truncated"
 
 
 class EnterpriseAttrib(EpochMixin):
@@ -275,12 +336,14 @@ class EnterpriseAttrib(EpochMixin):
 
 class FileEnterpriseAttrib(EnterpriseAttrib):
     """
-    Attributes associated with `files reputations` returned by the Enterprise `reputation provider`.
+    Attributes associated with `file reputations` returned by the Enterprise `reputation provider`.
+
+    This class extends the attributes defined in the :class:`EnterpriseAttrib` class.
 
         +-----------------------+---------+------------------------------------------------------------------+
         | Name                  | Numeric | Description                                                      |
         +=======================+=========+==================================================================+
-        | FIRST_CONTACT         | 2102165 | The time the file was first seen (Epoch time string)             |
+        | FIRST_CONTACT         | 2102165 | The time the file was first seen (Epoch time)                    |
         |                       |         |                                                                  |
         |                       |         | See the :class:`EpochMixin` class for helper methods used to     |
         |                       |         | parse the Epoch time string.                                     |
@@ -305,10 +368,10 @@ class FileEnterpriseAttrib(EnterpriseAttrib):
         +-----------------------+---------+------------------------------------------------------------------+
         | DETECTION_COUNT       | 2113685 | The count of detections for the file or certificate              |
         +-----------------------+---------+------------------------------------------------------------------+
-        | LAST_DETECTION_TIME   | 2113942 | The last time a detection occurred (Epoch time string)           |
+        | LAST_DETECTION_TIME   | 2113942 | The last time a detection occurred (Epoch time)                  |
         |                       |         |                                                                  |
         |                       |         | See the :class:`EpochMixin` class for helper methods used to     |
-        |                       |         | parse the Epoch time string.                                     |
+        |                       |         | parse the Epoch time.                                            |
         +-----------------------+---------+------------------------------------------------------------------+
         | IS_PREVALENT          | 2123156 | Whether the file is considered to be `prevalent` within the      |
         |                       |         | enterprise                                                       |
@@ -357,7 +420,7 @@ class FileEnterpriseAttrib(EnterpriseAttrib):
         bin_attrib = aggregate_attrib.decode('base64', 'strict')
         agg_list = \
             list(struct.unpack('<H', bin_attrib[i] + bin_attrib[i + 1])[0]
-                for i in xrange(0, len(bin_attrib), 2))
+                 for i in xrange(0, len(bin_attrib), 2))
         if agg_list[4] > 0:
             agg_list[4] = (agg_list[4] / 100.0)
         return tuple(agg_list)
@@ -383,10 +446,15 @@ class CertEnterpriseAttrib(EnterpriseAttrib):
     """
     Attributes associated with `certificate reputations` returned by the Enterprise `reputation provider`.
 
+    This class extends the attributes defined in the :class:`EnterpriseAttrib` class.
+
         +-----------------------+---------+------------------------------------------------------------------+
         | Name                  | Numeric | Description                                                      |
         +=======================+=========+==================================================================+
-        | FIRST_CONTACT         | 2109589 | The time the certificate was first seen (Epoch time string)      |
+        | FIRST_CONTACT         | 2109589 | The time the certificate was first seen (Epoch time)             |
+        |                       |         |                                                                  |
+        |                       |         | See the :class:`EpochMixin` class for helper methods used to     |
+        |                       |         | parse the Epoch time.                                            |
         +-----------------------+---------+------------------------------------------------------------------+
         | PREVALENCE            | 2109333 | The count of unique systems that have executed a file that is    |
         |                       |         | associated with the certificate (via signing)                    |
@@ -421,16 +489,18 @@ class GtiAttrib:
 
 class FileGtiAttrib(GtiAttrib):
     """
-    Attributes associated with `files reputations` returned by the Global Threat Intelligence (GTI)
+    Attributes associated with `file reputations` returned by the Global Threat Intelligence (GTI)
     `reputation provider`.
+
+    This class extends the attributes defined in the :class:`GtiAttrib` class.
 
         +-----------------------+---------+------------------------------------------------------------------+
         | Name                  | Numeric | Description                                                      |
         +=======================+=========+==================================================================+
-        | FIRST_CONTACT         | 2101908 | The time the file was first seen (Epoch time string)             |
+        | FIRST_CONTACT         | 2101908 | The time the file was first seen (Epoch time)                    |
         |                       |         |                                                                  |
         |                       |         | See the :class:`EpochMixin` class for helper methods used to     |
-        |                       |         | parse the Epoch time string.                                     |
+        |                       |         | parse the Epoch time.                                            |
         +-----------------------+---------+------------------------------------------------------------------+
         | PREVALENCE            | 2102421 | The number of times the file has been requested.                 |
         +-----------------------+---------+------------------------------------------------------------------+
@@ -444,10 +514,15 @@ class CertGtiAttrib(GtiAttrib):
     Attributes associated with `certificate reputations` returned by the Global Threat Intelligence (GTI)
     `reputation provider`.
 
+    This class extends the attributes defined in the :class:`GtiAttrib` class.
+
         +-----------------------+---------+------------------------------------------------------------------+
         | Name                  | Numeric | Description                                                      |
         +=======================+=========+==================================================================+
-        | FIRST_CONTACT         | 2109077 | The time the certificate was first seen (Epoch time string)      |
+        | FIRST_CONTACT         | 2109077 | The time the certificate was first seen (Epoch time)             |
+        |                       |         |                                                                  |
+        |                       |         | See the :class:`EpochMixin` class for helper methods used to     |
+        |                       |         | parse the Epoch time.                                            |
         +-----------------------+---------+------------------------------------------------------------------+
         | PREVALENCE            | 2108821 | The number of times the certificate has been requested.          |
         +-----------------------+---------+------------------------------------------------------------------+
@@ -545,23 +620,88 @@ class FirstRefProp(EpochMixin):
 
     For more information, see the "first reference" methods:
 
-    For files:
-        :func:`dxltieclient.client.TieClient.get_file_first_references`
+        For files:
+            :func:`dxltieclient.client.TieClient.get_file_first_references`
 
-    For certificates:
-        :func:`dxltieclient.client.TieClient.get_certificate_first_references`
+        For certificates:
+            :func:`dxltieclient.client.TieClient.get_certificate_first_references`
 
         +---------------+-------------------------------------------------------------------------+
         | Name          | Description                                                             |
         +===============+=========================================================================+
         | DATE          | The time the system first referenced the file or certificate            |
-        |               | (Epoch time string)                                                     |
+        |               | (Epoch time)                                                            |
         |               |                                                                         |
         |               | See the :class:`EpochMixin` class for helper methods used to parse the  |
-        |               | Epoch time string.                                                      |
+        |               | Epoch time.                                                             |
         +---------------+-------------------------------------------------------------------------+
         | SYSTEM_GUID   | The GUID of the system that referenced the file or certificate          |
         +---------------+-------------------------------------------------------------------------+
     """
     DATE = "date"
     SYSTEM_GUID = "agentGuid"
+
+
+class RepChangeEventProp:
+    """
+    The standard set of properties that are included with a `reputation change event`.
+
+    See the :class:`dxltieclient.callbacks.ReputationChangeCallback` class for more information about
+    reputation change events.
+
+        +-----------------+-------------------------------------------------------------------------+
+        | Name            | Description                                                             |
+        +=================+=========================================================================+
+        | HASHES          | A ``dict`` (dictionary) of hashes that identify the file or certificate |
+        |                 | whose reputation has changed. The ``key`` in the dictionary is the      |
+        |                 | `hash type` and the ``value`` is the `hex` representation of the hash   |
+        |                 | value. See the :class:`HashType` class for the list of `hash type`      |
+        |                 | constants.                                                              |
+        +-----------------+-------------------------------------------------------------------------+
+        | NEW_REPUTATIONS | The new `Reputations` for the file or certificate whose reputation has  |
+        |                 | changed as a Python ``dict`` (dictionary).                              |
+        +-----------------+-------------------------------------------------------------------------+
+        | OLD_REPUTATIONS | The previous `Reputations` for the file or certificate whose reputation |
+        |                 | has changed as a Python ``dict`` (dictionary).                          |
+        +-----------------+-------------------------------------------------------------------------+
+        | UPDATE_TIME     | The time the reputation change occurred (Epoch time).                   |
+        |                 |                                                                         |
+        |                 | See the :class:`EpochMixin` class for helper methods used to parse the  |
+        |                 | Epoch time.                                                             |
+        +-----------------+-------------------------------------------------------------------------+
+    """
+    HASHES = "hashes"
+    NEW_REPUTATIONS = "newReputations"
+    OLD_REPUTATIONS = "oldReputations"
+    UPDATE_TIME = "updateTime"
+
+
+class FileRepChangeEventProp(RepChangeEventProp):
+    """
+    The standard set of properties that are included with a `file reputation change event`.
+
+    This class extends the properties defined in the :class:`RepChangeEventProp` class.
+
+         +-----------------+-------------------------------------------------------------------------+
+         | Name            | Description                                                             |
+         +=================+=========================================================================+
+         | RELATIONSHIPS   | Contains information regarding the certificate associated with this     |
+         |                 | file (if such a relationship exists).                                   |
+         +-----------------+-------------------------------------------------------------------------+
+    """
+    RELATIONSHIPS = "relationships"
+
+
+class CertRepChangeEventProp(RepChangeEventProp):
+    """
+    The standard set of properties that are included with a `certificate reputation change event`.
+
+    This class extends the properties defined in the :class:`RepChangeEventProp` class.
+
+         +-----------------+-------------------------------------------------------------------------+
+         | Name            | Description                                                             |
+         +=================+=========================================================================+
+         | PUBLIC_KEY_SHA1 | The SHA-1 of the certificate's public key                               |
+         +-----------------+-------------------------------------------------------------------------+
+    """
+    PUBLIC_KEY_SHA1 = "publicKeySha1"

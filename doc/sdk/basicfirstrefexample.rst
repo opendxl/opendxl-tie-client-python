@@ -18,8 +18,9 @@ For example:
 
     .. code-block:: python
 
-        FILE_SHA1 = "7eb0139d2175739b3ccb0d1110067820be6abd29"
         FILE_MD5 = "f2c7bb8acc97f92e987a2d4087d021b1"
+        FILE_SHA1 = "7eb0139d2175739b3ccb0d1110067820be6abd29"
+        FILE_SHA256 = "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
 
 This sample is equivalent to running the, `"Where Has File Run"` action in the `"TIE Reputations"` page within
 ePO.
@@ -34,8 +35,8 @@ A simple way to determine a valid set of hashes to use with this sample is detai
     what will be displayed when the sample is executed.
   * Close the `"Where Has File Run"` results
   * Click on the same `file` to display its associated reputation information
-  * In the `"File Reputations Information"` page copy the `"SHA-1 Hash"` and `"MD5 Hash"` values and paste them
-    into the sample prior to running (as shown in the example above)
+  * In the `"File Reputations Information"` page copy the `"MD5 Hash"`, `"SHA-1 Hash"`, and `"SHA-256 Hash"` values and
+    paste them into the sample prior to running (as shown in the example above)
 
 Running
 *******
@@ -78,14 +79,15 @@ The majority of the sample code is shown below:
             # Get the list of systems that have referenced the file
             system_list = \
                 tie_client.get_file_first_references({
+                    HashType.MD5: FILE_MD5,
                     HashType.SHA1: FILE_SHA1,
-                    HashType.MD5: FILE_MD5
+                    HashType.SHA256: FILE_SHA256
                 })
 
             print "\nSystems that have referenced the file:\n"
             for system in system_list:
                 print "\t" + system[FirstRefProp.SYSTEM_GUID] + ": " + \
-                      FirstRefProp.to_localtime_string(system[FirstRefProp.DATE])
+                        FirstRefProp.to_localtime_string(system[FirstRefProp.DATE])
 
 Once a connection is established to the DXL fabric, a :class:`dxltieclient.client.TieClient` instance is created
 which will be used to communicate with the TIE DXL services.

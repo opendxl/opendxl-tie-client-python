@@ -38,9 +38,9 @@ The output should appear similar to the following:
             },
             "3": {
                 "attributes": {
-                    "2101652": "126",
+                    "2101652": "233",
                     "2102165": "1476902802",
-                    "2111893": "135",
+                    "2111893": "242",
                     "2114965": "4",
                     "2139285": "73183493944770750"
                 },
@@ -62,9 +62,9 @@ The output should appear similar to the following:
             },
             "3": {
                 "attributes": {
-                    "2101652": "16",
+                    "2101652": "120",
                     "2102165": "1476902803",
-                    "2111893": "135",
+                    "2111893": "242",
                     "2114965": "0",
                     "2139285": "73183493944770750"
                 },
@@ -110,22 +110,27 @@ The majority of the sample code is shown below:
             #
             reputations_dict = \
                 tie_client.get_file_reputation({
+                    HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1",
                     HashType.SHA1: "7eb0139d2175739b3ccb0d1110067820be6abd29",
-                    HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1"
+                    HashType.SHA256: "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
                 })
             print "Notepad.exe reputations:"
-            print json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': ')) + "\n"
+            print json.dumps(reputations_dict,
+                             sort_keys=True, indent=4, separators=(',', ': ')) + "\n"
 
             #
             # Request and display reputation for EICAR
             #
             reputations_dict = \
                 tie_client.get_file_reputation({
+                    HashType.MD5: "44d88612fea8a8f36de82e1278abb02f",
                     HashType.SHA1: "3395856ce81f2b7382dee72602f798b642f14140",
-                    HashType.MD5: "44d88612fea8a8f36de82e1278abb02f"
+                    HashType.SHA256: "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+
                 })
             print "EICAR reputations:"
-            print json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': '))
+            print json.dumps(reputations_dict,
+                             sort_keys=True, indent=4, separators=(',', ': '))
 
 Once a connection is established to the DXL fabric, a :class:`dxltieclient.client.TieClient` instance is created
 which will be used to communicate with the TIE DXL services.
