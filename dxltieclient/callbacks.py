@@ -7,7 +7,8 @@ import json
 
 from dxltieclient import TieClient
 from dxlclient.callbacks import EventCallback
-from constants import RepChangeEventProp, FileRepChangeEventProp, CertRepChangeEventProp, DetectionEventProp
+from constants import RepChangeEventProp, FileRepChangeEventProp, CertRepChangeEventProp, \
+    DetectionEventProp, FirstInstanceEventProp
 
 
 class ReputationChangeCallback(EventCallback):
@@ -294,7 +295,7 @@ class DetectionCallback(EventCallback):
         Invoked when a DXL event has been received.
 
         NOTE: This method should not be overridden (it performs transformations to simplify TIE usage).
-        Instead, the :func:`on_detetion` method must be overridden.
+        Instead, the :func:`on_detection` method must be overridden.
 
         :param event: The :class:`dxlclient.message.Event` message that was received
         """
@@ -350,6 +351,109 @@ class DetectionCallback(EventCallback):
                 * Remediation action that occurred in response to the detection
 
         :param detection_dict: A Python ``dict`` (dictionary) containing the details of the detection
+        :param original_event: The original DXL event message that was received
+        """
+        raise NotImplementedError("Must be implemented in a child class.")
+
+
+class FirstInstanceCallback(EventCallback):
+    """
+    Concrete instances of this class are used to receive "first instance" events from the DXL fabric.
+    The "first instance" event indicates that this is the first time the file has been encountered
+    within the local enterprise.
+
+    The following steps must be performed to create and register a first instance callback
+    (as shown in the example below):
+
+        * Create a derived class from :class:`FirstInstanceCallback`
+        * Override the :func:`on_first_instance` method to handle first instance events
+        * Register the callback with the client:
+
+            For files:
+                :func:`dxltieclient.client.TieClient.add_file_first_instance_callback`
+
+    **Example Usage**
+
+        .. code-block:: python
+
+            class MyFirstInstanceCallback(FirstInstanceCallback):
+                def on_first_instance(self, first_instance_dict, original_event):
+
+                    # Dump the dictionary
+                    print json.dumps(first_instance_dict,
+                                     sort_keys=True, indent=4, separators=(',', ': '))
+
+            # Create the client
+            with DxlClient(config) as client:
+
+                # Connect to the fabric
+                client.connect()
+
+                # Create the McAfee Threat Intelligence Exchange (TIE) client
+                tie_client = TieClient(client)
+
+                # Create first instance callback
+                first_instance_callback = MyFirstInstanceCallback()
+
+                # Register first instance callback with the client
+                tie_client.add_file_first_instance_callback(first_instance_callback)
+    """
+    def on_event(self, event):
+        """
+        Invoked when a DXL event has been received.
+
+        NOTE: This method should not be overridden (it performs transformations to simplify TIE usage).
+        Instead, the :func:`on_first_instance` method must be overridden.
+
+        :param event: The :class:`dxlclient.message.Event` message that was received
+        """
+        # Decode the event payload
+        first_instance_dict = json.loads(event.payload.decode(encoding="UTF-8"))
+
+        # Transform hashes
+        if FirstInstanceEventProp.HASHES in first_instance_dict:
+            first_instance_dict[RepChangeEventProp.HASHES] = \
+                TieClient._transform_hashes(first_instance_dict[FirstInstanceEventProp.HASHES])
+
+        # Invoke the first instance method
+        self.on_first_instance(first_instance_dict, event)
+
+    def on_first_instance(self, first_instance_dict, original_event):
+        """
+        NOTE: This method must be overridden by derived classes.
+
+        Each `first instance event` that is received from the DXL fabric will cause this method to be
+        invoked with the corresponding `first instance information`.
+
+        **First Instance Information**
+
+            The `first instance` information is provided as a Python ``dict`` (dictionary) via the
+            ``first_instance_dict`` parameter.
+
+            An example `first instance` ``dict`` (dictionary) is shown below:
+
+            .. code-block:: python
+
+                First instance on topic: /mcafee/event/tie/file/firstinstance
+                {
+                    "agentGuid": "{68125cd6-a5d8-11e6-348e-000c29663178}",
+                    "hashes": {
+                        "md5": "31dbe8cc443d2ca7fd236ac00a52fb17",
+                        "sha1": "2d6ca45061b7972312e00e5933fdff95bb90b61b",
+                        "sha256": "aa3c461d4c21a392e372d0d6ca4ceb1e4d88098d587659454eaf4d93c661880f"
+                    },
+                    "name": "MORPH.EXE"
+                }
+
+            The top level property names in the dictionary are listed in the
+            :class:`dxltieclient.constants.FirstInstanceEventProp` constants class.
+
+            The information provided in the dictionary includes:
+
+                * System the first instance of the file was found on
+                * File information (file name and associated hashes)
+
+        :param first_instance_dict: A Python ``dict`` (dictionary) containing the details of the first instance event
         :param original_event: The original DXL event message that was received
         """
         raise NotImplementedError("Must be implemented in a child class.")

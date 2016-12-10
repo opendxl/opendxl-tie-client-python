@@ -31,8 +31,9 @@ TIE_EVENT_CERT_REPUTATION_CHANGE_TOPIC = "/mcafee/event/tie/cert/repchange/broad
 # Topic used to notify that a file detection has occurred
 TIE_EVENT_FILE_DETECTION_TOPIC = "/mcafee/event/tie/file/detection"
 
-
+# Topic used to notify when the first instance of a file has been found
 TIE_EVENT_FILE_FIRST_INSTANCE_TOPIC = "/mcafee/event/tie/file/firstinstance"
+
 TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC = "/mcafee/event/tie/file/prevalence"
 
 
@@ -72,6 +73,30 @@ class TieClient(object):
         if response_timeout < self.__MIN_RESPONSE_TIMEOUT:
             raise Exception("Response timeout must be greater than or equal to " + str(self.__MIN_RESPONSE_TIMEOUT))
         self.__response_timeout = response_timeout
+
+    def add_file_first_instance_callback(self, first_instance_callback):
+        """
+        Registers a :class:`dxltieclient.callbacks.FirstInstanceCallback` with the client to receive
+        `file first instance` events.
+
+        See the :class:`dxltieclient.callbacks.FirstInstanceCallback` class documentation for more details.
+
+        :param: first_instance_callback: The :class:`dxltieclient.callbacks.FirstInstanceCallback` instance that
+            will receive `file first instance` events.
+        """
+        self.__dxl_client.add_event_callback(
+            TIE_EVENT_FILE_FIRST_INSTANCE_TOPIC, first_instance_callback)
+
+    def remove_file_first_instance_callback(self, first_instance_callback):
+        """
+        Unregisters a :class:`dxltieclient.callbacks.FirstInstanceCallback` from the client so that
+        it will no longer receive `file first instance` events.
+
+        :param: first_instance_callback: The :class:`dxltieclient.callbacks.FirstInstanceCallback` instance to
+            unregister.
+        """
+        self.__dxl_client.remove_event_callback(
+            TIE_EVENT_FILE_FIRST_INSTANCE_TOPIC, first_instance_callback)
 
     def add_file_detection_callback(self, detection_callback):
         """

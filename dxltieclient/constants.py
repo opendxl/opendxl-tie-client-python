@@ -717,7 +717,7 @@ class DetectionEventProp:
         +--------------------+-------------------------------------------------------------------------+
         | Name               | Description                                                             |
         +====================+=========================================================================+
-        | AGENT_GUID         | The GUID of the system that the detection occurred on.                  |
+        | SYSTEM_GUID        | The GUID of the system that the detection occurred on.                  |
         +--------------------+-------------------------------------------------------------------------+
         | HASHES             | A ``dict`` (dictionary) of hashes that identify the file that triggered |
         |                    | the detection. The ``key`` in the dictionary is the                     |
@@ -742,9 +742,35 @@ class DetectionEventProp:
         |                    | response to the detection.                                              |
         +--------------------+-------------------------------------------------------------------------+
     """
-    AGENT_GUID = "agentGuid"
+    SYSTEM_GUID = "agentGuid"
     HASHES = "hashes"
     DETECTION_TIME = "detectionTime"
     LOCAL_REPUTATION = "localReputation"
     NAME = "name"
     REMEDIATION_ACTION = "remediationAction"
+
+
+class FirstInstanceEventProp:
+    """
+    The standard set of properties that are included with a `first instance event`.
+
+    See the :class:`dxltieclient.callbacks.FirstInstanceCallback` class for more information about
+    first instance events.
+
+        +--------------------+-------------------------------------------------------------------------+
+        | Name               | Description                                                             |
+        +====================+=========================================================================+
+        | SYSTEM_GUID        | The GUID of the system where the first instance of the file was found.  |
+        +--------------------+-------------------------------------------------------------------------+
+        | HASHES             | A ``dict`` (dictionary) of hashes that identify the file.               |
+        |                    | The ``key`` in the dictionary is the                                    |
+        |                    | `hash type` and the ``value`` is the `hex` representation of the hash   |
+        |                    | value. See the :class:`HashType` class for the list of `hash type`      |
+        |                    | constants.                                                              |
+        +--------------------+-------------------------------------------------------------------------+
+        | NAME               | The name of the file.                                                   |
+        +--------------------+-------------------------------------------------------------------------+
+    """
+    SYSTEM_GUID = "agentGuid"
+    HASHES = "hashes"
+    NAME = "name"
