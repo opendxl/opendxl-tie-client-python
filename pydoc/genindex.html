@@ -85,11 +85,11 @@
   </dt>
 
       
-  <dt><a href="dxltieclient.client.html#dxltieclient.client.TieClient.add_file_reputation_change_callback">add_file_reputation_change_callback() (dxltieclient.client.TieClient method)</a>
+  <dt><a href="dxltieclient.client.html#dxltieclient.client.TieClient.add_file_first_instance_callback">add_file_first_instance_callback() (dxltieclient.client.TieClient method)</a>
   </dt>
 
       
-  <dt><a href="dxltieclient.constants.html#dxltieclient.constants.DetectionEventProp.AGENT_GUID">AGENT_GUID (dxltieclient.constants.DetectionEventProp attribute)</a>
+  <dt><a href="dxltieclient.client.html#dxltieclient.client.TieClient.add_file_reputation_change_callback">add_file_reputation_change_callback() (dxltieclient.client.TieClient method)</a>
   </dt>
 
       
@@ -272,12 +272,12 @@
   <dt><a href="dxltieclient.constants.html#dxltieclient.constants.FileReputationProp">FileReputationProp (class in dxltieclient.constants)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="dxltieclient.constants.html#dxltieclient.constants.CertReputationOverriddenProp.FILES">FILES (dxltieclient.constants.CertReputationOverriddenProp attribute)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="dxltieclient.constants.html#dxltieclient.constants.CertEnterpriseAttrib.FIRST_CONTACT">FIRST_CONTACT (dxltieclient.constants.CertEnterpriseAttrib attribute)</a>
   </dt>
@@ -296,6 +296,14 @@
   </dt>
 
       </dl></dd>
+      
+  <dt><a href="dxltieclient.callbacks.html#dxltieclient.callbacks.FirstInstanceCallback">FirstInstanceCallback (class in dxltieclient.callbacks)</a>
+  </dt>
+
+      
+  <dt><a href="dxltieclient.constants.html#dxltieclient.constants.FirstInstanceEventProp">FirstInstanceEventProp (class in dxltieclient.constants)</a>
+  </dt>
+
       
   <dt><a href="dxltieclient.constants.html#dxltieclient.constants.FirstRefProp">FirstRefProp (class in dxltieclient.constants)</a>
   </dt>
@@ -361,6 +369,10 @@
   </dt>
 
       <dd><dl>
+        
+  <dt><a href="dxltieclient.constants.html#dxltieclient.constants.FirstInstanceEventProp.HASHES">(dxltieclient.constants.FirstInstanceEventProp attribute)</a>
+  </dt>
+
         
   <dt><a href="dxltieclient.constants.html#dxltieclient.constants.RepChangeEventProp.HASHES">(dxltieclient.constants.RepChangeEventProp attribute)</a>
   </dt>
@@ -510,12 +522,18 @@
   <dt><a href="dxltieclient.constants.html#dxltieclient.constants.DetectionEventProp.NAME">NAME (dxltieclient.constants.DetectionEventProp attribute)</a>
   </dt>
 
+      <dd><dl>
+        
+  <dt><a href="dxltieclient.constants.html#dxltieclient.constants.FirstInstanceEventProp.NAME">(dxltieclient.constants.FirstInstanceEventProp attribute)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="dxltieclient.constants.html#dxltieclient.constants.RepChangeEventProp.NEW_REPUTATIONS">NEW_REPUTATIONS (dxltieclient.constants.RepChangeEventProp attribute)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="dxltieclient.constants.html#dxltieclient.constants.AtdTrustLevel.NOT_SET">NOT_SET (dxltieclient.constants.AtdTrustLevel attribute)</a>
   </dt>
@@ -546,12 +564,20 @@
 
       <dd><dl>
         
+  <dt><a href="dxltieclient.callbacks.html#dxltieclient.callbacks.FirstInstanceCallback.on_event">(dxltieclient.callbacks.FirstInstanceCallback method)</a>
+  </dt>
+
+        
   <dt><a href="dxltieclient.callbacks.html#dxltieclient.callbacks.ReputationChangeCallback.on_event">(dxltieclient.callbacks.ReputationChangeCallback method)</a>
   </dt>
 
       </dl></dd>
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="dxltieclient.callbacks.html#dxltieclient.callbacks.FirstInstanceCallback.on_first_instance">on_first_instance() (dxltieclient.callbacks.FirstInstanceCallback method)</a>
+  </dt>
+
       
   <dt><a href="dxltieclient.callbacks.html#dxltieclient.callbacks.ReputationChangeCallback.on_reputation_change">on_reputation_change() (dxltieclient.callbacks.ReputationChangeCallback method)</a>
   </dt>
@@ -637,11 +663,15 @@
   </dt>
 
       
-  <dt><a href="dxltieclient.client.html#dxltieclient.client.TieClient.remove_file_reputation_change_callback">remove_file_reputation_change_callback() (dxltieclient.client.TieClient method)</a>
+  <dt><a href="dxltieclient.client.html#dxltieclient.client.TieClient.remove_file_first_instance_callback">remove_file_first_instance_callback() (dxltieclient.client.TieClient method)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="dxltieclient.client.html#dxltieclient.client.TieClient.remove_file_reputation_change_callback">remove_file_reputation_change_callback() (dxltieclient.client.TieClient method)</a>
+  </dt>
+
       
   <dt><a href="dxltieclient.constants.html#dxltieclient.constants.RepChangeEventProp">RepChangeEventProp (class in dxltieclient.constants)</a>
   </dt>
@@ -680,12 +710,12 @@
   <dt><a href="dxltieclient.client.html#dxltieclient.client.TieClient.set_certificate_reputation">set_certificate_reputation() (dxltieclient.client.TieClient method)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="dxltieclient.client.html#dxltieclient.client.TieClient.set_file_reputation">set_file_reputation() (dxltieclient.client.TieClient method)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="dxltieclient.constants.html#dxltieclient.constants.HashType.SHA1">SHA1 (dxltieclient.constants.HashType attribute)</a>
   </dt>
@@ -695,9 +725,19 @@
   </dt>
 
       
-  <dt><a href="dxltieclient.constants.html#dxltieclient.constants.FirstRefProp.SYSTEM_GUID">SYSTEM_GUID (dxltieclient.constants.FirstRefProp attribute)</a>
+  <dt><a href="dxltieclient.constants.html#dxltieclient.constants.DetectionEventProp.SYSTEM_GUID">SYSTEM_GUID (dxltieclient.constants.DetectionEventProp attribute)</a>
   </dt>
 
+      <dd><dl>
+        
+  <dt><a href="dxltieclient.constants.html#dxltieclient.constants.FirstInstanceEventProp.SYSTEM_GUID">(dxltieclient.constants.FirstInstanceEventProp attribute)</a>
+  </dt>
+
+        
+  <dt><a href="dxltieclient.constants.html#dxltieclient.constants.FirstRefProp.SYSTEM_GUID">(dxltieclient.constants.FirstRefProp attribute)</a>
+  </dt>
+
+      </dl></dd>
   </dl></td>
 </tr></table>
 

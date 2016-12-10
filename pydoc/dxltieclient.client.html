@@ -111,6 +111,23 @@ will receive <cite>file detection</cite> events.</td>
 </dd></dl>
 
 <dl class="method">
+<dt id="dxltieclient.client.TieClient.add_file_first_instance_callback">
+<code class="descname">add_file_first_instance_callback</code><span class="sig-paren">(</span><em>first_instance_callback</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.client.TieClient.add_file_first_instance_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.FirstInstanceCallback" title="dxltieclient.callbacks.FirstInstanceCallback"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.callbacks.FirstInstanceCallback</span></code></a> with the client to receive
+<cite>file first instance</cite> events.</p>
+<p>See the <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.FirstInstanceCallback" title="dxltieclient.callbacks.FirstInstanceCallback"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.callbacks.FirstInstanceCallback</span></code></a> class documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">first_instance_callback: The <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.FirstInstanceCallback" title="dxltieclient.callbacks.FirstInstanceCallback"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.callbacks.FirstInstanceCallback</span></code></a> instance that
+will receive <cite>file first instance</cite> events.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="dxltieclient.client.TieClient.add_file_reputation_change_callback">
 <code class="descname">add_file_reputation_change_callback</code><span class="sig-paren">(</span><em>rep_change_callback</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.client.TieClient.add_file_reputation_change_callback" title="Permalink to this definition">¶</a></dt>
 <dd><p>Registers a <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.ReputationChangeCallback" title="dxltieclient.callbacks.ReputationChangeCallback"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.callbacks.ReputationChangeCallback</span></code></a> with the client to receive
@@ -454,6 +471,22 @@ it will no longer receive <cite>file detection</cite> events.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">detection_callback: The <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.DetectionCallback" title="dxltieclient.callbacks.DetectionCallback"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.callbacks.DetectionCallback</span></code></a> instance to
+unregister.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="dxltieclient.client.TieClient.remove_file_first_instance_callback">
+<code class="descname">remove_file_first_instance_callback</code><span class="sig-paren">(</span><em>first_instance_callback</em><span class="sig-paren">)</span><a class="headerlink" href="#dxltieclient.client.TieClient.remove_file_first_instance_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unregisters a <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.FirstInstanceCallback" title="dxltieclient.callbacks.FirstInstanceCallback"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.callbacks.FirstInstanceCallback</span></code></a> from the client so that
+it will no longer receive <cite>file first instance</cite> events.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">first_instance_callback: The <a class="reference internal" href="dxltieclient.callbacks.html#dxltieclient.callbacks.FirstInstanceCallback" title="dxltieclient.callbacks.FirstInstanceCallback"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.callbacks.FirstInstanceCallback</span></code></a> instance to
 unregister.</td>
 </tr>
 </tbody>

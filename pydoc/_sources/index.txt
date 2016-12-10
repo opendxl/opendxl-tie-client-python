@@ -53,5 +53,6 @@ Basic
     .. toctree::
         :maxdepth: 1
 
-        basicreputationchangecallback
-        basicdetectioncallback
+        basicreputationchangecallbackexample
+        basicdetectioncallbackexample
+        basicfirstinstancecallbackexample
