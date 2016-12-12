@@ -1,5 +1,7 @@
-# This sample queries a Threat Intelligence Exchange server for the reputations
-# of a file and a certificate and displays the result
+# This sample demonstrates invoking the McAfee Threat Intelligence Exchange (TIE)
+# DXL service to retrieve the reputation of a file and certificate (as identified
+# by their hashes). Further, this example demonstrates using the constants classes
+# to examine specific fields within the reputation responses.
 
 import os
 import sys

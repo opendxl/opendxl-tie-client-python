@@ -85,7 +85,7 @@ The output should appear similar to the following:
 
 The sample outputs the reputation information for a file and a certificate.
 
-In addition to dumping all of the reputation information received, this sample pulls out 3 specific
+In addition to dumping all of the reputation information received, this sample pulls out three specific
 properties for the file and certificate:
 
     * The Global Threat Intelligence (GTI) Trust Level
