@@ -88,7 +88,7 @@ The sample outputs the reputation information for a file and a certificate.
 In addition to dumping all of the reputation information received, this sample pulls out three specific
 properties for the file and certificate:
 
-    * The Global Threat Intelligence (GTI) Trust Level
+    * The Global Threat Intelligence (GTI) trust level
     * The prevalence of the file or certificate within the enterprise
     * The first time the the file or certificate was found within the enterprise
 
@@ -196,7 +196,7 @@ To request the reputation of the certificate, a call is made to the
 :func:`dxltieclient.client.TieClient.get_certificate_reputation` method of the :class:`dxltieclient.client.TieClient`
 instance along with the hash values that are used to identify the certificate.
 
-Once reputations are received, the constants classes in the :class:`dxltieclient.constants` package are
+Once reputations are received, the constants classes in the :class:`dxltieclient.constants` module are
 used to examine specific fields within the reputation responses.
 
 

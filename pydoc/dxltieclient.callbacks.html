@@ -170,7 +170,7 @@ Instead, the <a class="reference internal" href="#dxltieclient.callbacks.Detecti
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> &#8211; The <code class="xref py py-class docutils literal"><span class="pre">dxlclient.message.Event</span></code> message that was received</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> &#8211; The original DXL event message that was received</td>
 </tr>
 </tbody>
 </table>
@@ -240,7 +240,7 @@ Instead, the <a class="reference internal" href="#dxltieclient.callbacks.FirstIn
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> &#8211; The <code class="xref py py-class docutils literal"><span class="pre">dxlclient.message.Event</span></code> message that was received</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> &#8211; The original DXL event message that was received</td>
 </tr>
 </tbody>
 </table>
@@ -257,8 +257,7 @@ invoked with the corresponding <cite>first instance information</cite>.</p>
 <div><p>The <cite>first instance</cite> information is provided as a Python <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) via the
 <code class="docutils literal"><span class="pre">first_instance_dict</span></code> parameter.</p>
 <p>An example <cite>first instance</cite> <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) is shown below:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">First</span> <span class="n">instance</span> <span class="n">on</span> <span class="n">topic</span><span class="p">:</span> <span class="o">/</span><span class="n">mcafee</span><span class="o">/</span><span class="n">event</span><span class="o">/</span><span class="n">tie</span><span class="o">/</span><span class="nb">file</span><span class="o">/</span><span class="n">firstinstance</span>
-<span class="p">{</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;agentGuid&quot;</span><span class="p">:</span> <span class="s2">&quot;{68125cd6-a5d8-11e6-348e-000c29663178}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;hashes&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;md5&quot;</span><span class="p">:</span> <span class="s2">&quot;31dbe8cc443d2ca7fd236ac00a52fb17&quot;</span><span class="p">,</span>
@@ -359,7 +358,7 @@ Instead, the <a class="reference internal" href="#dxltieclient.callbacks.Reputat
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> &#8211; The <code class="xref py py-class docutils literal"><span class="pre">dxlclient.message.Event</span></code> message that was received</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> &#8211; The original DXL event message that was received</td>
 </tr>
 </tbody>
 </table>
