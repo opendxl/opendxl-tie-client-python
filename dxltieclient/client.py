@@ -203,7 +203,7 @@ class TieClient(object):
             payload_dict["hashes"].append({"type": key, "value": base64.b64encode(value.decode('hex'))})
             
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode()
+        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
         self.__dxl_sync_request(req)
@@ -311,7 +311,7 @@ class TieClient(object):
             payload_dict["hashes"].append({"type": key, "value": base64.b64encode(value.decode('hex'))})
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode()
+        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
         response = self.__dxl_sync_request(req)
@@ -386,7 +386,7 @@ class TieClient(object):
             payload_dict["hashes"].append({"type": key, "value": base64.b64encode(value.decode('hex'))})
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode()
+        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
         response = self.__dxl_sync_request(req)
@@ -477,7 +477,7 @@ class TieClient(object):
             payload_dict["publicKeySha1"] = base64.b64encode(public_key_sha1.decode('hex'))
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode()
+        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
         self.__dxl_sync_request(req)
@@ -576,7 +576,7 @@ class TieClient(object):
         # Create a dictionary for the payload
         payload_dict = {
             "hashes": [
-                {"type": "sha1", "value": "6FRZsjwjLbPLlMelbUdnj1jo5R4="}
+                {"type": "sha1", "value": base64.b64encode(sha1.decode('hex'))}
             ]}
 
         # Add public key SHA-1 (if specified)
@@ -584,7 +584,7 @@ class TieClient(object):
             payload_dict["publicKeySha1"] = base64.b64encode(public_key_sha1.decode('hex'))
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode()
+        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
         response = self.__dxl_sync_request(req)
@@ -657,7 +657,7 @@ class TieClient(object):
             payload_dict["publicKeySha1"] = base64.b64encode(public_key_sha1.decode('hex'))
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode()
+        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
         response = self.__dxl_sync_request(req)

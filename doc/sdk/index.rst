@@ -56,3 +56,12 @@ Basic
         basicreputationchangecallbackexample
         basicdetectioncallbackexample
         basicfirstinstancecallbackexample
+
+Advanced
+
+    Service Invocations
+
+    .. toctree::
+        :maxdepth: 1
+
+        advancedgetreputationexample

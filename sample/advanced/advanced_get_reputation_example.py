@@ -24,8 +24,9 @@ config = DxlClientConfig.create_dxl_config_from_file(CONFIG_FILE)
 
 # Hashes for the file to look up (notepad.exe)
 # These can be replaced by a file which is known to have run within the enterprise for better results
-FILE_SHA1 = "7eb0139d2175739b3ccb0d1110067820be6abd29"
 FILE_MD5 = "f2c7bb8acc97f92e987a2d4087d021b1"
+FILE_SHA1 = "7eb0139d2175739b3ccb0d1110067820be6abd29"
+FILE_SHA256 = "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
 
 # Hashes for the certificate to look up
 # These can be replaced by a certificate which is known to have run within the enterprise for better results
@@ -44,8 +45,12 @@ with DxlClient(config) as client:
     #
     # Perform the file reputation query
     #
-
-    reputations_dict = tie_client.get_file_reputation({HashType.SHA1: FILE_SHA1, HashType.MD5: FILE_MD5})
+    reputations_dict = \
+        tie_client.get_file_reputation({
+            HashType.MD5: FILE_MD5,
+            HashType.SHA1: FILE_SHA1,
+            HashType.SHA256: FILE_SHA256
+        })
 
     print "File reputation response:"
     
@@ -81,7 +86,8 @@ with DxlClient(config) as client:
     # Perform the certificate reputation query
     #
 
-    reputations_dict = tie_client.get_certificate_reputation(CERTIFICATE_BODY_SHA1, CERTIFICATE_PUBLIC_KEY_SHA1)
+    reputations_dict = tie_client.get_certificate_reputation(
+        CERTIFICATE_BODY_SHA1, CERTIFICATE_PUBLIC_KEY_SHA1)
 
     print "\nCertificate reputation response:"
     
