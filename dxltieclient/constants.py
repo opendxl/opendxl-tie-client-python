@@ -157,7 +157,8 @@ class ReputationProp:
         +---------------+-------------------------------------------------------------------------+
         | Name          | Description                                                             |
         +===============+=========================================================================+
-        | PROVIDER_ID   | The identifier of the particular `provider` that provided this          |
+        | PROVIDER_ID   | The identifier of the particular `provider` that provided the           |
+        |               | reputation.                                                             |
         |               |                                                                         |
         |               | See the :class:`FileProvider` constants class for the list of           |
         |               | `file reputation providers`.                                            |

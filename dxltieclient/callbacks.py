@@ -61,7 +61,7 @@ class ReputationChangeCallback(EventCallback):
         NOTE: This method should not be overridden (it performs transformations to simplify TIE usage).
         Instead, the :func:`on_reputation_change` method must be overridden.
 
-        :param event: The :class:`dxlclient.message.Event` message that was received
+        :param event: The original DXL event message that was received
         """
         # Decode the event payload
         rep_change_dict = json.loads(event.payload.decode(encoding="UTF-8"))
@@ -297,7 +297,7 @@ class DetectionCallback(EventCallback):
         NOTE: This method should not be overridden (it performs transformations to simplify TIE usage).
         Instead, the :func:`on_detection` method must be overridden.
 
-        :param event: The :class:`dxlclient.message.Event` message that was received
+        :param event: The original DXL event message that was received
         """
         # Decode the event payload
         detection_dict = json.loads(event.payload.decode(encoding="UTF-8"))
@@ -405,7 +405,7 @@ class FirstInstanceCallback(EventCallback):
         NOTE: This method should not be overridden (it performs transformations to simplify TIE usage).
         Instead, the :func:`on_first_instance` method must be overridden.
 
-        :param event: The :class:`dxlclient.message.Event` message that was received
+        :param event: The original DXL event message that was received
         """
         # Decode the event payload
         first_instance_dict = json.loads(event.payload.decode(encoding="UTF-8"))
@@ -434,7 +434,6 @@ class FirstInstanceCallback(EventCallback):
 
             .. code-block:: python
 
-                First instance on topic: /mcafee/event/tie/file/firstinstance
                 {
                     "agentGuid": "{68125cd6-a5d8-11e6-348e-000c29663178}",
                     "hashes": {
