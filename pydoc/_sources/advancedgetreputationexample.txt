@@ -90,7 +90,7 @@ properties for the file and certificate:
 
     * The Global Threat Intelligence (GTI) trust level
     * The prevalence of the file or certificate within the enterprise
-    * The first time the the file or certificate was found within the enterprise
+    * The first time the file or certificate was found within the enterprise
 
 Details
 *******
