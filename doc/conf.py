@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 #
-# DXL Python SDK documentation build configuration file, created by
-# sphinx-quickstart on Tue Jan 13 11:34:32 2015.
 
 import sys
 import os
@@ -32,7 +30,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'McAfee Threat Intelligence Exchange (TIE) DXL Client Library'
-copyright = u'2016, McAfee Inc'
+copyright = u'2017, McAfee Inc'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -63,3 +61,4 @@ htmlhelp_basename = 'sphinxdoc'
 autoclass_content = 'both'
 
 modindex_common_prefix = ['dxltieclient.']
+
