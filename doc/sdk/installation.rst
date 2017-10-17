@@ -5,11 +5,13 @@ Prerequisites
 *************
 
 * OpenDXL Python Client library installed
- * `<https://github.com/opendxl/opendxl-client-python>`_
+    `<https://github.com/opendxl/opendxl-client-python>`_
+
 * The OpenDXL Python Client prerequisites must be satisfied
- * `<https://opendxl.github.io/opendxl-client-python/pydoc/installation.html>`_
+    `<https://opendxl.github.io/opendxl-client-python/pydoc/installation.html>`_
+
 * McAfee Threat Intelligence Exchange Server installed and available on DXL fabric
- * `<http://www.mcafee.com/us/products/threat-intelligence-exchange.aspx>`_
+    `<http://www.mcafee.com/us/products/threat-intelligence-exchange.aspx>`_
 
 Installation
 ************

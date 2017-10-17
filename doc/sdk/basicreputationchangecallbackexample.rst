@@ -39,8 +39,10 @@ listed below:
     * Select a `file` or `certificate` in the list
     * Click the `"Actions"` button at the bottom left and select a new "Enterprise" reputation
       (for example, `Known Trusted`)
-     * NOTE: It is safest to select a file (or certificate) that has a "GTI" Reputation of `Known Trusted` and simply
-       set the "Enterprise" reputation to be the same (`Known Trusted`).
+
+      * NOTE: It is safest to select a file (or certificate) that has a "GTI" Reputation of `Known Trusted` and simply
+        set the "Enterprise" reputation to be the same (`Known Trusted`).
+
     * Remove the override by clicking on the `"Actions"` button again and selecting `"Remove Override"`
 
 Reputation Change Output
