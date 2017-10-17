@@ -5,6 +5,7 @@
 
 import base64
 import json
+from dxlbootstrap.client import Client
 from dxlclient import Request, Message
 from constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp
 
@@ -37,7 +38,7 @@ TIE_EVENT_FILE_FIRST_INSTANCE_TOPIC = "/mcafee/event/tie/file/firstinstance"
 TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC = "/mcafee/event/tie/file/prevalence"
 
 
-class TieClient(object):
+class TieClient(Client):
     """
     This client provides a high level wrapper for communicating with the 
     McAfee Threat Intelligence Exchange (TIE) DXL service.
@@ -46,12 +47,7 @@ class TieClient(object):
     determine where a file has executed, etc.) without having to focus on lower-level details such as
     TIE-specific DXL topics and message formats.
     """
-    
-    # The default amount of time (in seconds) to wait for a response from the TIE server
-    __DEFAULT_RESPONSE_TIMEOUT = 30
-    # The minimum amount of time (in seconds) to wait for a response from the TIE server
-    __MIN_RESPONSE_TIMEOUT = 30
-    
+
     def __init__(self, dxl_client):
         """
         Constructor parameters:
@@ -59,20 +55,7 @@ class TieClient(object):
         :param dxl_client: The DXL client to use for communication with the TIE DXL service
         """
         self.__dxl_client = dxl_client
-        self.__response_timeout = self.__DEFAULT_RESPONSE_TIMEOUT
-
-    @property
-    def response_timeout(self):
-        """
-        The maximum amount of time (in seconds) to wait for a response from the TIE server
-        """
-        return self.__response_timeout
-
-    @response_timeout.setter
-    def response_timeout(self, response_timeout):
-        if response_timeout < self.__MIN_RESPONSE_TIMEOUT:
-            raise Exception("Response timeout must be greater than or equal to " + str(self.__MIN_RESPONSE_TIMEOUT))
-        self.__response_timeout = response_timeout
+        super(TieClient, self).__init__(dxl_client)
 
     def add_file_first_instance_callback(self, first_instance_callback):
         """
@@ -206,7 +189,7 @@ class TieClient(object):
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
-        self.__dxl_sync_request(req)
+        self._dxl_sync_request(req)
 
     def get_file_reputation(self, hashes):
         """
@@ -314,7 +297,7 @@ class TieClient(object):
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
-        response = self.__dxl_sync_request(req)
+        response = self._dxl_sync_request(req)
         
         resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
 
@@ -389,7 +372,7 @@ class TieClient(object):
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
-        response = self.__dxl_sync_request(req)
+        response = self._dxl_sync_request(req)
 
         resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
 
@@ -480,7 +463,7 @@ class TieClient(object):
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
-        self.__dxl_sync_request(req)
+        self._dxl_sync_request(req)
 
     def get_certificate_reputation(self, sha1, public_key_sha1=None):
         """
@@ -587,7 +570,7 @@ class TieClient(object):
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
-        response = self.__dxl_sync_request(req)
+        response = self._dxl_sync_request(req)
         
         resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
 
@@ -660,7 +643,7 @@ class TieClient(object):
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
         # Send the request
-        response = self.__dxl_sync_request(req)
+        response = self._dxl_sync_request(req)
 
         resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
 
@@ -669,22 +652,6 @@ class TieClient(object):
             return resp_dict["agents"]
         else:
             return []
-
-    def __dxl_sync_request(self, request):
-        """
-        Performs a synchronous DXL request. Throws an exception if an error occurs
-
-        :param request: The request to send
-        :return: The DXL response
-        """
-        # Send the request and wait for a response (synchronous)
-        res = self.__dxl_client.sync_request(request, timeout=self.__response_timeout)
-
-        # Return a dictionary corresponding to the response payload
-        if res.message_type != Message.MESSAGE_TYPE_ERROR:
-            return res
-        else:
-            raise Exception("Error: " + res.error_message + " (" + str(res.error_code) + ")")
 
     @staticmethod
     def _base64_to_hex(base64_value):
