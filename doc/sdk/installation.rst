@@ -20,7 +20,7 @@ Use ``pip`` to automatically install the module:
 
     .. parsed-literal::
 
-        pip install dxltieclient-\ |version|\-py2.7-none-any.whl
+        pip install dxltieclient-\ |version|\-py2.py3-none-any.whl
 
 Or with:
 

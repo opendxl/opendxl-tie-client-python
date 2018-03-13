@@ -42,7 +42,7 @@ TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC = "/mcafee/event/tie/file/prevalence"
 
 class TieClient(Client):
     """
-    This client provides a high level wrapper for communicating with the 
+    This client provides a high level wrapper for communicating with the
     McAfee Threat Intelligence Exchange (TIE) DXL service.
 
     The purpose of this client is to allow users to access the features of TIE (manage reputations,
@@ -188,7 +188,7 @@ class TieClient(Client):
             payload_dict["hashes"].append(
                 {"type": key,
                  "value": self._hex_to_base64(value)})
-            
+
         # Set the payload
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
 
@@ -304,14 +304,13 @@ class TieClient(Client):
 
         # Send the request
         response = self._dxl_sync_request(req)
-        
+
         resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
 
         # Transform reputations to be simpler to use
         if "reputations" in resp_dict:
             return TieClient._transform_reputations(resp_dict["reputations"])
-        else:
-            return {}
+        return {}
 
     def get_file_first_references(self, hashes, query_limit=500):
         """
@@ -387,8 +386,7 @@ class TieClient(Client):
         # Return the agents list
         if "agents" in resp_dict:
             return resp_dict["agents"]
-        else:
-            return []
+        return []
 
     def add_certificate_reputation_change_callback(self, rep_change_callback):
         """
@@ -581,14 +579,13 @@ class TieClient(Client):
 
         # Send the request
         response = self._dxl_sync_request(req)
-        
+
         resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
 
         # Transform reputations to be simpler to use
         if "reputations" in resp_dict:
             return TieClient._transform_reputations(resp_dict["reputations"])
-        else:
-            return {}
+        return {}
 
     def get_certificate_first_references(self, sha1, public_key_sha1=None, query_limit=500):
         """
@@ -661,8 +658,7 @@ class TieClient(Client):
         # Return the agents list
         if "agents" in resp_dict:
             return resp_dict["agents"]
-        else:
-            return []
+        return []
 
     @staticmethod
     def _base64_to_hex(base64_value):
@@ -718,4 +714,3 @@ class TieClient(Client):
                         file_dict["hashes"] = TieClient._transform_hashes(file_dict["hashes"])
 
         return reputations_dict
-
