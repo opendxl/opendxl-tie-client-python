@@ -3,11 +3,12 @@
 # Copyright (c) 2017 McAfee Inc. - All Rights Reserved.
 ################################################################################
 
+from __future__ import absolute_import
 import json
 
 from dxltieclient import TieClient
 from dxlclient.callbacks import EventCallback
-from constants import RepChangeEventProp, FileRepChangeEventProp, CertRepChangeEventProp, \
+from .constants import RepChangeEventProp, FileRepChangeEventProp, CertRepChangeEventProp, \
     DetectionEventProp, FirstInstanceEventProp
 
 

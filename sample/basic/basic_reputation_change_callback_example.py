@@ -3,6 +3,8 @@
 # McAfee Threat Intelligence Exchange (TIE) DXL service when the reputation
 # of a file or certificate changes.
 
+from __future__ import absolute_import
+from __future__ import print_function
 import logging
 import os
 import sys
@@ -31,11 +33,11 @@ class MyReputationChangeCallback(ReputationChangeCallback):
     """
     def on_reputation_change(self, rep_change_dict, original_event):
         # Display the DXL topic that the event was received on
-        print "Reputation change on topic: " + original_event.destination_topic
+        print("Reputation change on topic: " + original_event.destination_topic)
 
         # Dump the dictionary
-        print json.dumps(rep_change_dict,
-                         sort_keys=True, indent=4, separators=(',', ': '))
+        print(json.dumps(rep_change_dict,
+                         sort_keys=True, indent=4, separators=(',', ': ')))
 
 # Create the client
 with DxlClient(config) as client:
@@ -54,6 +56,6 @@ with DxlClient(config) as client:
     tie_client.add_certificate_reputation_change_callback(rep_change_callback)
 
     # Wait forever
-    print "Waiting for reputation change events..."
+    print("Waiting for reputation change events...")
     while True:
         time.sleep(60)

@@ -2,6 +2,8 @@
 # (TIE) DXL service to retrieve the set of systems which have referenced
 # (typically executed) a file (as identified by hashes).
 
+from __future__ import absolute_import
+from __future__ import print_function
 import logging
 import os
 import sys
@@ -43,7 +45,7 @@ with DxlClient(config) as client:
             HashType.SHA256: FILE_SHA256
         })
 
-    print "\nSystems that have referenced the file:\n"
+    print("\nSystems that have referenced the file:\n")
     for system in system_list:
-        print "\t" + system[FirstRefProp.SYSTEM_GUID] + ": " + \
-                FirstRefProp.to_localtime_string(system[FirstRefProp.DATE])
+        print("\t" + system[FirstRefProp.SYSTEM_GUID] + ": " + \
+                FirstRefProp.to_localtime_string(system[FirstRefProp.DATE]))

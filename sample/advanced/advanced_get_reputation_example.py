@@ -3,6 +3,8 @@
 # by their hashes). Further, this example demonstrates using the constants classes
 # to examine specific fields within the reputation responses.
 
+from __future__ import absolute_import
+from __future__ import print_function
 import os
 import sys
 import json
@@ -54,13 +56,13 @@ with DxlClient(config) as client:
             HashType.SHA256: FILE_SHA256
         })
 
-    print "File reputation response:"
+    print("File reputation response:")
     
     # Display the Global Threat Intelligence (GTI) trust level for the file
     if FileProvider.GTI in reputations_dict:
         gti_rep = reputations_dict[FileProvider.GTI]
-        print "\tGlobal Threat Intelligence (GTI) trust level: " + \
-              str(gti_rep[ReputationProp.TRUST_LEVEL])
+        print("\tGlobal Threat Intelligence (GTI) trust level: " + \
+              str(gti_rep[ReputationProp.TRUST_LEVEL]))
     
     # Display the Enterprise reputation information
     if FileProvider.ENTERPRISE in reputations_dict:
@@ -71,18 +73,18 @@ with DxlClient(config) as client:
 
         # Display prevalence (if it exists)
         if FileEnterpriseAttrib.PREVALENCE in ent_rep_attribs:
-            print "\tEnterprise prevalence: " + \
-                  ent_rep_attribs[FileEnterpriseAttrib.PREVALENCE]
+            print("\tEnterprise prevalence: " + \
+                  ent_rep_attribs[FileEnterpriseAttrib.PREVALENCE])
 
         # Display first contact date (if it exists)
         if FileEnterpriseAttrib.FIRST_CONTACT in ent_rep_attribs:
-            print "\tFirst contact: " + \
+            print("\tFirst contact: " + \
                   FileEnterpriseAttrib.to_localtime_string(
-                      ent_rep_attribs[FileEnterpriseAttrib.FIRST_CONTACT])
+                      ent_rep_attribs[FileEnterpriseAttrib.FIRST_CONTACT]))
 
     # Display the full file reputation response
-    print "\nFull file reputation response:\n" + \
-          json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': '))
+    print("\nFull file reputation response:\n" + \
+          json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': ')))
 
     #
     # Perform the certificate reputation query
@@ -91,13 +93,13 @@ with DxlClient(config) as client:
     reputations_dict = tie_client.get_certificate_reputation(
         CERTIFICATE_BODY_SHA1, CERTIFICATE_PUBLIC_KEY_SHA1)
 
-    print "\nCertificate reputation response:"
+    print("\nCertificate reputation response:")
     
     # Display the Global Threat Intelligence(GTI) trust level for the certificate
     if CertProvider.GTI in reputations_dict:
         gti_rep = reputations_dict[CertProvider.GTI]
-        print "\tGlobal Threat Intelligence (GTI) trust level: " \
-            + str(gti_rep[ReputationProp.TRUST_LEVEL])
+        print("\tGlobal Threat Intelligence (GTI) trust level: " \
+            + str(gti_rep[ReputationProp.TRUST_LEVEL]))
     
     # Display the Enterprise reputation information
     if CertProvider.ENTERPRISE in reputations_dict:
@@ -108,15 +110,15 @@ with DxlClient(config) as client:
 
         # Display prevalence (if it exists)
         if CertEnterpriseAttrib.PREVALENCE in ent_rep_attribs:
-            print "\tEnterprise prevalence: " \
-                + ent_rep_attribs[CertEnterpriseAttrib.PREVALENCE]
+            print("\tEnterprise prevalence: " \
+                + ent_rep_attribs[CertEnterpriseAttrib.PREVALENCE])
 
         # Display first contact date (if it exists)
         if CertEnterpriseAttrib.FIRST_CONTACT in ent_rep_attribs:
-            print "\tFirst contact: " + \
+            print("\tFirst contact: " + \
                   CertEnterpriseAttrib.to_localtime_string(
-                      ent_rep_attribs[CertEnterpriseAttrib.FIRST_CONTACT])
+                      ent_rep_attribs[CertEnterpriseAttrib.FIRST_CONTACT]))
 
     # Display the full certificate response
-    print "\nFull certificate reputation response:\n" + \
-          json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': '))
+    print("\nFull certificate reputation response:\n" + \
+          json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': ')))

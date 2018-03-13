@@ -3,8 +3,10 @@
 # Copyright (c) 2017 McAfee Inc. - All Rights Reserved.
 ################################################################################
 
+from __future__ import absolute_import
 import time
 import struct
+from six.moves import range
 
 
 class EpochMixin:
@@ -306,7 +308,7 @@ class EnterpriseAttrib(EpochMixin):
         :param version_attrib: The encoded version string
         :return: A ``tuple`` corresponding to the specified encoded version string
         """
-        ver_long = long(version_attrib)
+        ver_long = int(version_attrib)
         return (((ver_long >> 56) & 0xff), ((ver_long >> 48) & 0xff),
                 ((ver_long >> 32) & 0xffff), (ver_long & 0xffffffff))
 
@@ -421,7 +423,7 @@ class FileEnterpriseAttrib(EnterpriseAttrib):
         bin_attrib = aggregate_attrib.decode('base64', 'strict')
         agg_list = \
             list(struct.unpack('<H', bin_attrib[i] + bin_attrib[i + 1])[0]
-                 for i in xrange(0, len(bin_attrib), 2))
+                 for i in range(0, len(bin_attrib), 2))
         if agg_list[4] > 0:
             agg_list[4] = (agg_list[4] / 100.0)
         return tuple(agg_list)

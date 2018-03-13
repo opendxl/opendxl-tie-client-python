@@ -3,11 +3,12 @@
 # Copyright (c) 2017 McAfee Inc. - All Rights Reserved.
 ################################################################################
 
+from __future__ import absolute_import
 import base64
 import json
 from dxlbootstrap.client import Client
 from dxlclient import Request, Message
-from constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp
+from .constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp
 
 # Topic used to set the reputation of a file
 TIE_SET_FILE_REPUTATION_TOPIC = "/mcafee/service/tie/file/reputation/set"
