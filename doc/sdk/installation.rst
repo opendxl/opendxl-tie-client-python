@@ -13,6 +13,9 @@ Prerequisites
 * McAfee Threat Intelligence Exchange Server installed and available on DXL fabric
     `<http://www.mcafee.com/us/products/threat-intelligence-exchange.aspx>`_
 
+* Python 2.7.9 or higher in the Python 2.x series or Python 3.4.0 or higher
+  in the Python 3.x series installed within a Windows or Linux environment.
+
 Installation
 ************
 
