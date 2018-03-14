@@ -4,9 +4,15 @@
 ################################################################################
 
 from __future__ import absolute_import
+import base64
+import sys
 import time
 import struct
-from six.moves import range
+
+if sys.version_info[0] > 2:
+    Range = range
+else:
+    Range = xrange
 
 
 class EpochMixin:
@@ -420,10 +426,10 @@ class FileEnterpriseAttrib(EnterpriseAttrib):
         :param aggregate_attrib: The aggregate string
         :return: A `tuple` containing the values in the specified aggregate string
         """
-        bin_attrib = aggregate_attrib.decode('base64', 'strict')
+        bin_attrib = base64.b64decode(aggregate_attrib)
         agg_list = \
-            list(struct.unpack('<H', bin_attrib[i] + bin_attrib[i + 1])[0]
-                 for i in range(0, len(bin_attrib), 2))
+            list(struct.unpack('<H', bin_attrib[i:i+2])[0]
+                 for i in Range(0, len(bin_attrib), 2))
         if agg_list[4] > 0:
             agg_list[4] = (agg_list[4] / 100.0)
         return tuple(agg_list)
