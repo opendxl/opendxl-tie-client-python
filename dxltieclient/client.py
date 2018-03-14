@@ -5,9 +5,10 @@
 
 from __future__ import absolute_import
 import base64
+import binascii
 import json
 from dxlbootstrap.client import Client
-from dxlclient import Request, Message
+from dxlclient import Request
 from .constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp
 
 # Topic used to set the reputation of a file
@@ -184,7 +185,9 @@ class TieClient(Client):
             "hashes": []}
 
         for key, value in hashes.items():
-            payload_dict["hashes"].append({"type": key, "value": base64.b64encode(value.decode('hex'))})
+            payload_dict["hashes"].append(
+                {"type": key,
+                 "value": self._hex_to_base64(value)})
             
         # Set the payload
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
@@ -290,9 +293,11 @@ class TieClient(Client):
 
         # Create a dictionary for the payload
         payload_dict = {"hashes": []}
-        
+
         for key, value in hashes.items():
-            payload_dict["hashes"].append({"type": key, "value": base64.b64encode(value.decode('hex'))})
+            payload_dict["hashes"].append(
+                {"type": key,
+                 "value": self._hex_to_base64(value)})
 
         # Set the payload
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
@@ -367,7 +372,9 @@ class TieClient(Client):
         }
 
         for key, value in hashes.items():
-            payload_dict["hashes"].append({"type": key, "value": base64.b64encode(value.decode('hex'))})
+            payload_dict["hashes"].append({
+                "type": key,
+                "value": self._hex_to_base64(value)})
 
         # Set the payload
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
@@ -453,12 +460,13 @@ class TieClient(Client):
             "providerId": CertProvider.ENTERPRISE,
             "comment": comment,
             "hashes": [
-                {"type": "sha1", "value": base64.b64encode(sha1.decode('hex'))}
+                {"type": "sha1", "value": self._hex_to_base64(sha1)}
             ]}
 
         # Add public key SHA-1 (if specified)
         if public_key_sha1:
-            payload_dict["publicKeySha1"] = base64.b64encode(public_key_sha1.decode('hex'))
+            payload_dict["publicKeySha1"] = self._hex_to_base64(
+                public_key_sha1)
 
         # Set the payload
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
@@ -560,12 +568,13 @@ class TieClient(Client):
         # Create a dictionary for the payload
         payload_dict = {
             "hashes": [
-                {"type": "sha1", "value": base64.b64encode(sha1.decode('hex'))}
+                {"type": "sha1", "value": self._hex_to_base64(sha1)}
             ]}
 
         # Add public key SHA-1 (if specified)
         if public_key_sha1:
-            payload_dict["publicKeySha1"] = base64.b64encode(public_key_sha1.decode('hex'))
+            payload_dict["publicKeySha1"] = self._hex_to_base64(
+                public_key_sha1)
 
         # Set the payload
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
@@ -633,12 +642,13 @@ class TieClient(Client):
         payload_dict = {
             "queryLimit": query_limit,
             "hashes": [
-                {"type": "sha1", "value": base64.b64encode(sha1.decode('hex'))}
+                {"type": "sha1", "value": self._hex_to_base64(sha1)}
             ]}
 
         # Add public key SHA-1 (if specified)
         if public_key_sha1:
-            payload_dict["publicKeySha1"] = base64.b64encode(public_key_sha1.decode('hex'))
+            payload_dict["publicKeySha1"] = self._hex_to_base64(
+                public_key_sha1)
 
         # Set the payload
         req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
@@ -661,7 +671,16 @@ class TieClient(Client):
         :param base64_value: The base64 value
         :return: The corresponding hex string
         """
-        return base64.b64decode(base64_value).encode("hex")
+        return binascii.hexlify(base64.b64decode(base64_value)).decode("ascii")
+
+    @staticmethod
+    def _hex_to_base64(hex_value):
+        """
+        Converts from a hex string to a base64 string
+        :param hex_value: The hex value
+        :return: The corresponding base64 string
+        """
+        return base64.b64encode(binascii.unhexlify(hex_value)).decode("ascii")
 
     @staticmethod
     def _transform_hashes(hashes):
