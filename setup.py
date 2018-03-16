@@ -31,7 +31,8 @@ class LintCommand(Command):
     def run(self):
         self.announce("Running pylint for library source files and tests",
                       level=distutils.log.INFO)
-        subprocess.check_call(["pylint", "dxltieclient"] + glob.glob("*.py"))
+        subprocess.check_call(["pylint", "dxltieclient", "tests"] +
+                              glob.glob("*.py"))
         self.announce("Running pylint for samples", level=distutils.log.INFO)
         subprocess.check_call(["pylint"] + glob.glob("sample/*.py") +
                               glob.glob("sample/**/*.py") +
@@ -50,8 +51,9 @@ class CiCommand(Command):
         pass
     def run(self):
         self.run_command("lint")
+        self.run_command("test")
 
-TEST_REQUIREMENTS = ["pylint"]
+TEST_REQUIREMENTS = ["nose", "pylint"]
 
 DEV_REQUIREMENTS = TEST_REQUIREMENTS + ["sphinx"]
 
@@ -74,6 +76,8 @@ setup(
         "dev": DEV_REQUIREMENTS,
         "test": TEST_REQUIREMENTS
     },
+
+    test_suite="nose.collector",
 
     # Application author details:
     author="McAfee, Inc.",
