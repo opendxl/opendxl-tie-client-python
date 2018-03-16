@@ -27,13 +27,15 @@ logger = logging.getLogger(__name__)
 config = DxlClientConfig.create_dxl_config_from_file(CONFIG_FILE)
 
 # Hashes for the file to look up (notepad.exe)
-# These can be replaced by a file which is known to have run within the enterprise for better results
+# These can be replaced by a file which is known to have run within the
+# enterprise for better results
 FILE_MD5 = "f2c7bb8acc97f92e987a2d4087d021b1"
 FILE_SHA1 = "7eb0139d2175739b3ccb0d1110067820be6abd29"
 FILE_SHA256 = "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
 
 # Hashes for the certificate to look up
-# These can be replaced by a certificate which is known to have run within the enterprise for better results
+# These can be replaced by a certificate which is known to have run within the
+# enterprise for better results
 CERTIFICATE_BODY_SHA1 = "6EAE26DB8C13182A7947982991B4321732CC3DE2"
 CERTIFICATE_PUBLIC_KEY_SHA1 = "3B87A2D6F39770160364B79A152FCC73BAE27ADF"
 
@@ -57,13 +59,13 @@ with DxlClient(config) as client:
         })
 
     print("File reputation response:")
-    
+
     # Display the Global Threat Intelligence (GTI) trust level for the file
     if FileProvider.GTI in reputations_dict:
         gti_rep = reputations_dict[FileProvider.GTI]
         print("\tGlobal Threat Intelligence (GTI) trust level: " + \
               str(gti_rep[ReputationProp.TRUST_LEVEL]))
-    
+
     # Display the Enterprise reputation information
     if FileProvider.ENTERPRISE in reputations_dict:
         ent_rep = reputations_dict[FileProvider.ENTERPRISE]
@@ -94,13 +96,13 @@ with DxlClient(config) as client:
         CERTIFICATE_BODY_SHA1, CERTIFICATE_PUBLIC_KEY_SHA1)
 
     print("\nCertificate reputation response:")
-    
+
     # Display the Global Threat Intelligence(GTI) trust level for the certificate
     if CertProvider.GTI in reputations_dict:
         gti_rep = reputations_dict[CertProvider.GTI]
         print("\tGlobal Threat Intelligence (GTI) trust level: " \
             + str(gti_rep[ReputationProp.TRUST_LEVEL]))
-    
+
     # Display the Enterprise reputation information
     if CertProvider.ENTERPRISE in reputations_dict:
         ent_rep = reputations_dict[CertProvider.ENTERPRISE]
