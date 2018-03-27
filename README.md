@@ -1,4 +1,5 @@
 # McAfee Threat Intelligence Exchange (TIE) DXL Python Client Library
+[![OpenDXL Bootstrap](https://img.shields.io/badge/Built%20With-OpenDXL%20Bootstrap-blue.svg)](https://github.com/opendxl/opendxl-bootstrap-python)
 [![Latest PyPI Version](https://img.shields.io/pypi/v/dxltieclient.svg)](https://pypi.python.org/pypi/dxltieclient)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.org/opendxl/opendxl-tie-client-python.png?branch=master)](https://travis-ci.org/opendxl/opendxl-tie-client-python)
