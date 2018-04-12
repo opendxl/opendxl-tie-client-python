@@ -80,7 +80,7 @@ setup(
     test_suite="nose.collector",
 
     # Application author details:
-    author="McAfee, Inc.",
+    author="McAfee LLC",
 
     # License
     license="Apache License 2.0",
