@@ -56,7 +56,6 @@ with DxlClient(config) as client:
             HashType.MD5: "44d88612fea8a8f36de82e1278abb02f",
             HashType.SHA1: "3395856ce81f2b7382dee72602f798b642f14140",
             HashType.SHA256: "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
-
         })
     print("EICAR reputations:")
     print(json.dumps(reputations_dict,

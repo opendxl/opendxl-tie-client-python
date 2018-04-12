@@ -84,10 +84,10 @@ The majority of the sample code is shown below:
                     HashType.SHA256: FILE_SHA256
                 })
 
-            print "\nSystems that have referenced the file:\n"
+            print("\nSystems that have referenced the file:\n")
             for system in system_list:
-                print "\t" + system[FirstRefProp.SYSTEM_GUID] + ": " + \
-                        FirstRefProp.to_localtime_string(system[FirstRefProp.DATE])
+                print("\t" + system[FirstRefProp.SYSTEM_GUID] + ": " + \
+                        FirstRefProp.to_localtime_string(system[FirstRefProp.DATE]))
 
 Once a connection is established to the DXL fabric, a :class:`dxltieclient.client.TieClient` instance is created
 which will be used to communicate with the TIE DXL services.

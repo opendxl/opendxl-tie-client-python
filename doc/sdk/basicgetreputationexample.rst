@@ -114,9 +114,9 @@ The majority of the sample code is shown below:
                     HashType.SHA1: "7eb0139d2175739b3ccb0d1110067820be6abd29",
                     HashType.SHA256: "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
                 })
-            print "Notepad.exe reputations:"
-            print json.dumps(reputations_dict,
-                             sort_keys=True, indent=4, separators=(',', ': ')) + "\n"
+            print("Notepad.exe reputations:")
+            print(json.dumps(reputations_dict,
+                             sort_keys=True, indent=4, separators=(',', ': ')) + "\n")
 
             #
             # Request and display reputation for EICAR
@@ -126,11 +126,10 @@ The majority of the sample code is shown below:
                     HashType.MD5: "44d88612fea8a8f36de82e1278abb02f",
                     HashType.SHA1: "3395856ce81f2b7382dee72602f798b642f14140",
                     HashType.SHA256: "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
-
                 })
-            print "EICAR reputations:"
-            print json.dumps(reputations_dict,
-                             sort_keys=True, indent=4, separators=(',', ': '))
+            print("EICAR reputations:")
+            print(json.dumps(reputations_dict,
+                             sort_keys=True, indent=4, separators=(',', ': ')))
 
 Once a connection is established to the DXL fabric, a :class:`dxltieclient.client.TieClient` instance is created
 which will be used to communicate with the TIE DXL services.

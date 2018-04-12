@@ -143,11 +143,11 @@ The majority of the sample code is shown below:
             """
             def on_reputation_change(self, rep_change_dict, original_event):
                 # Display the DXL topic that the event was received on
-                print "Reputation change on topic: " + original_event.destination_topic
+                print("Reputation change on topic: " + original_event.destination_topic)
 
                 # Dump the dictionary
-                print json.dumps(rep_change_dict,
-                                 sort_keys=True, indent=4, separators=(',', ': '))
+                print(json.dumps(rep_change_dict,
+                                 sort_keys=True, indent=4, separators=(',', ': ')))
 
         # Create the client
         with DxlClient(config) as client:
@@ -161,13 +161,12 @@ The majority of the sample code is shown below:
             # Create reputation change callback
             rep_change_callback = MyReputationChangeCallback()
 
-            # Register callbacks with client to receive both file and certificate
-            # reputation change events
+            # Register callbacks with client to receive both file and certificate reputation change events
             tie_client.add_file_reputation_change_callback(rep_change_callback)
             tie_client.add_certificate_reputation_change_callback(rep_change_callback)
 
             # Wait forever
-            print "Waiting for reputation change events..."
+            print("Waiting for reputation change events...")
             while True:
                 time.sleep(60)
 
@@ -182,7 +181,3 @@ An instance of the derived callback is constructed and registered with both the
 :func:`dxltieclient.client.TieClient.add_file_reputation_change_callback` and
 :func:`dxltieclient.client.TieClient.add_certificate_reputation_change_callback` methods to
 receive file and certificate reputation change events.
-
-
-
-
