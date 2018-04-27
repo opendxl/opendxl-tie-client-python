@@ -146,8 +146,7 @@ The majority of the sample code is shown below:
                 print("Reputation change on topic: " + original_event.destination_topic)
 
                 # Dump the dictionary
-                print(json.dumps(rep_change_dict,
-                                 sort_keys=True, indent=4, separators=(',', ': ')))
+                print(MessageUtils.dict_to_json(rep_change_dict, True))
 
         # Create the client
         with DxlClient(config) as client:

@@ -6,8 +6,8 @@
 from __future__ import absolute_import
 import base64
 import binascii
-import json
 from dxlbootstrap.client import Client
+from dxlbootstrap.util import MessageUtils
 from dxlclient import Request
 from .constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp
 
@@ -190,7 +190,7 @@ class TieClient(Client):
                  "value": self._hex_to_base64(value)})
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
         self._dxl_sync_request(req)
@@ -300,12 +300,12 @@ class TieClient(Client):
                  "value": self._hex_to_base64(value)})
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
         response = self._dxl_sync_request(req)
 
-        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
+        resp_dict = MessageUtils.json_payload_to_dict(response)
 
         # Transform reputations to be simpler to use
         if "reputations" in resp_dict:
@@ -376,12 +376,12 @@ class TieClient(Client):
                 "value": self._hex_to_base64(value)})
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
         response = self._dxl_sync_request(req)
 
-        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
+        resp_dict = MessageUtils.json_payload_to_dict(response)
 
         # Return the agents list
         if "agents" in resp_dict:
@@ -467,7 +467,7 @@ class TieClient(Client):
                 public_key_sha1)
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
         self._dxl_sync_request(req)
@@ -575,12 +575,12 @@ class TieClient(Client):
                 public_key_sha1)
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
         response = self._dxl_sync_request(req)
 
-        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
+        resp_dict = MessageUtils.json_payload_to_dict(response)
 
         # Transform reputations to be simpler to use
         if "reputations" in resp_dict:
@@ -648,12 +648,12 @@ class TieClient(Client):
                 public_key_sha1)
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
         response = self._dxl_sync_request(req)
 
-        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
+        resp_dict = MessageUtils.json_payload_to_dict(response)
 
         # Return the agents list
         if "agents" in resp_dict:

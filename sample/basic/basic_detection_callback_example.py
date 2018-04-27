@@ -8,8 +8,8 @@ import logging
 import os
 import sys
 import time
-import json
 
+from dxlbootstrap.util import MessageUtils
 from dxlclient.client import DxlClient
 from dxlclient.client_config import DxlClientConfig
 from dxltieclient import TieClient, DetectionCallback
@@ -35,8 +35,7 @@ class MyDetectionCallback(DetectionCallback):
         print("Detection on topic: " + original_event.destination_topic)
 
         # Dump the dictionary
-        print(json.dumps(detection_dict,
-                         sort_keys=True, indent=4, separators=(',', ': ')))
+        print(MessageUtils.dict_to_json(detection_dict, True))
 
 # Create the client
 with DxlClient(config) as client:

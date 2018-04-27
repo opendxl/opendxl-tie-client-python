@@ -146,7 +146,7 @@ The majority of the sample code is shown below:
 
             # Display the full file reputation response
             print("\nFull file reputation response:\n" + \
-                  json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': ')))
+                  MessageUtils.dict_to_json(reputations_dict, True))
 
             #
             # Perform the certificate reputation query
@@ -183,7 +183,7 @@ The majority of the sample code is shown below:
 
             # Display the full certificate response
             print("\nFull certificate reputation response:\n" + \
-                  json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': ')))
+                  MessageUtils.dict_to_json(reputations_dict, True))
 
 Once a connection is established to the DXL fabric, a :class:`dxltieclient.client.TieClient` instance is created
 which will be used to communicate with the TIE DXL services.

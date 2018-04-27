@@ -7,8 +7,8 @@ from __future__ import print_function
 import logging
 import os
 import sys
-import json
 
+from dxlbootstrap.util import MessageUtils
 from dxlclient.client import DxlClient
 from dxlclient.client_config import DxlClientConfig
 from dxltieclient import TieClient
@@ -45,8 +45,7 @@ with DxlClient(config) as client:
             HashType.SHA256: "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
         })
     print("Notepad.exe reputations:")
-    print(json.dumps(reputations_dict,
-                     sort_keys=True, indent=4, separators=(',', ': ')) + "\n")
+    print(MessageUtils.dict_to_json(reputations_dict, True) + "\n")
 
     #
     # Request and display reputation for EICAR
@@ -58,5 +57,4 @@ with DxlClient(config) as client:
             HashType.SHA256: "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
         })
     print("EICAR reputations:")
-    print(json.dumps(reputations_dict,
-                     sort_keys=True, indent=4, separators=(',', ': ')))
+    print(MessageUtils.dict_to_json(reputations_dict, True))

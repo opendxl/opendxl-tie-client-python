@@ -9,8 +9,8 @@ import logging
 import os
 import sys
 import time
-import json
 
+from dxlbootstrap.util import MessageUtils
 from dxlclient.client import DxlClient
 from dxlclient.client_config import DxlClientConfig
 from dxltieclient import TieClient, ReputationChangeCallback
@@ -36,8 +36,7 @@ class MyReputationChangeCallback(ReputationChangeCallback):
         print("Reputation change on topic: " + original_event.destination_topic)
 
         # Dump the dictionary
-        print(json.dumps(rep_change_dict,
-                         sort_keys=True, indent=4, separators=(',', ': ')))
+        print(MessageUtils.dict_to_json(rep_change_dict, True))
 
 # Create the client
 with DxlClient(config) as client:

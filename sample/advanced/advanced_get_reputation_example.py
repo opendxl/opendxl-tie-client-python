@@ -7,8 +7,8 @@ from __future__ import absolute_import
 from __future__ import print_function
 import os
 import sys
-import json
 
+from dxlbootstrap.util import MessageUtils
 from dxlclient.client_config import DxlClientConfig
 from dxlclient.client import DxlClient
 from dxltieclient import TieClient
@@ -86,7 +86,7 @@ with DxlClient(config) as client:
 
     # Display the full file reputation response
     print("\nFull file reputation response:\n" + \
-          json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': ')))
+          MessageUtils.dict_to_json(reputations_dict, True))
 
     #
     # Perform the certificate reputation query
@@ -123,4 +123,4 @@ with DxlClient(config) as client:
 
     # Display the full certificate response
     print("\nFull certificate reputation response:\n" + \
-          json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': ')))
+          MessageUtils.dict_to_json(reputations_dict, True))

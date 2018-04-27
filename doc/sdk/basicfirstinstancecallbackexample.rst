@@ -76,8 +76,7 @@ The majority of the sample code is shown below:
                 print("First instance on topic: " + original_event.destination_topic)
 
                 # Dump the dictionary
-                print(json.dumps(first_instance_dict,
-                                 sort_keys=True, indent=4, separators=(',', ': ')))
+                print(MessageUtils.dict_to_json(first_instance_dict, True))
 
         # Create the client
         with DxlClient(config) as client:
