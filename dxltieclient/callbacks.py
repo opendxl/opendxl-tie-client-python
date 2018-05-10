@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 ################################################################################
-# Copyright (c) 2017 McAfee Inc. - All Rights Reserved.
+# Copyright (c) 2017 McAfee LLC - All Rights Reserved.
 ################################################################################
 
-import json
+from __future__ import absolute_import
 
-from dxltieclient import TieClient
+from dxlbootstrap.util import MessageUtils
 from dxlclient.callbacks import EventCallback
-from constants import RepChangeEventProp, FileRepChangeEventProp, CertRepChangeEventProp, \
+from dxltieclient import TieClient
+from .constants import RepChangeEventProp, FileRepChangeEventProp, CertRepChangeEventProp, \
     DetectionEventProp, FirstInstanceEventProp
 
 
@@ -36,8 +37,7 @@ class ReputationChangeCallback(EventCallback):
                 def on_reputation_change(self, rep_change_dict, original_event):
 
                     # Dump the reputation change dictionary
-                    print json.dumps(rep_change_dict,
-                                     sort_keys=True, indent=4, separators=(',', ': '))
+                    print(MessageUtils.dict_to_json(rep_change_dict, True))
 
             # Create the client
             with DxlClient(config) as client:
@@ -64,7 +64,7 @@ class ReputationChangeCallback(EventCallback):
         :param event: The original DXL event message that was received
         """
         # Decode the event payload
-        rep_change_dict = json.loads(event.payload.decode(encoding="UTF-8"))
+        rep_change_dict = MessageUtils.json_payload_to_dict(event)
 
         # Transform hashes
         if RepChangeEventProp.HASHES in rep_change_dict:
@@ -272,8 +272,7 @@ class DetectionCallback(EventCallback):
                 def on_detection(self, detection_dict, original_event):
 
                     # Dump the dictionary
-                    print json.dumps(detection_dict,
-                                     sort_keys=True, indent=4, separators=(',', ': '))
+                    print(MessageUtils.dict_to_json(detection_dict, True))
 
             # Create the client
             with DxlClient(config) as client:
@@ -300,7 +299,7 @@ class DetectionCallback(EventCallback):
         :param event: The original DXL event message that was received
         """
         # Decode the event payload
-        detection_dict = json.loads(event.payload.decode(encoding="UTF-8"))
+        detection_dict = MessageUtils.json_payload_to_dict(event)
 
         # Transform hashes
         if DetectionEventProp.HASHES in detection_dict:
@@ -380,8 +379,7 @@ class FirstInstanceCallback(EventCallback):
                 def on_first_instance(self, first_instance_dict, original_event):
 
                     # Dump the dictionary
-                    print json.dumps(first_instance_dict,
-                                     sort_keys=True, indent=4, separators=(',', ': '))
+                    print(MessageUtils.dict_to_json(first_instance_dict, True))
 
             # Create the client
             with DxlClient(config) as client:
@@ -408,7 +406,7 @@ class FirstInstanceCallback(EventCallback):
         :param event: The original DXL event message that was received
         """
         # Decode the event payload
-        first_instance_dict = json.loads(event.payload.decode(encoding="UTF-8"))
+        first_instance_dict = MessageUtils.json_payload_to_dict(event)
 
         # Transform hashes
         if FirstInstanceEventProp.HASHES in first_instance_dict:

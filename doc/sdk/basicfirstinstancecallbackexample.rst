@@ -73,11 +73,10 @@ The majority of the sample code is shown below:
             """
             def on_first_instance(self, first_instance_dict, original_event):
                 # Display the DXL topic that the event was received on
-                print "First instance on topic: " + original_event.destination_topic
+                print("First instance on topic: " + original_event.destination_topic)
 
                 # Dump the dictionary
-                print json.dumps(first_instance_dict,
-                                 sort_keys=True, indent=4, separators=(',', ': '))
+                print(MessageUtils.dict_to_json(first_instance_dict, True))
 
         # Create the client
         with DxlClient(config) as client:
@@ -95,7 +94,7 @@ The majority of the sample code is shown below:
             tie_client.add_file_first_instance_callback(first_instance_callback)
 
             # Wait forever
-            print "Waiting for first instance events..."
+            print("Waiting for first instance events...")
             while True:
                 time.sleep(60)
 

@@ -59,7 +59,7 @@ The majority of the sample code is shown below:
                 filename="notepad.exe",
                 comment="Reputation set via OpenDXL")
 
-            print "Succeeded."
+            print("Succeeded.")
 
 Once a connection is established to the DXL fabric, a :class:`dxltieclient.client.TieClient` instance is created
 which will be used to communicate with the TIE DXL services.

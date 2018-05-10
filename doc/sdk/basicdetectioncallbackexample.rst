@@ -84,11 +84,10 @@ The majority of the sample code is shown below:
             """
             def on_detection(self, detection_dict, original_event):
                 # Display the DXL topic that the event was received on
-                print "Detection on topic: " + original_event.destination_topic
+                print("Detection on topic: " + original_event.destination_topic)
 
                 # Dump the dictionary
-                print json.dumps(detection_dict,
-                                 sort_keys=True, indent=4, separators=(',', ': '))
+                print(MessageUtils.dict_to_json(detection_dict, True))
 
         # Create the client
         with DxlClient(config) as client:
@@ -106,7 +105,7 @@ The majority of the sample code is shown below:
             tie_client.add_file_detection_callback(detection_callback)
 
             # Wait forever
-            print "Waiting for detection events..."
+            print("Waiting for detection events...")
             while True:
                 time.sleep(60)
 

@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 ################################################################################
-# Copyright (c) 2017 McAfee Inc. - All Rights Reserved.
+# Copyright (c) 2017 McAfee LLC - All Rights Reserved.
 ################################################################################
 from __future__ import absolute_import
 
+from ._version import __version__
 from .client import TieClient
 from .constants import *
 from .callbacks import *
-
-__version__ = "0.1.0"
 
 
 def get_version():

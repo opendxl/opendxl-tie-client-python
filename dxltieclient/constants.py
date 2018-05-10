@@ -1,13 +1,23 @@
 # -*- coding: utf-8 -*-
 ################################################################################
-# Copyright (c) 2017 McAfee Inc. - All Rights Reserved.
+# Copyright (c) 2017 McAfee LLC - All Rights Reserved.
 ################################################################################
 
+from __future__ import absolute_import
+import base64
+import sys
 import time
 import struct
 
+# xrange was replaced with range in Python 3. Continue using xrange instead of
+# range in Python 2 because it provides better performance.
+if sys.version_info[0] > 2:
+    RANGE = range
+else:
+    RANGE = xrange # pylint: disable=undefined-variable
 
-class EpochMixin:
+
+class EpochMixin(object):
     """
     Mixin (helper) class that provides utility methods for parsing properties/attributes that
     contain Epoch times.
@@ -32,7 +42,7 @@ class EpochMixin:
         return time.localtime(float(epoch_time))
 
     @staticmethod
-    def to_localtime_string(epoch_time, format="%Y-%m-%d %H:%M:%S"):
+    def to_localtime_string(epoch_time, format="%Y-%m-%d %H:%M:%S"): # pylint: disable=redefined-builtin
         """
         Converts the specified Epoch time to a local time string.
 
@@ -52,7 +62,7 @@ class EpochMixin:
         return time.strftime(format, EpochMixin.to_localtime(epoch_time))
 
 
-class HashType:
+class HashType(object):
     """
     Constants that are used to indicate `hash type`.
 
@@ -71,7 +81,7 @@ class HashType:
     SHA256 = "sha256"
 
 
-class FileProvider:
+class FileProvider(object):
     """
     Constants that are used to indicate the `provider` of a particular `file reputation`.
 
@@ -93,7 +103,7 @@ class FileProvider:
     MWG = 7
 
 
-class CertProvider:
+class CertProvider(object):
     """
     Constants that are used to indicate the `provider` of a particular `certificate reputation`.
 
@@ -109,7 +119,7 @@ class CertProvider:
     ENTERPRISE = 4
 
 
-class TrustLevel:
+class TrustLevel(object):
     """
     Constants that are used to indicate the `trust level` of a file or certificate.
 
@@ -150,7 +160,7 @@ class TrustLevel:
     NOT_SET = 0
 
 
-class ReputationProp:
+class ReputationProp(object):
     """
     The standard set of properties that are included with each `reputation`.
 
@@ -221,7 +231,7 @@ class FileReputationProp(ReputationProp):
                 }
             ],
             "truncated": 0
-"""
+""" # pylint: disable=pointless-string-statement
 
 
 class CertReputationProp(ReputationProp):
@@ -244,7 +254,7 @@ class CertReputationProp(ReputationProp):
     OVERRIDDEN = "overridden"
 
 
-class CertReputationOverriddenProp:
+class CertReputationOverriddenProp(object):
     """
     The set of properties associated with the ``OVERRIDDEN`` property of a `certificate reputation`
     (see :class:`CertReputationProp`).
@@ -306,7 +316,7 @@ class EnterpriseAttrib(EpochMixin):
         :param version_attrib: The encoded version string
         :return: A ``tuple`` corresponding to the specified encoded version string
         """
-        ver_long = long(version_attrib)
+        ver_long = int(version_attrib)
         return (((ver_long >> 56) & 0xff), ((ver_long >> 48) & 0xff),
                 ((ver_long >> 32) & 0xffff), (ver_long & 0xffffffff))
 
@@ -418,10 +428,10 @@ class FileEnterpriseAttrib(EnterpriseAttrib):
         :param aggregate_attrib: The aggregate string
         :return: A `tuple` containing the values in the specified aggregate string
         """
-        bin_attrib = aggregate_attrib.decode('base64', 'strict')
+        bin_attrib = base64.b64decode(aggregate_attrib)
         agg_list = \
-            list(struct.unpack('<H', bin_attrib[i] + bin_attrib[i + 1])[0]
-                 for i in xrange(0, len(bin_attrib), 2))
+            list(struct.unpack('<H', bin_attrib[i:i+2])[0]
+                 for i in RANGE(0, len(bin_attrib), 2))
         if agg_list[4] > 0:
             agg_list[4] = (agg_list[4] / 100.0)
         return tuple(agg_list)
@@ -473,7 +483,7 @@ class CertEnterpriseAttrib(EnterpriseAttrib):
     IS_PREVALENT = "2125972"
 
 
-class GtiAttrib:
+class GtiAttrib(object):
     """
     Attributes associated with `reputations` (for files and certificates) returned by
     the Global Threat Intelligence (GTI) `reputation provider`.
@@ -535,7 +545,7 @@ class CertGtiAttrib(GtiAttrib):
     REVOKED = "2117524"
 
 
-class AtdAttrib:
+class AtdAttrib(object):
     """
     Attributes associated with `file reputations` returned by the Advanced Threat Defense (ATD)
     `reputation provider`.
@@ -575,7 +585,7 @@ class AtdAttrib:
     BEHAVIORS = "4197784"
 
 
-class AtdTrustLevel:
+class AtdTrustLevel(object):
     """
     Constants that are used to indicate the `trust level` of a file or certificate as returned by the
     Advanced Threat Defense (ATD) `reputation provider`.
@@ -643,7 +653,7 @@ class FirstRefProp(EpochMixin):
     SYSTEM_GUID = "agentGuid"
 
 
-class RepChangeEventProp:
+class RepChangeEventProp(object):
     """
     The standard set of properties that are included with a `reputation change event`.
 
@@ -708,7 +718,7 @@ class CertRepChangeEventProp(RepChangeEventProp):
     PUBLIC_KEY_SHA1 = "publicKeySha1"
 
 
-class DetectionEventProp:
+class DetectionEventProp(object):
     """
     The standard set of properties that are included with a `detection event`.
 
@@ -751,7 +761,7 @@ class DetectionEventProp:
     REMEDIATION_ACTION = "remediationAction"
 
 
-class FirstInstanceEventProp:
+class FirstInstanceEventProp(object):
     """
     The standard set of properties that are included with a `first instance event`.
 

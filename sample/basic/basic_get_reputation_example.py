@@ -2,11 +2,13 @@
 # (TIE) DXL service to retrieve the reputation of files (as identified
 # by their hashes)
 
+from __future__ import absolute_import
+from __future__ import print_function
 import logging
 import os
 import sys
-import json
 
+from dxlbootstrap.util import MessageUtils
 from dxlclient.client import DxlClient
 from dxlclient.client_config import DxlClientConfig
 from dxltieclient import TieClient
@@ -42,9 +44,8 @@ with DxlClient(config) as client:
             HashType.SHA1: "7eb0139d2175739b3ccb0d1110067820be6abd29",
             HashType.SHA256: "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
         })
-    print "Notepad.exe reputations:"
-    print json.dumps(reputations_dict,
-                     sort_keys=True, indent=4, separators=(',', ': ')) + "\n"
+    print("Notepad.exe reputations:")
+    print(MessageUtils.dict_to_json(reputations_dict, True) + "\n")
 
     #
     # Request and display reputation for EICAR
@@ -54,8 +55,6 @@ with DxlClient(config) as client:
             HashType.MD5: "44d88612fea8a8f36de82e1278abb02f",
             HashType.SHA1: "3395856ce81f2b7382dee72602f798b642f14140",
             HashType.SHA256: "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
-
         })
-    print "EICAR reputations:"
-    print json.dumps(reputations_dict,
-                     sort_keys=True, indent=4, separators=(',', ': '))
+    print("EICAR reputations:")
+    print(MessageUtils.dict_to_json(reputations_dict, True))

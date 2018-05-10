@@ -2,6 +2,8 @@
 # (TIE) DXL service to set the trust level of a file (as identified
 # by its hashes)
 
+from __future__ import absolute_import
+from __future__ import print_function
 import logging
 import os
 import sys
@@ -41,4 +43,4 @@ with DxlClient(config) as client:
         filename="notepad.exe",
         comment="Reputation set via OpenDXL")
 
-    print "Succeeded."
+    print("Succeeded.")

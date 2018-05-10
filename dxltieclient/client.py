@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 ################################################################################
-# Copyright (c) 2017 McAfee Inc. - All Rights Reserved.
+# Copyright (c) 2017 McAfee LLC - All Rights Reserved.
 ################################################################################
 
+from __future__ import absolute_import
 import base64
-import json
-from dxlclient import Request, Message
-from constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp
+import binascii
+from dxlbootstrap.client import Client
+from dxlbootstrap.util import MessageUtils
+from dxlclient import Request
+from .constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp
 
 # Topic used to set the reputation of a file
 TIE_SET_FILE_REPUTATION_TOPIC = "/mcafee/service/tie/file/reputation/set"
@@ -37,21 +40,16 @@ TIE_EVENT_FILE_FIRST_INSTANCE_TOPIC = "/mcafee/event/tie/file/firstinstance"
 TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC = "/mcafee/event/tie/file/prevalence"
 
 
-class TieClient(object):
+class TieClient(Client):
     """
-    This client provides a high level wrapper for communicating with the 
+    This client provides a high level wrapper for communicating with the
     McAfee Threat Intelligence Exchange (TIE) DXL service.
 
     The purpose of this client is to allow users to access the features of TIE (manage reputations,
     determine where a file has executed, etc.) without having to focus on lower-level details such as
     TIE-specific DXL topics and message formats.
     """
-    
-    # The default amount of time (in seconds) to wait for a response from the TIE server
-    __DEFAULT_RESPONSE_TIMEOUT = 30
-    # The minimum amount of time (in seconds) to wait for a response from the TIE server
-    __MIN_RESPONSE_TIMEOUT = 30
-    
+
     def __init__(self, dxl_client):
         """
         Constructor parameters:
@@ -59,20 +57,7 @@ class TieClient(object):
         :param dxl_client: The DXL client to use for communication with the TIE DXL service
         """
         self.__dxl_client = dxl_client
-        self.__response_timeout = self.__DEFAULT_RESPONSE_TIMEOUT
-
-    @property
-    def response_timeout(self):
-        """
-        The maximum amount of time (in seconds) to wait for a response from the TIE server
-        """
-        return self.__response_timeout
-
-    @response_timeout.setter
-    def response_timeout(self, response_timeout):
-        if response_timeout < self.__MIN_RESPONSE_TIMEOUT:
-            raise Exception("Response timeout must be greater than or equal to " + str(self.__MIN_RESPONSE_TIMEOUT))
-        self.__response_timeout = response_timeout
+        super(TieClient, self).__init__(dxl_client)
 
     def add_file_first_instance_callback(self, first_instance_callback):
         """
@@ -200,13 +185,15 @@ class TieClient(object):
             "hashes": []}
 
         for key, value in hashes.items():
-            payload_dict["hashes"].append({"type": key, "value": base64.b64encode(value.decode('hex'))})
-            
+            payload_dict["hashes"].append(
+                {"type": key,
+                 "value": self._hex_to_base64(value)})
+
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
-        self.__dxl_sync_request(req)
+        self._dxl_sync_request(req)
 
     def get_file_reputation(self, hashes):
         """
@@ -306,23 +293,24 @@ class TieClient(object):
 
         # Create a dictionary for the payload
         payload_dict = {"hashes": []}
-        
+
         for key, value in hashes.items():
-            payload_dict["hashes"].append({"type": key, "value": base64.b64encode(value.decode('hex'))})
+            payload_dict["hashes"].append(
+                {"type": key,
+                 "value": self._hex_to_base64(value)})
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
-        response = self.__dxl_sync_request(req)
-        
-        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
+        response = self._dxl_sync_request(req)
+
+        resp_dict = MessageUtils.json_payload_to_dict(response)
 
         # Transform reputations to be simpler to use
         if "reputations" in resp_dict:
             return TieClient._transform_reputations(resp_dict["reputations"])
-        else:
-            return {}
+        return {}
 
     def get_file_first_references(self, hashes, query_limit=500):
         """
@@ -383,21 +371,22 @@ class TieClient(object):
         }
 
         for key, value in hashes.items():
-            payload_dict["hashes"].append({"type": key, "value": base64.b64encode(value.decode('hex'))})
+            payload_dict["hashes"].append({
+                "type": key,
+                "value": self._hex_to_base64(value)})
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
-        response = self.__dxl_sync_request(req)
+        response = self._dxl_sync_request(req)
 
-        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
+        resp_dict = MessageUtils.json_payload_to_dict(response)
 
         # Return the agents list
         if "agents" in resp_dict:
             return resp_dict["agents"]
-        else:
-            return []
+        return []
 
     def add_certificate_reputation_change_callback(self, rep_change_callback):
         """
@@ -469,18 +458,19 @@ class TieClient(object):
             "providerId": CertProvider.ENTERPRISE,
             "comment": comment,
             "hashes": [
-                {"type": "sha1", "value": base64.b64encode(sha1.decode('hex'))}
+                {"type": "sha1", "value": self._hex_to_base64(sha1)}
             ]}
 
         # Add public key SHA-1 (if specified)
         if public_key_sha1:
-            payload_dict["publicKeySha1"] = base64.b64encode(public_key_sha1.decode('hex'))
+            payload_dict["publicKeySha1"] = self._hex_to_base64(
+                public_key_sha1)
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
-        self.__dxl_sync_request(req)
+        self._dxl_sync_request(req)
 
     def get_certificate_reputation(self, sha1, public_key_sha1=None):
         """
@@ -576,26 +566,26 @@ class TieClient(object):
         # Create a dictionary for the payload
         payload_dict = {
             "hashes": [
-                {"type": "sha1", "value": base64.b64encode(sha1.decode('hex'))}
+                {"type": "sha1", "value": self._hex_to_base64(sha1)}
             ]}
 
         # Add public key SHA-1 (if specified)
         if public_key_sha1:
-            payload_dict["publicKeySha1"] = base64.b64encode(public_key_sha1.decode('hex'))
+            payload_dict["publicKeySha1"] = self._hex_to_base64(
+                public_key_sha1)
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
-        response = self.__dxl_sync_request(req)
-        
-        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
+        response = self._dxl_sync_request(req)
+
+        resp_dict = MessageUtils.json_payload_to_dict(response)
 
         # Transform reputations to be simpler to use
         if "reputations" in resp_dict:
             return TieClient._transform_reputations(resp_dict["reputations"])
-        else:
-            return {}
+        return {}
 
     def get_certificate_first_references(self, sha1, public_key_sha1=None, query_limit=500):
         """
@@ -649,42 +639,26 @@ class TieClient(object):
         payload_dict = {
             "queryLimit": query_limit,
             "hashes": [
-                {"type": "sha1", "value": base64.b64encode(sha1.decode('hex'))}
+                {"type": "sha1", "value": self._hex_to_base64(sha1)}
             ]}
 
         # Add public key SHA-1 (if specified)
         if public_key_sha1:
-            payload_dict["publicKeySha1"] = base64.b64encode(public_key_sha1.decode('hex'))
+            payload_dict["publicKeySha1"] = self._hex_to_base64(
+                public_key_sha1)
 
         # Set the payload
-        req.payload = json.dumps(payload_dict).encode(encoding="UTF-8")
+        MessageUtils.dict_to_json_payload(req, payload_dict)
 
         # Send the request
-        response = self.__dxl_sync_request(req)
+        response = self._dxl_sync_request(req)
 
-        resp_dict = json.loads(response.payload.decode(encoding="UTF-8"))
+        resp_dict = MessageUtils.json_payload_to_dict(response)
 
         # Return the agents list
         if "agents" in resp_dict:
             return resp_dict["agents"]
-        else:
-            return []
-
-    def __dxl_sync_request(self, request):
-        """
-        Performs a synchronous DXL request. Throws an exception if an error occurs
-
-        :param request: The request to send
-        :return: The DXL response
-        """
-        # Send the request and wait for a response (synchronous)
-        res = self.__dxl_client.sync_request(request, timeout=self.__response_timeout)
-
-        # Return a dictionary corresponding to the response payload
-        if res.message_type != Message.MESSAGE_TYPE_ERROR:
-            return res
-        else:
-            raise Exception("Error: " + res.error_message + " (" + str(res.error_code) + ")")
+        return []
 
     @staticmethod
     def _base64_to_hex(base64_value):
@@ -693,7 +667,16 @@ class TieClient(object):
         :param base64_value: The base64 value
         :return: The corresponding hex string
         """
-        return base64.b64decode(base64_value).encode("hex")
+        return binascii.hexlify(base64.b64decode(base64_value)).decode("ascii")
+
+    @staticmethod
+    def _hex_to_base64(hex_value):
+        """
+        Converts from a hex string to a base64 string
+        :param hex_value: The hex value
+        :return: The corresponding base64 string
+        """
+        return base64.b64encode(binascii.unhexlify(hex_value)).decode("ascii")
 
     @staticmethod
     def _transform_hashes(hashes):
@@ -731,4 +714,3 @@ class TieClient(object):
                         file_dict["hashes"] = TieClient._transform_hashes(file_dict["hashes"])
 
         return reputations_dict
-
