@@ -1,35 +1,23 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Basic Get Reputation Example &#8212; McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</title>
-    
+    <title>Basic Get Reputation Example &#8212; McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.2.0 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation" href="index.html" />
     <link rel="next" title="Basic Set Reputation Example" href="basicsetreputationexample.html" />
     <link rel="prev" title="Samples Configuration" href="sampleconfig.html" /> 
-  </head>
-  <body role="document">
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -45,7 +33,7 @@
         <li class="right" >
           <a href="sampleconfig.html" title="Samples Configuration"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.2.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -70,15 +58,15 @@ but has been refactored to use the McAfee Threat Intelligence Exchange (TIE) DXL
 </div>
 <div class="section" id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
-<p>To run this sample execute the <code class="docutils literal"><span class="pre">sample/basic/basic_get_reputation_example.py</span></code> script as follows:</p>
+<p>To run this sample execute the <code class="docutils literal notranslate"><span class="pre">sample/basic/basic_get_reputation_example.py</span></code> script as follows:</p>
 <blockquote>
 <div><pre class="literal-block">
-c:\dxltieclient-python-sdk-0.1.0&gt;python sample/basic/basic_get_reputation_example.py
+c:\dxltieclient-python-sdk-0.2.0&gt;python sample/basic/basic_get_reputation_example.py
 </pre>
 </div></blockquote>
 <p>The output should appear similar to the following:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Notepad</span><span class="o">.</span><span class="n">exe</span> <span class="n">reputations</span><span class="p">:</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Notepad</span><span class="o">.</span><span class="n">exe</span> <span class="n">reputations</span><span class="p">:</span>
 <span class="p">{</span>
     <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -129,21 +117,21 @@ c:\dxltieclient-python-sdk-0.1.0&gt;python sample/basic/basic_get_reputation_exa
 </div>
 </div></blockquote>
 <p>The sample outputs the file reputation for two files.</p>
-<p>The <cite>key</cite> for each entry in the <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) corresponds to a particular <cite>provider</cite> of the
+<p>The <cite>key</cite> for each entry in the <code class="docutils literal notranslate"><span class="pre">dict</span></code> (dictionary) corresponds to a particular <cite>provider</cite> of the
 associated <cite>reputation</cite>. The list of <cite>file reputation providers</cite> can be found in the
-<a class="reference internal" href="dxltieclient.constants.html#dxltieclient.constants.FileProvider" title="dxltieclient.constants.FileProvider"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.FileProvider</span></code></a> constants class.</p>
+<a class="reference internal" href="dxltieclient.constants.html#dxltieclient.constants.FileProvider" title="dxltieclient.constants.FileProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">dxltieclient.constants.FileProvider</span></code></a> constants class.</p>
 <p>The first file queried in the TIE service is “notepad.exe”. The McAfee Global Threat Intelligence (GTI) service is
-identified in the results as <code class="docutils literal"><span class="pre">&quot;providerId&quot;</span> <span class="pre">:</span> <span class="pre">1</span></code>. The trust level associated with the GTI response
-(<code class="docutils literal"><span class="pre">&quot;trustLevel&quot;:</span> <span class="pre">99</span></code>) indicates that the file is known good.</p>
+identified in the results as <code class="docutils literal notranslate"><span class="pre">&quot;providerId&quot;</span> <span class="pre">:</span> <span class="pre">1</span></code>. The trust level associated with the GTI response
+(<code class="docutils literal notranslate"><span class="pre">&quot;trustLevel&quot;:</span> <span class="pre">99</span></code>) indicates that the file is known good.</p>
 <p>The second file queried in the TIE service is the “EICAR Standard Anti-Virus Test File”. The trust level associated
-with the GTI response (<code class="docutils literal"><span class="pre">&quot;trustLevel&quot;:</span> <span class="pre">1</span></code>) indicates that the file is known bad.</p>
-<p>See the <a class="reference internal" href="dxltieclient.constants.html#dxltieclient.constants.TrustLevel" title="dxltieclient.constants.TrustLevel"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.constants.TrustLevel</span></code></a> constants class for the list of standard trust levels.</p>
+with the GTI response (<code class="docutils literal notranslate"><span class="pre">&quot;trustLevel&quot;:</span> <span class="pre">1</span></code>) indicates that the file is known bad.</p>
+<p>See the <a class="reference internal" href="dxltieclient.constants.html#dxltieclient.constants.TrustLevel" title="dxltieclient.constants.TrustLevel"><code class="xref py py-class docutils literal notranslate"><span class="pre">dxltieclient.constants.TrustLevel</span></code></a> constants class for the list of standard trust levels.</p>
 </div>
 <div class="section" id="details">
 <h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
 <p>The majority of the sample code is shown below:</p>
 <blockquote>
-<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Create the client</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the client</span>
 <span class="k">with</span> <span class="n">DxlClient</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
 
     <span class="c1"># Connect to the fabric</span>
@@ -161,9 +149,8 @@ with the GTI response (<code class="docutils literal"><span class="pre">&quot;tr
             <span class="n">HashType</span><span class="o">.</span><span class="n">SHA1</span><span class="p">:</span> <span class="s2">&quot;7eb0139d2175739b3ccb0d1110067820be6abd29&quot;</span><span class="p">,</span>
             <span class="n">HashType</span><span class="o">.</span><span class="n">SHA256</span><span class="p">:</span> <span class="s2">&quot;142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2&quot;</span>
         <span class="p">})</span>
-    <span class="k">print</span> <span class="s2">&quot;Notepad.exe reputations:&quot;</span>
-    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">reputations_dict</span><span class="p">,</span>
-                     <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Notepad.exe reputations:&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">MessageUtils</span><span class="o">.</span><span class="n">dict_to_json</span><span class="p">(</span><span class="n">reputations_dict</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="c1">#</span>
     <span class="c1"># Request and display reputation for EICAR</span>
@@ -173,20 +160,18 @@ with the GTI response (<code class="docutils literal"><span class="pre">&quot;tr
             <span class="n">HashType</span><span class="o">.</span><span class="n">MD5</span><span class="p">:</span> <span class="s2">&quot;44d88612fea8a8f36de82e1278abb02f&quot;</span><span class="p">,</span>
             <span class="n">HashType</span><span class="o">.</span><span class="n">SHA1</span><span class="p">:</span> <span class="s2">&quot;3395856ce81f2b7382dee72602f798b642f14140&quot;</span><span class="p">,</span>
             <span class="n">HashType</span><span class="o">.</span><span class="n">SHA256</span><span class="p">:</span> <span class="s2">&quot;275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f&quot;</span>
-
         <span class="p">})</span>
-    <span class="k">print</span> <span class="s2">&quot;EICAR reputations:&quot;</span>
-    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">reputations_dict</span><span class="p">,</span>
-                     <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;: &#39;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;EICAR reputations:&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">MessageUtils</span><span class="o">.</span><span class="n">dict_to_json</span><span class="p">(</span><span class="n">reputations_dict</span><span class="p">,</span> <span class="bp">True</span><span class="p">))</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Once a connection is established to the DXL fabric, a <a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient" title="dxltieclient.client.TieClient"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.client.TieClient</span></code></a> instance is created
+<p>Once a connection is established to the DXL fabric, a <a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient" title="dxltieclient.client.TieClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">dxltieclient.client.TieClient</span></code></a> instance is created
 which will be used to communicate with the TIE DXL services.</p>
 <p>For each file whose reputations are retrieved, a call is made to the
-<a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.get_file_reputation" title="dxltieclient.client.TieClient.get_file_reputation"><code class="xref py py-func docutils literal"><span class="pre">dxltieclient.client.TieClient.get_file_reputation()</span></code></a> method of the <a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient" title="dxltieclient.client.TieClient"><code class="xref py py-class docutils literal"><span class="pre">dxltieclient.client.TieClient</span></code></a>
+<a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.get_file_reputation" title="dxltieclient.client.TieClient.get_file_reputation"><code class="xref py py-func docutils literal notranslate"><span class="pre">dxltieclient.client.TieClient.get_file_reputation()</span></code></a> method of the <a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient" title="dxltieclient.client.TieClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">dxltieclient.client.TieClient</span></code></a>
 instance along with the hash values that are used to identify the file.</p>
-<p>The reputations that are received for each file are printed by converting the response <code class="docutils literal"><span class="pre">dict</span></code> (dictionary) to
+<p>The reputations that are received for each file are printed by converting the response <code class="docutils literal notranslate"><span class="pre">dict</span></code> (dictionary) to
 JSON.</p>
 </div>
 </div>
@@ -216,18 +201,20 @@ JSON.</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/basicgetreputationexample.txt"
+      <li><a href="_sources/basicgetreputationexample.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -249,12 +236,12 @@ JSON.</p>
         <li class="right" >
           <a href="sampleconfig.html" title="Samples Configuration"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016, McAfee Inc.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+        &#169; Copyright 2018, McAfee LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
     </div>
   </body>
 </html>
