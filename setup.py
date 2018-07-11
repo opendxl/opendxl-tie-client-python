@@ -79,12 +79,13 @@ setup(
 
     test_suite="nose.collector",
 
-    # Application author details:
+    # Package author details:
     author="McAfee LLC",
 
     # License
     license="Apache License 2.0",
 
+    # Keywords
     keywords=['opendxl', 'dxl', 'mcafee', 'client', 'tie'],
 
     # Packages
@@ -110,7 +111,6 @@ setup(
         "Development Status :: 4 - Beta",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "License :: OSI Approved :: Apache Software License",
-        "Programming Language :: Python",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
@@ -120,7 +120,7 @@ setup(
     ],
 
     cmdclass={
-        'ci': CiCommand,
-        'lint': LintCommand
+        "ci": CiCommand,
+        "lint": LintCommand
     }
 )
