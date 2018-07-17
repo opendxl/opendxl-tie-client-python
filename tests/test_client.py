@@ -194,13 +194,12 @@ class TestSetCertReputation(BaseClientTest):
             with MockTieServer(dxl_client):
                 # Set cert1 reputations
                 # Set the Enterprise reputation for cert1 to Most Likely Trusted
-                reputations_dict = \
-                    tie_client.set_certificate_reputation(
-                        trust_level=TrustLevel.MOST_LIKELY_TRUSTED,
-                        sha1=CERT_CERT1_SHA1,
-                        public_key_sha1=CERT_CERT1_PUBLIC_KEY_SHA1,
-                        comment=SET_REP_COMMENT
-                    )
+                tie_client.set_certificate_reputation(
+                    trust_level=TrustLevel.MOST_LIKELY_TRUSTED,
+                    sha1=CERT_CERT1_SHA1,
+                    public_key_sha1=CERT_CERT1_PUBLIC_KEY_SHA1,
+                    comment=SET_REP_COMMENT
+                )
 
                 # Get cert1 reputations
                 reputations_dict = \

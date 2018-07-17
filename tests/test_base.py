@@ -43,7 +43,7 @@ class BaseClientTest(TestCase):
         return DxlClient(config)
 
 
-    #pylint: disable=invalid-name, no-member, deprecated-method
+    #pylint: disable=invalid-name, no-member, deprecated-method, arguments-differ
     def assertRaisesRegex(self, expected_exception, expected_regex, *args, **kwargs):
         if sys.version_info[0] < 3:
             return self.assertRaisesRegexp(
@@ -147,7 +147,7 @@ class TempSampleFile(object):
         with open(base_filename, 'r') as base_file:
             with open(target_filename, 'w+') as new_sample_file:
                 for line in base_file:
-                    if target != None and replacement != None:
+                    if target is not None and replacement is not None:
                         if line.startswith(target):
                             line = replacement
                     new_sample_file.write(line)
