@@ -62,14 +62,13 @@ class TestSamples(BaseClientTest):
     def test_basicgetrep_example(self):
         # Modify sample file to include necessary sample data
         sample_filename = self.BASIC_FOLDER + "/basic_get_reputation_example.py"
-        temp_sample_file = TempSampleFile(sample_filename)
 
         with self.create_client(max_retries=0) as dxl_client:
             # Set up client, and register mock service
             dxl_client.connect()
 
             with MockTieServer(dxl_client):
-                mock_print = BaseClientTest.run_sample(temp_sample_file.temp_file.name)
+                mock_print = BaseClientTest.run_sample(sample_filename)
 
                 output_string = ""
 
