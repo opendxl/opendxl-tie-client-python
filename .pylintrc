@@ -134,8 +134,7 @@ disable=print-statement,
         too-many-arguments,
         missing-docstring,
         protected-access,
-        line-too-long,
-        too-many-locals
+        line-too-long
 
 
 # Enable the message, report, category or checker with the given id(s). You can

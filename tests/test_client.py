@@ -1,15 +1,7 @@
-import os
-import sys
-import base64
-
 from dxltieclient import *
 from tests.test_base import BaseClientTest
 from tests.test_value_constants import *
 from tests.mock_tieserver import MockTieServer
-
-sys.path.append(
-    os.path.dirname(os.path.abspath(__file__)) + "/../.."
-)
 
 class JsonDumpCallback(DetectionCallback):
 
@@ -106,11 +98,12 @@ class TestGetFileReputation(BaseClientTest):
             tie_client = TieClient(dxl_client)
             dxl_client.connect()
             with MockTieServer(dxl_client):
-                try:
-                    tie_client.get_file_reputation(FILE_INVALID_HASH_DICT)
-
-                except Exception as ex:
-                    self.assertIn("Error: Could not find reputation (0)", str(ex))
+                self.assertRaisesRegex(
+                    Exception,
+                    r"Error: Could not find reputation \(0\)",
+                    tie_client.get_file_reputation,
+                    FILE_INVALID_HASH_DICT
+                )
 
             dxl_client.disconnect()
 
@@ -180,14 +173,13 @@ class TestGetCertReputation(BaseClientTest):
             tie_client = TieClient(dxl_client)
             dxl_client.connect()
             with MockTieServer(dxl_client):
-                try:
-                    tie_client.get_certificate_reputation(
-                        CERT_INVALID_SHA1,
-                        CERT_INVALID_SHA1
-                    )
-
-                except Exception as ex:
-                    self.assertIn("Error: Could not find reputation (0)", str(ex))
+                self.assertRaisesRegex(
+                    Exception,
+                    r"Error: Could not find reputation \(0\)",
+                    tie_client.get_certificate_reputation,
+                    CERT_INVALID_SHA1,
+                    CERT_INVALID_SHA1
+                )
 
             dxl_client.disconnect()
 
@@ -249,11 +241,12 @@ class TestGetFileFirstReference(BaseClientTest):
             tie_client = TieClient(dxl_client)
             dxl_client.connect()
             with MockTieServer(dxl_client):
-                try:
-                    tie_client.get_file_first_references(FILE_INVALID_HASH_DICT)
-
-                except Exception as ex:
-                    self.assertIn("Error: Could not find reputation (0)", str(ex))
+                self.assertRaisesRegex(
+                    Exception,
+                    r"Error: Could not find reputation \(0\)",
+                    tie_client.get_file_first_references,
+                    FILE_INVALID_HASH_DICT
+                )
 
             dxl_client.disconnect()
 
@@ -266,7 +259,6 @@ class TestGetCertFirstReference(BaseClientTest):
             tie_client = TieClient(dxl_client)
             dxl_client.connect()
             with MockTieServer(dxl_client):
-                # Notepad.exe reputations
                 systems_list = \
                     tie_client.get_certificate_first_references(
                         CERT_CERT1_SHA1,
@@ -285,14 +277,13 @@ class TestGetCertFirstReference(BaseClientTest):
             tie_client = TieClient(dxl_client)
             dxl_client.connect()
             with MockTieServer(dxl_client):
-                try:
-                    tie_client.get_certificate_first_references(
-                        CERT_INVALID_SHA1,
-                        CERT_INVALID_SHA1
-                    )
-
-                except Exception as ex:
-                    self.assertIn("Error: Could not find reputation (0)", str(ex))
+                self.assertRaisesRegex(
+                    Exception,
+                    r"Error: Could not find reputation \(0\)",
+                    tie_client.get_certificate_first_references,
+                    CERT_INVALID_SHA1,
+                    CERT_INVALID_SHA1
+                )
 
             dxl_client.disconnect()
 

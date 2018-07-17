@@ -1,123 +1,6 @@
-import json
-import os
-import re
-
-from tempfile import NamedTemporaryFile
-from mock import patch
-from tests.test_base import BaseClientTest
+from tests.test_base import *
 from tests.test_value_constants import *
 from tests.mock_tieserver import MockTieServer
-
-if sys.version_info[0] > 2:
-    import builtins  # pylint: disable=import-error, unused-import
-    from urllib.parse import quote_plus  # pylint: disable=no-name-in-module, import-error, unused-import
-else:
-    import __builtin__  # pylint: disable=import-error
-
-    builtins = __builtin__  # pylint: disable=invalid-name
-    from urllib import quote_plus  # pylint: disable=no-name-in-module, ungrouped-imports
-
-
-def expected_print_output(detail):
-    json_string = json.dumps(
-        detail,
-        sort_keys=True,
-        separators=(".*", ": ")
-    )
-
-    return re.sub(
-        r"(\.\*)+",
-        ".*",
-        re.sub(
-            r"[{[\]}]",
-            ".*",
-            json_string
-        )
-    )
-
-
-class StringContains(object):
-    def __init__(self, pattern):
-        self.pattern = pattern
-
-    def __eq__(self, other):
-        return self.pattern in other
-
-
-class StringDoesNotContain(object):
-    def __init__(self, pattern):
-        self.pattern = pattern
-
-    def __eq__(self, other):
-        return not self.pattern in other
-
-
-class StringMatchesRegEx(object):
-    def __init__(self, pattern):
-        self.pattern = pattern
-
-    def __eq__(self, other):
-        return re.match(self.pattern, other, re.DOTALL)
-
-
-class StringDoesNotMatchRegEx(object):
-    def __init__(self, pattern):
-        self.pattern = pattern
-
-    def __eq__(self, other):
-        return not re.match(self.pattern, other)
-
-
-def run_sample(sample_file):
-    with open(sample_file) as f, \
-            patch.object(builtins, 'print') as mock_print:
-        sample_globals = {"__file__": sample_file}
-        exec(f.read(), sample_globals)  # pylint: disable=exec-used
-    return mock_print
-
-
-class TempSampleFile(object):
-
-    @property
-    def temp_file(self):
-        return self._temp_file
-
-    def __init__(self, sample_filename):
-        self._temp_file = NamedTemporaryFile(
-            mode="w+",
-            dir=os.path.dirname(sample_filename),
-            delete=False)
-        self._temp_file.close()
-        os.chmod(self._temp_file.name, 0o777)
-        self.base_filename = sample_filename
-        self.write_file_line(full_copy=True)
-
-    def write_file_line(self, target=None, replacement=None, full_copy=False):
-        if full_copy:
-            base_filename = self.base_filename
-            target_filename = self._temp_file.name
-        else:
-            base_filename = self._temp_file.name
-            target_filename = base_filename + "new"
-
-        with open(base_filename, 'r') as base_file:
-            with open(target_filename, 'w+') as new_sample_file:
-                for line in base_file:
-                    if target != None and replacement != None:
-                        if line.startswith(target):
-                            line = replacement
-                    new_sample_file.write(line)
-
-        if not full_copy:
-            os.remove(base_filename)
-            os.rename(target_filename, base_filename)
-            os.chmod(base_filename, 0o777)
-
-
-    def __del__(self):
-        self.temp_file.close()
-        os.remove(self._temp_file.name)
-
 
 class TestSamples(BaseClientTest):
 
@@ -162,11 +45,12 @@ class TestSamples(BaseClientTest):
             dxl_client.connect()
 
             with MockTieServer(dxl_client):
-                mock_print = run_sample(temp_sample_file.temp_file.name)
+                mock_print = BaseClientTest.run_sample(temp_sample_file.temp_file.name)
 
-                mock_print.assert_any_call(
-                    StringContains("Systems that have referenced the file:")
-                )
+                for guid in FIRST_REF_AGENT_GUIDS:
+                    mock_print.assert_any_call(
+                        StringContains(guid)
+                    )
 
                 mock_print.assert_any_call(
                     StringDoesNotContain("Error")
@@ -185,10 +69,24 @@ class TestSamples(BaseClientTest):
             dxl_client.connect()
 
             with MockTieServer(dxl_client):
-                mock_print = run_sample(temp_sample_file.temp_file.name)
+                mock_print = BaseClientTest.run_sample(temp_sample_file.temp_file.name)
 
-                mock_print.assert_any_call(
-                    StringContains("\"1451502875\"")
+                output_string = ""
+
+                for print_call in mock_print.mock_calls:
+                    output_string += str(print_call[1]) #Gets text argument for each print call
+
+                self.assertTrue(
+                    StringContains('"trustLevel": 99')
+                )
+                self.assertTrue(
+                    StringContains('"createDate": 1451502875')
+                )
+                self.assertTrue(
+                    StringContains('"providerId": 1')
+                )
+                self.assertTrue(
+                    StringContains('"2139285": "72339069014638857"')
                 )
 
                 mock_print.assert_any_call(
@@ -208,7 +106,7 @@ class TestSamples(BaseClientTest):
             dxl_client.connect()
 
             with MockTieServer(dxl_client):
-                mock_print = run_sample(temp_sample_file.temp_file.name)
+                mock_print = BaseClientTest.run_sample(temp_sample_file.temp_file.name)
 
                 mock_print.assert_any_call(
                     StringContains("Succeeded")
@@ -266,7 +164,7 @@ class TestSamples(BaseClientTest):
             dxl_client.connect()
 
             with MockTieServer(dxl_client):
-                mock_print = run_sample(temp_sample_file.temp_file.name)
+                mock_print = BaseClientTest.run_sample(temp_sample_file.temp_file.name)
 
                 mock_print.assert_any_call(
                     StringContains(GtiAttrib.ORIGINAL_RESPONSE)

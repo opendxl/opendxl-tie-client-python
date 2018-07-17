@@ -17,8 +17,6 @@ class TestReputationChangeCallback(TestCase):
 
             def __init__(self):
                 super(MyReputationChangeCallback, self).__init__()
-                self.detection_dict_received = None
-                self.original_event_received = None
                 self.rep_change_dict_received = {}
                 self.original_event_received = None
 
@@ -80,7 +78,8 @@ class TestReputationChangeCallback(TestCase):
                             "value": "rB/QkipKKm5XeazdYodHwoOUsLk=",
                             "type": HashType.SHA1
                         }
-                    ]
+                    ],
+                    "publicKeySha1": "Q139Rw9ydDfHy08Hy6H5ofQnJlY="
                 }
             },
             RepChangeEventProp.HASHES:[
@@ -123,7 +122,8 @@ class TestReputationChangeCallback(TestCase):
                 "certificate": {
                     RepChangeEventProp.HASHES: {
                         HashType.SHA1: "ac1fd0922a4a2a6e5779acdd628747c28394b0b9"
-                    }
+                    },
+                    "publicKeySha1": "435dfd470f727437c7cb4f07cba1f9a1f4272656"
                 }
             },
             RepChangeEventProp.HASHES: {
@@ -181,8 +181,6 @@ class TestDetectionCallback(TestCase):
             def __init__(self):
                 super(MyDetectionCallback, self).__init__()
                 self.detection_dict_received = None
-                self.original_event_received = None
-                self.detection_dict_received = {}
                 self.original_event_received = None
 
             def on_detection(self, detection_dict, original_event):
@@ -250,9 +248,7 @@ class TestFirstInstanceCallback(TestCase):
 
             def __init__(self):
                 super(MyFirstInstanceCallback, self).__init__()
-                self.detection_dict_received = None
-                self.original_event_received = None
-                self.first_instance_dict_received = {}
+                self.first_instance_dict_received = None
                 self.original_event_received = None
 
             def on_first_instance(self, first_instance_dict, original_event):
@@ -263,27 +259,29 @@ class TestFirstInstanceCallback(TestCase):
             RepChangeEventProp.HASHES:[
                 {
                     "type":HashType.SHA1,
-                    "value":"0wzjHGXydh+ijtstLjkl1CkZgqU="
+                    "value":"LWykUGG3lyMS4A5ZM/3/lbuQths="
                 },
                 {
                     "type":HashType.MD5,
-                    "value":"FvdpvB03zBTjCTuYgc8WkQ=="
+                    "value":"MdvozEQ9LKf9I2rAClL7Fw=="
                 },
                 {
                     "type":HashType.SHA256,
-                    "value":"yXfKH1ESH+5YzaiIJ6YXOtTx1y2AJihOTE9EMCqWfkA="
+                    "value":"qjxGHUwho5LjctDWykzrHk2ICY1YdllFTq9Nk8ZhiA8="
                 }
             ],
-            DetectionEventProp.SYSTEM_GUID:"testGuid"
+            DetectionEventProp.SYSTEM_GUID:"testGuid",
+            DetectionEventProp.NAME:"MORPH.EXE"
         }
 
         first_instance_expected = {
             DetectionEventProp.SYSTEM_GUID: "testGuid",
             RepChangeEventProp.HASHES: {
-                HashType.SHA256: "c977ca1f51121fee58cda88827a6173ad4f1d72d8026284e4c4f44302a967e40",
-                HashType.SHA1: "d30ce31c65f2761fa28edb2d2e3925d4291982a5",
-                HashType.MD5: "16f769bc1d37cc14e3093b9881cf1691"
-            }
+                HashType.SHA256: "aa3c461d4c21a392e372d0d6ca4ceb1e4d88098d587659454eaf4d93c661880f",
+                HashType.SHA1: "2d6ca45061b7972312e00e5933fdff95bb90b61b",
+                HashType.MD5: "31dbe8cc443d2ca7fd236ac00a52fb17"
+            },
+            DetectionEventProp.NAME:"MORPH.EXE"
         }
 
         test_event = Event(TEST_TOPIC)
@@ -295,6 +293,8 @@ class TestFirstInstanceCallback(TestCase):
         first_instance_callback = MyFirstInstanceCallback()
 
         first_instance_callback.on_event(test_event)
+
+        self.assertIn("MORPH.EXE", str(test_event.payload))
 
         self.assertDictEqual(
             first_instance_callback.first_instance_dict_received,

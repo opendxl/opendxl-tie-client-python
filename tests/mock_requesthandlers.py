@@ -7,6 +7,7 @@ from dxlbootstrap.util import MessageUtils
 
 import dxltieclient.client
 
+#pylint: disable=too-many-locals
 class FakeTieServerCallback(RequestCallback):
     """
     'fake_tie_file_reputation' request handler registered with topic
