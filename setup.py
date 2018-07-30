@@ -79,12 +79,13 @@ setup(
 
     test_suite="nose.collector",
 
-    # Application author details:
+    # Package author details:
     author="McAfee LLC",
 
     # License
     license="Apache License 2.0",
 
+    # Keywords
     keywords=['opendxl', 'dxl', 'mcafee', 'client', 'tie'],
 
     # Packages
@@ -120,7 +121,7 @@ setup(
     ],
 
     cmdclass={
-        'ci': CiCommand,
-        'lint': LintCommand
+        "ci": CiCommand,
+        "lint": LintCommand
     }
 )
