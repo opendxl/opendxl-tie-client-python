@@ -6,9 +6,10 @@
 from __future__ import absolute_import
 import base64
 import binascii
+import json
 from dxlbootstrap.client import Client
 from dxlbootstrap.util import MessageUtils
-from dxlclient import Request
+from dxlclient import Request, Event
 from .constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp
 
 # Topic used to set the reputation of a file
@@ -38,6 +39,9 @@ TIE_EVENT_FILE_DETECTION_TOPIC = "/mcafee/event/tie/file/detection"
 TIE_EVENT_FILE_FIRST_INSTANCE_TOPIC = "/mcafee/event/tie/file/firstinstance"
 
 TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC = "/mcafee/event/tie/file/prevalence"
+
+#Topic used to notify that a file reputation has changed
+EVENT_TOPIC_CUSTOM_FILE_REPORT = "/mcafee/event/custom/file/report";
 
 
 class TieClient(Client):
@@ -194,6 +198,75 @@ class TieClient(Client):
 
         # Send the request
         self._dxl_sync_request(req)
+
+    def set_external_file_reputation(self, trust_level, hashes, filename="", comment=""):
+        """
+        Sets the "External" reputation  (`trust level`) of a specified file (as identified by hashes).
+
+        .. note::
+
+            **Client Authorization**
+
+            The OpenDXL Python client invoking this method must have permission to send messages to the
+            ``/mcafee/event/custom/file/report`` topic which is part of the
+            ``TIE Server Set External Reputation`` authorization group.
+
+            The following page provides an example of authorizing a Python client to send messages to an
+            `authorization group`. While the example is based on McAfee Active Response (MAR), the
+            instructions are the same with the exception of swapping the ``TIE Server Set External Reputation``
+            `authorization group` in place of ``Active Response Server API``:
+
+            `<https://opendxl.github.io/opendxl-client-python/pydoc/marsendauth.html>`_
+
+        **Example Usage**
+
+            .. code-block:: python
+
+                # Set the External reputation (trust level) for notepad.exe to Known Trusted
+                tie_client.set_external_file_reputation(
+                TrustLevel.KNOWN_TRUSTED, {
+                    HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1",
+                    HashType.SHA1: "7eb0139d2175739b3ccb0d1110067820be6abd29",
+                    HashType.SHA256: "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
+                },
+                filename="notepad.exe",
+                comment="Reputation set via OpenDXL")
+
+        :param trust_level: The new `trust level` for the file. The list of standard `trust levels` can be found in the
+            :class:`dxltieclient.constants.TrustLevel` constants class.
+        :param hashes: A ``dict`` (dictionary) of hashes that identify the file to update the reputation for.
+            The ``key`` in the dictionary is the `hash type` and the ``value`` is the `hex` representation of the
+            hash value. See the :class:`dxltieclient.constants.HashType` class for the list of `hash type`
+            constants.
+        :param filename: A file name to associate with the file (optional)
+        :param comment: A comment to associate with the file (optional)
+        """
+        # Create the event
+        event = Event(EVENT_TOPIC_CUSTOM_FILE_REPORT)
+
+        # Create a dictionary for the payload
+        payload_dict = {
+            "file": {
+                "type": 18,
+                "hashes": hashes,
+                "attributes": {
+                    "filename": filename
+                },
+                "reputation": {
+                    "score": trust_level
+                }
+            },
+            "provider": {
+                "id": FileProvider.EXTERNAL
+            },
+            "comment": comment
+        }
+
+        # Set the payload
+        event.payload = json.dumps(payload_dict)
+
+        # Send the event
+        self._dxl_client.send_event(event)
 
     def get_file_reputation(self, hashes):
         """
