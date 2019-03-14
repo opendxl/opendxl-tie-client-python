@@ -55,7 +55,7 @@ with DxlClient(config) as client:
         if key != 11:
             # If the oficial providers do not have a reputation for the specified file or is unknown and the external reputation
             # does not have conflicts with the oficial provider's reputation, then the reputation can be set
-            if reputations_dict[key]["trustLevel"] != 99 and reputations_dict[key]["trustLevel"] != 0:
+            if reputations_dict[key]["trustLevel"] != 50 and reputations_dict[key]["trustLevel"] != 0:
                 set_reputation = False
                 break
 
