@@ -10,7 +10,8 @@ import json
 from dxlbootstrap.client import Client
 from dxlbootstrap.util import MessageUtils
 from dxlclient import Request, Event
-from .constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp
+from .constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp, \
+TrustLevel, FileType
 
 # Topic used to set the reputation of a file
 TIE_SET_FILE_REPUTATION_TOPIC = "/mcafee/service/tie/file/reputation/set"
@@ -199,7 +200,7 @@ class TieClient(Client):
         # Send the request
         self._dxl_sync_request(req)
 
-    def set_external_file_reputation(self, trust_level, hashes, filename="", comment=""):
+    def set_external_file_reputation(self, trust_level, hashes, file_type=0, filename="", comment=""):
         """
         Sets the "External" reputation  (`trust level`) of a specified file (as identified by hashes).
 
@@ -222,7 +223,7 @@ class TieClient(Client):
 
             .. code-block:: python
 
-                # Set the External reputation (trust level) for notepad.exe to Known Trusted
+                # Set the External reputation (trust level) for file.exe to Known Trusted
                 tie_client.set_external_file_reputation(
                 TrustLevel.KNOWN_TRUSTED, {
                     HashType.MD5: "f2c7bb8acc97f92e987a2d4087d021b1",
@@ -238,16 +239,24 @@ class TieClient(Client):
             The ``key`` in the dictionary is the `hash type` and the ``value`` is the `hex` representation of the
             hash value. See the :class:`dxltieclient.constants.HashType` class for the list of `hash type`
             constants.
+        :param file_type: A number that represents the file type (optional)
         :param filename: A file name to associate with the file (optional)
         :param comment: A comment to associate with the file (optional)
         """
+        if not trust_level:
+            raise ValueError("TrustLevel was not specified")
+        if not self.validParameter(FileType, file_type):
+            raise ValueError ("FileType was not a valid entry")
+        if not self.validParameter(TrustLevel, trust_level):
+            raise ValueError ("TrustLevel was not a valid entry")
+        if not hashes:
+            raise ValueError("File hashes were not specified")
         # Create the event
         event = Event(EVENT_TOPIC_CUSTOM_FILE_REPORT)
-
         # Create a dictionary for the payload
         payload_dict = {
-            "file": {
-                "type": 18,
+            "file":  {
+                "type": file_type,
                 "hashes": hashes,
                 "attributes": {
                     "filename": filename
@@ -779,7 +788,7 @@ class TieClient(Client):
 
             # Transform file overrides (if applicable)
             if CertReputationProp.OVERRIDDEN in reputation and \
-               CertReputationOverriddenProp.FILES in reputation[CertReputationProp.OVERRIDDEN]:
+                    CertReputationOverriddenProp.FILES in reputation[CertReputationProp.OVERRIDDEN]:
                 overridden_files = \
                     reputation[CertReputationProp.OVERRIDDEN][CertReputationOverriddenProp.FILES]
                 for file_dict in overridden_files:
@@ -787,3 +796,7 @@ class TieClient(Client):
                         file_dict["hashes"] = TieClient._transform_hashes(file_dict["hashes"])
 
         return reputations_dict
+
+    def validParameter(self, Constant, value):
+        return value in [getattr(Constant, key) for key in dir(Constant) if not key.startswith('__')]
+

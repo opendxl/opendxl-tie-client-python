@@ -786,3 +786,46 @@ class FirstInstanceEventProp(object):
     SYSTEM_GUID = "agentGuid"
     HASHES = "hashes"
     NAME = "name"
+
+class FileType (object):
+
+    NONE = 0
+    COM = 1
+    EXE = 2
+    DRV = 4
+    BOOT = 8
+    PE = 16
+    PEEXE = 18
+    VXD = 64
+    DLLNONPE = 128
+    DLL = 144
+    WIN = 272
+    MZSTUB = 512
+    NLM = 1024
+    ELF = 2048
+    JS = 4096
+    VBS = 8192
+    SCRIPT = 12288
+    OLE = 16384
+    PIC = 65536
+    TEXT = 131072
+    BAT = 143360
+    HTML = 262144
+    HTMLTEXT = 393216
+    HTA = 524288
+    RTF = 1048576
+    PDF = 2097152
+    MMEDIA = 4194304
+    URL = 8388608
+    SYS = 16777232
+    ZIP = 33587200
+    CAB = 67141632
+    RARNOARC =  134217728
+    RAR = 134250496
+    OOXML = 167772160
+    OOXMLPK = 301989888
+    MACHO = 536870912
+    APK = 1073741824
+    CLASS = 2147483648
+    JAR = 4328554496
+
