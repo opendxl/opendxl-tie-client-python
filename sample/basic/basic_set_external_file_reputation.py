@@ -68,7 +68,7 @@ with DxlClient(config) as client:
                 FileType.PEEXE,
                 filename="file.exe",
                 comment="Reputation set via OpenDXL")
-            print("Event Send")
+            print("Event Sent")
         except ValueError as e:
             print("Error: "+ str(e))
     else:
