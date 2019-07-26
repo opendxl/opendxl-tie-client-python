@@ -39,8 +39,8 @@ class FakeTieServerEvent(EventCallback):
         filename = event_payload["file"]["attributes"]["filename"]
         if filename in self._requests_handler.REPUTATION_METADATA:
             reputations = self._requests_handler.REPUTATION_METADATA[filename]["reputations"]
-            external_rep = next(filter(
-                lambda rep: rep[ReputationProp.PROVIDER_ID] == FileProvider.EXTERNAL, reputations), None)
+            external_rep = next(
+                (rep for rep in reputations if rep[ReputationProp.PROVIDER_ID] == FileProvider.EXTERNAL), None)
             if not external_rep:
                 external_rep = {ReputationProp.ATTRIBUTES: {},
                                 ReputationProp.PROVIDER_ID: FileProvider.EXTERNAL}
