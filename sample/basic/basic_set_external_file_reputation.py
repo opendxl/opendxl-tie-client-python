@@ -4,6 +4,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 
+import hashlib
 import logging
 import os
 import sys
@@ -11,9 +12,6 @@ import time
 
 from dxlclient.client import DxlClient
 from dxlclient.client_config import DxlClientConfig
-from _md5 import md5
-from _sha1 import sha1
-from _sha256 import sha256
 
 from dxltieclient import TieClient
 from dxltieclient.constants import HashType, TrustLevel, FileType, FileProvider, ReputationProp
@@ -31,9 +29,9 @@ config = DxlClientConfig.create_dxl_config_from_file(CONFIG_FILE)
 
 # Random values for testing
 random = time.time()
-fileMD5 = md5(random).hexdigest()
-fileSHA1 = sha1(random).hexdigest()
-fileSHA256 = sha256(random).hexdigest()
+fileMD5 = hashlib.md5(str(random).encode('utf-8')).hexdigest()
+fileSHA1 = hashlib.sha1(str(random).encode('utf-8')).hexdigest()
+fileSHA256 = hashlib.sha256(str(random).encode('utf-8')).hexdigest()
 
 # Create the client
 with DxlClient(config) as client:
