@@ -7,8 +7,8 @@ from __future__ import print_function
 import logging
 import os
 import sys
+import time
 
-from dxlclient import UuidGenerator
 from dxlclient.client import DxlClient
 from dxlclient.client_config import DxlClientConfig
 from _md5 import md5
@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 config = DxlClientConfig.create_dxl_config_from_file(CONFIG_FILE)
 
 # Random values for testing
-random = UuidGenerator.generate_id_as_string().encode('utf-8')
+random = time.time()
 fileMD5 = md5(random).hexdigest()
 fileSHA1 = sha1(random).hexdigest()
 fileSHA256 = sha256(random).hexdigest()
