@@ -8,12 +8,12 @@ import logging
 import os
 import sys
 
-from dxlclient import UuidGenerator
-from dxlclient.client import DxlClient
-from dxlclient.client_config import DxlClientConfig
 from _md5 import md5
 from _sha1 import sha1
 from _sha256 import sha256
+from dxlclient import UuidGenerator
+from dxlclient.client import DxlClient
+from dxlclient.client_config import DxlClientConfig
 
 from dxltieclient import TieClient
 from dxltieclient.constants import HashType, TrustLevel, FileType, FileProvider, ReputationProp
