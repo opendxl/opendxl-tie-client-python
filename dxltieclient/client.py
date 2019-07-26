@@ -4,14 +4,17 @@
 ################################################################################
 
 from __future__ import absolute_import
+
 import base64
 import binascii
 import json
+
 from dxlbootstrap.client import Client
 from dxlbootstrap.util import MessageUtils
 from dxlclient import Request, Event
+
 from .constants import FileProvider, ReputationProp, CertProvider, CertReputationProp, CertReputationOverriddenProp, \
-TrustLevel, FileType
+    TrustLevel, FileType
 
 # Topic used to set the reputation of a file
 TIE_SET_FILE_REPUTATION_TOPIC = "/mcafee/service/tie/file/reputation/set"
@@ -41,8 +44,8 @@ TIE_EVENT_FILE_FIRST_INSTANCE_TOPIC = "/mcafee/event/tie/file/firstinstance"
 
 TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC = "/mcafee/event/tie/file/prevalence"
 
-#Topic used to notify that a file reputation has changed
-EVENT_TOPIC_CUSTOM_FILE_REPORT = "/mcafee/event/custom/file/report";
+# Topic used to notify that a file reputation has changed
+TIE_EVENT_EXTERNAL_FILE_REPORT_TOPIC = "/mcafee/event/external/file/report"
 
 
 class TieClient(Client):
@@ -209,7 +212,7 @@ class TieClient(Client):
             **Client Authorization**
 
             The OpenDXL Python client invoking this method must have permission to send messages to the
-            ``/mcafee/event/custom/file/report`` topic which is part of the
+            ``/mcafee/event/external/file/report`` topic which is part of the
             ``TIE Server Set External Reputation`` authorization group.
 
             The following page provides an example of authorizing a Python client to send messages to an
@@ -230,6 +233,7 @@ class TieClient(Client):
                     HashType.SHA1: "7eb0139d2175739b3ccb0d1110067820be6abd29",
                     HashType.SHA256: "142e1d688ef0568370c37187fd9f2351d7ddeda574f8bfa9b0fa4ef42db85aa2"
                 },
+                FileType.PEEXE,
                 filename="notepad.exe",
                 comment="Reputation set via OpenDXL")
 
@@ -239,23 +243,24 @@ class TieClient(Client):
             The ``key`` in the dictionary is the `hash type` and the ``value`` is the `hex` representation of the
             hash value. See the :class:`dxltieclient.constants.HashType` class for the list of `hash type`
             constants.
-        :param file_type: A number that represents the file type (optional)
+        :param file_type: A number that represents the file type. The list of allowed `file types` can be found in the
+            :class:`dxltieclient.constants.FileType` constants class. (optional)
         :param filename: A file name to associate with the file (optional)
         :param comment: A comment to associate with the file (optional)
         """
         if not trust_level:
             raise ValueError("TrustLevel was not specified")
-        if not self.validParameter(FileType, file_type):
-            raise ValueError ("FileType was not a valid entry")
-        if not self.validParameter(TrustLevel, trust_level):
-            raise ValueError ("TrustLevel was not a valid entry")
+        if not self.valid_parameter(FileType, file_type):
+            raise ValueError("FileType was not a valid entry")
+        if not self.valid_parameter(TrustLevel, trust_level):
+            raise ValueError("TrustLevel was not a valid entry")
         if not hashes:
             raise ValueError("File hashes were not specified")
         # Create the event
-        event = Event(EVENT_TOPIC_CUSTOM_FILE_REPORT)
+        event = Event(TIE_EVENT_EXTERNAL_FILE_REPORT_TOPIC)
         # Create a dictionary for the payload
         payload_dict = {
-            "file":  {
+            "file": {
                 "type": file_type,
                 "hashes": hashes,
                 "attributes": {
@@ -421,7 +426,7 @@ class TieClient(Client):
 
                 [
                     {
-                        "agentGuid": "{3a6f574a-3e6f-436d-acd4-bcde336b054d}",
+                        "agentGuid": "{3a6f574a-3e6f-436d-acd4-b3de336b054d}",
                         "date": 1475873692
                     },
                     {
@@ -624,9 +629,9 @@ class TieClient(Client):
             These attributes can be found in the :class:`dxltieclient.constants` module:
 
                 :class:`dxltieclient.constants.CertEnterpriseAttrib`
-                    Attributes associated with the `Enterprise` reputation provider for certificates
+                    Attributes associated with `Enterprise` reputation provider for certificates
                 :class:`dxltieclient.constants.CertGtiAttrib`
-                    Attributes associated with the `Global Threat Intelligence (GTI)` reputation provider for certificates
+                    Attributes associated with `Global Threat Intelligence (GTI)` reputation provider for certificates
 
             The following example shows how to access the `prevalence` attribute from the "Enterprise" reputation:
 
@@ -797,6 +802,6 @@ class TieClient(Client):
 
         return reputations_dict
 
-    def validParameter(self, Constant, value):
-        return value in [getattr(Constant, key) for key in dir(Constant) if not key.startswith('__')]
-
+    @staticmethod
+    def valid_parameter(constant, value):
+        return value in [getattr(constant, key) for key in dir(constant) if not key.startswith('__')]

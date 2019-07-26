@@ -4,6 +4,22 @@ Basic Set Reputation Example
 This sample demonstrates invoking the McAfee Threat Intelligence Exchange (TIE) DXL service to set the
 enterprise-specific `trust level` of a file (as identified by its hashes).
 
+.. note::
+
+
+
+    From TIE Server 3.0.0 and above it's recommended for automated integrations to set an External Reputation
+    (see :doc:`basicsetexternalreputationexample`) instead of an Enterprise Override.
+
+    Advantages:
+        * It will help you differentiate between manual Enterprise Overrides (from ePO UI) from automated
+          integrations (from OpenDXL).
+        * External Provider reputations will be treated as a fallback, so endpoints will consider it only if there is
+          no other reputation for the file. This will reduce the impact of false positives.
+        * Files with an Enterprise Overrides are not deleted after its retention period expires, because this information
+          cannot be recovered. When files are no longer used, keeping their automatically overridden reputations
+          is not practical.
+
 Prerequisites
 *************
 * The samples configuration step has been completed (see :doc:`sampleconfig`)

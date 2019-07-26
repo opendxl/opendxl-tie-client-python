@@ -13,6 +13,7 @@ def clean_dir(src_dir, directory):
             target_file = os.path.join(directory, f)
             if not os.path.isdir(target_file) and not f.lower().endswith(".py"):
                 os.remove(os.path.join(directory, f))
+    if os.path.exists(src_dir):
         for f in os.listdir(src_dir):
             src_file = os.path.join(src_dir, f)
             if not os.path.isdir(src_file) and \

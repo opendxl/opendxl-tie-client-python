@@ -5,17 +5,18 @@ import json
 import os
 import re
 import sys
-
 from tempfile import NamedTemporaryFile
 from unittest import TestCase
-from mock import patch
+
 from dxlclient import DxlClientConfig, DxlClient
+from mock import patch
 
 if sys.version_info[0] > 2:
     import builtins  # pylint: disable=import-error, unused-import
 else:
     import __builtin__  # pylint: disable=import-error
     builtins = __builtin__  # pylint: disable=invalid-name
+
 
 class BaseClientTest(TestCase):
     """

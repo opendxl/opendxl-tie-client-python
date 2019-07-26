@@ -14,7 +14,8 @@ import struct
 if sys.version_info[0] > 2:
     RANGE = range
 else:
-    RANGE = xrange # pylint: disable=undefined-variable
+    # noinspection PyUnresolvedReferences
+    RANGE = xrange  # pylint: disable=undefined-variable
 
 
 class EpochMixin(object):
@@ -22,6 +23,7 @@ class EpochMixin(object):
     Mixin (helper) class that provides utility methods for parsing properties/attributes that
     contain Epoch times.
     """
+
     @staticmethod
     def to_localtime(epoch_time):
         """
@@ -42,7 +44,7 @@ class EpochMixin(object):
         return time.localtime(float(epoch_time))
 
     @staticmethod
-    def to_localtime_string(epoch_time, format="%Y-%m-%d %H:%M:%S"): # pylint: disable=redefined-builtin
+    def to_localtime_string(epoch_time, format="%Y-%m-%d %H:%M:%S"):  # pylint: disable=redefined-builtin
         """
         Converts the specified Epoch time to a local time string.
 
@@ -221,6 +223,7 @@ class FileReputationProp(ReputationProp):
     """
     pass
 
+
 """
             "files": [
                 {
@@ -232,7 +235,7 @@ class FileReputationProp(ReputationProp):
                 }
             ],
             "truncated": 0
-""" # pylint: disable=pointless-string-statement
+"""  # pylint: disable=pointless-string-statement
 
 
 class CertReputationProp(ReputationProp):
@@ -288,6 +291,7 @@ class EnterpriseAttrib(EpochMixin):
         |                       |         | helper methods used to parse the encoded version string.         |
         +-----------------------+---------+------------------------------------------------------------------+
     """
+
     @staticmethod
     def to_version_tuple(version_attrib):
         """
@@ -399,6 +403,7 @@ class FileEnterpriseAttrib(EnterpriseAttrib):
         |                       |         | attribute                                                        |
         +-----------------------+---------+------------------------------------------------------------------+
     """
+
     @staticmethod
     def to_aggregate_tuple(aggregate_attrib):
         """
@@ -431,7 +436,7 @@ class FileEnterpriseAttrib(EnterpriseAttrib):
         """
         bin_attrib = base64.b64decode(aggregate_attrib)
         agg_list = \
-            list(struct.unpack('<H', bin_attrib[i:i+2])[0]
+            list(struct.unpack('<H', bin_attrib[i:i + 2])[0]
                  for i in RANGE(0, len(bin_attrib), 2))
         if agg_list[4] > 0:
             agg_list[4] = (agg_list[4] / 100.0)
@@ -787,8 +792,8 @@ class FirstInstanceEventProp(object):
     HASHES = "hashes"
     NAME = "name"
 
-class FileType (object):
 
+class FileType(object):
     NONE = 0
     COM = 1
     EXE = 2
@@ -820,7 +825,7 @@ class FileType (object):
     SYS = 16777232
     ZIP = 33587200
     CAB = 67141632
-    RARNOARC =  134217728
+    RARNOARC = 134217728
     RAR = 134250496
     OOXML = 167772160
     OOXMLPK = 301989888
@@ -828,4 +833,3 @@ class FileType (object):
     APK = 1073741824
     CLASS = 2147483648
     JAR = 4328554496
-

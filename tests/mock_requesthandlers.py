@@ -89,6 +89,35 @@ class FakeTieServerCallback(RequestCallback):
                 }
             ]
         },
+        "UNKNOWN_FILE": {
+            "hashes": {
+                "md5": "WGKX079jtHii32HvJXn9ng==",
+                "sha1": "p8UVqDbyDoWJ0caOBiN5BMPOwq0=",
+                "sha256": "8GSaVD6PtoLsJafcw7j6e4Z0TgGK5Lx4S+bIbLRoYa4="
+            },
+            "reputations": [
+                {
+                    "attributes": {
+                        "2120340": "2139162632"
+                    },
+                    "createDate": 1451504331,
+                    "providerId": 1,
+                    "trustLevel": 50
+                },
+                {
+                    "attributes": {
+                        "2101652": "11",
+                        "2102165": "1451504331",
+                        "2111893": "22",
+                        "2114965": "0",
+                        "2139285": "72339069014638857"
+                    },
+                    "createDate": 1451504331,
+                    "providerId": 3,
+                    "trustLevel": 0
+                }
+            ]
+        },
         TEST_CERT_NAME: {
             "agents": [
                 {
