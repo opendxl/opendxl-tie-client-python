@@ -379,7 +379,10 @@ class TieClient(Client):
         req = Request(TIE_GET_FILE_REPUTATION_TOPIC)
 
         # Create a dictionary for the payload
-        payload_dict = {"hashes": []}
+        payload_dict = {
+            "hashes": [],
+            "scanType": 3  # Set Scan Type as 3 (On Demand Scan) to identify this request as not coming from an endpoint
+        }
 
         for key, value in hashes.items():
             payload_dict["hashes"].append(
