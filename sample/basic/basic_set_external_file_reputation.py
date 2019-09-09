@@ -57,7 +57,7 @@ with DxlClient(config) as client:
     reputations_dict = tie_client.get_file_reputation(hashes)
     #
     # Check if there's any definitive reputation (different to Not Set [0] and Unknown [50])
-    # for any provider except for External Provider (providerId=11)
+    # for any provider except for External Provider (providerId=15)
     #
     has_definitive_reputation = \
         any([rep[ReputationProp.TRUST_LEVEL] != TrustLevel.NOT_SET

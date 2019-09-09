@@ -103,7 +103,7 @@ class FileProvider(object):
     ENTERPRISE = 3
     ATD = 5
     MWG = 7
-    EXTERNAL = 11
+    EXTERNAL = 15
 
 
 class CertProvider(object):
