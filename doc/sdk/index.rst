@@ -45,6 +45,7 @@ Basic
         :maxdepth: 1
 
         basicgetreputationexample
+        basicsetexternalreputationexample
         basicsetreputationexample
         basicfirstrefexample
 

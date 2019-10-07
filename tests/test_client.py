@@ -1,7 +1,8 @@
 from dxltieclient import *
+from tests.mock_tieserver import MockTieServer
 from tests.test_base import BaseClientTest
 from tests.test_value_constants import *
-from tests.mock_tieserver import MockTieServer
+
 
 class JsonDumpCallback(DetectionCallback):
 
@@ -12,12 +13,11 @@ class JsonDumpCallback(DetectionCallback):
 class TestSubscribeUnsubscribe(BaseClientTest):
 
     def test_subscribeunsubscribe(self):
-
         file_reputation_change_topic = "/mcafee/event/tie/file/repchange/broadcast"
         cert_reputation_change_topic = "/mcafee/event/tie/cert/repchange/broadcast"
         file_detection_topic = "/mcafee/event/tie/file/detection"
         file_first_instance_topic = "/mcafee/event/tie/file/firstinstance"
-        #TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC = "/mcafee/event/tie/file/prevalence"
+        # TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC = "/mcafee/event/tie/file/prevalence"
 
         with self.create_client(max_retries=0) as dxl_client:
             tie_client = TieClient(dxl_client)
@@ -37,7 +37,7 @@ class TestSubscribeUnsubscribe(BaseClientTest):
             self.assertIn(cert_reputation_change_topic, dxl_client.subscriptions)
             self.assertIn(file_first_instance_topic, dxl_client.subscriptions)
             self.assertIn(file_detection_topic, dxl_client.subscriptions)
-            #self.assertIn(TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC, dxl_client.subscriptions)
+            # self.assertIn(TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC, dxl_client.subscriptions)
 
             # Unsubscribe from Event Topics
             tie_client.remove_file_reputation_change_callback(detection_callback)
@@ -49,7 +49,7 @@ class TestSubscribeUnsubscribe(BaseClientTest):
             self.assertNotIn(cert_reputation_change_topic, dxl_client.subscriptions)
             self.assertNotIn(file_first_instance_topic, dxl_client.subscriptions)
             self.assertNotIn(file_detection_topic, dxl_client.subscriptions)
-            #self.assertIn(TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC, dxl_client.subscriptions)
+            # self.assertIn(TIE_EVENT_FILE_PREVALENCE_CHANGE_TOPIC, dxl_client.subscriptions)
 
             dxl_client.disconnect()
 
@@ -62,7 +62,6 @@ class TestGetFileReputation(BaseClientTest):
             tie_client = TieClient(dxl_client)
             dxl_client.connect()
             with MockTieServer(dxl_client):
-
                 # Notepad.exe reputations
                 reputations_dict = \
                     tie_client.get_file_reputation(FILE_NOTEPAD_EXE_HASH_DICT)
@@ -91,7 +90,6 @@ class TestGetFileReputation(BaseClientTest):
 
             dxl_client.disconnect()
 
-
     def test_getfilerep_invalid(self):
         with self.create_client(max_retries=0) as dxl_client:
             # Set up client, and register mock service
@@ -111,7 +109,6 @@ class TestGetFileReputation(BaseClientTest):
 class TestSetFileReputation(BaseClientTest):
 
     def test_setfilerep(self):
-
         file_notepad_exe_filename = "notepad.exe"
 
         with self.create_client(max_retries=0) as dxl_client:
@@ -135,6 +132,38 @@ class TestSetFileReputation(BaseClientTest):
                 self.assertEqual(
                     reputations_dict[FileProvider.ENTERPRISE][ReputationProp.TRUST_LEVEL],
                     TrustLevel.MOST_LIKELY_TRUSTED
+                )
+
+            dxl_client.disconnect()
+
+
+class TestSetExternalFileReputation(BaseClientTest):
+
+    def test_setexternalfilerep(self):
+        file_notepad_exe_filename = "notepad.exe"
+
+        with self.create_client(max_retries=0) as dxl_client:
+            # Set up client, and register mock service
+            tie_client = TieClient(dxl_client)
+            dxl_client.connect()
+            with MockTieServer(dxl_client):
+                # Set Notepad.exe reputations
+                # Set the External reputation for notepad.exe to Most Likely Trusted
+                tie_client.set_external_file_reputation(
+                    TrustLevel.KNOWN_TRUSTED,
+                    FILE_NOTEPAD_EXE_HASH_DICT,
+                    file_type=FileType.PEEXE,
+                    filename=file_notepad_exe_filename,
+                    comment=SET_REP_COMMENT
+                )
+
+                # Get Notepad.exe reputations
+                reputations_dict = \
+                    tie_client.get_file_reputation(FILE_NOTEPAD_EXE_HASH_DICT)
+
+                self.assertEqual(
+                    reputations_dict[FileProvider.EXTERNAL][ReputationProp.TRUST_LEVEL],
+                    TrustLevel.KNOWN_TRUSTED
                 )
 
             dxl_client.disconnect()
@@ -165,7 +194,6 @@ class TestGetCertReputation(BaseClientTest):
                 )
 
             dxl_client.disconnect()
-
 
     def test_getcertrep_invalid(self):
         with self.create_client(max_retries=0) as dxl_client:
@@ -233,7 +261,6 @@ class TestGetFileFirstReference(BaseClientTest):
 
             dxl_client.disconnect()
 
-
     def test_getfilefirstrefs_invalid(self):
         with self.create_client(max_retries=0) as dxl_client:
             # Set up client, and register mock service
@@ -268,7 +295,6 @@ class TestGetCertFirstReference(BaseClientTest):
                     self.assertIn(system[FirstRefProp.SYSTEM_GUID], FIRST_REF_AGENT_GUIDS)
 
             dxl_client.disconnect()
-
 
     def test_getcertfirstrefs_invalid(self):
         with self.create_client(max_retries=0) as dxl_client:
@@ -317,7 +343,6 @@ class TestTransforms(BaseClientTest):
 
         self.assertDictEqual(transformed_hashes, notepad_hashes_payload_expected)
 
-
     def test_transformreps(self):
         payload_reps_dict_input = [
             {
@@ -340,7 +365,7 @@ class TestTransforms(BaseClientTest):
                 ReputationProp.CREATE_DATE: 1476318514,
                 ReputationProp.PROVIDER_ID: CertProvider.ENTERPRISE,
                 ReputationProp.TRUST_LEVEL: TrustLevel.NOT_SET,
-                }
+            }
         ]
 
         payload_reps_dict_expected = {
@@ -364,13 +389,12 @@ class TestTransforms(BaseClientTest):
                 ReputationProp.CREATE_DATE: 1476318514,
                 ReputationProp.PROVIDER_ID: CertProvider.ENTERPRISE,
                 ReputationProp.TRUST_LEVEL: TrustLevel.NOT_SET,
-                }
+            }
         }
 
         transformed_reps = TieClient._transform_reputations(payload_reps_dict_input)
 
         self.assertDictEqual(transformed_reps, payload_reps_dict_expected)
-
 
     def test_transformreps_withoverrides(self):
         payload_reps_dict_input_or = [
@@ -426,7 +450,7 @@ class TestTransforms(BaseClientTest):
                 ReputationProp.PROVIDER_ID: CertProvider.ENTERPRISE,
                 ReputationProp.TRUST_LEVEL: TrustLevel.NOT_SET,
                 CertReputationProp.OVERRIDDEN: {
-                    CertReputationOverriddenProp.FILES:[
+                    CertReputationOverriddenProp.FILES: [
                         {
                             RepChangeEventProp.HASHES: FILE_NOTEPAD_EXE_HASH_DICT
                         }
