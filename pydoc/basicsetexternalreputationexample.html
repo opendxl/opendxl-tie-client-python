@@ -1,0 +1,221 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Basic Set External Reputation Example &#8212; McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.3.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Basic Set Reputation Example" href="basicsetreputationexample.html" />
+    <link rel="prev" title="Basic Get Reputation Example" href="basicgetreputationexample.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="basicsetreputationexample.html" title="Basic Set Reputation Example"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="basicgetreputationexample.html" title="Basic Get Reputation Example"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.3.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basic-set-external-reputation-example">
+<h1>Basic Set External Reputation Example<a class="headerlink" href="#basic-set-external-reputation-example" title="Permalink to this headline">¶</a></h1>
+<p>This sample demonstrates invoking the McAfee Threat Intelligence Exchange (TIE) DXL service to set the
+External Provider <cite>trust level</cite> of a file (as identified by its hashes).</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">The samples configuration step has been completed (see <a class="reference internal" href="sampleconfig.html"><span class="doc">Samples Configuration</span></a>)</p>
+</li>
+<li><p class="first">A McAfee Threat Intelligence Exchange (TIE) Service is available on the DXL fabric</p>
+</li>
+<li><p class="first">TIE Server version is 3.0.0 or above</p>
+</li>
+<li><p class="first">The Python client must be authorized to send messages to the <code class="docutils literal notranslate"><span class="pre">/mcafee/event/external/file/report</span></code>
+topic which is part of the <code class="docutils literal notranslate"><span class="pre">TIE</span> <span class="pre">Server</span> <span class="pre">Set</span> <span class="pre">External</span> <span class="pre">Reputation</span></code> authorization group.</p>
+<p>The following page provides an example of authorizing a Python client to send messages to an
+<cite>authorization group</cite>. While the example is based on McAfee Active Response (MAR), the
+instructions are the same with the exception of swapping the <code class="docutils literal notranslate"><span class="pre">TIE</span> <span class="pre">Server</span> <span class="pre">Set</span> <span class="pre">External</span> <span class="pre">Reputation</span></code>
+<cite>authorization group</cite> in place of <code class="docutils literal notranslate"><span class="pre">Active</span> <span class="pre">Response</span> <span class="pre">Server</span> <span class="pre">API</span></code>:</p>
+<p><a class="reference external" href="https://opendxl.github.io/opendxl-client-python/pydoc/marsendauth.html">https://opendxl.github.io/opendxl-client-python/pydoc/marsendauth.html</a></p>
+</li>
+</ul>
+</div>
+<div class="section" id="running">
+<h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p>To run this sample execute the <code class="docutils literal notranslate"><span class="pre">sample/basic/basic_set_external_file_reputation.py</span></code> script as follows:</p>
+<blockquote>
+<div><pre class="literal-block">
+c:\dxltieclient-python-sdk-0.3.0&gt;python sample/basic/basic_set_external_file_reputation.py
+</pre>
+</div></blockquote>
+<p>If the <cite>set external reputation</cite> operation succeeds the following message will be displayed:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Event</span> <span class="n">Sent</span><span class="o">.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="details">
+<h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
+<p>The majority of the sample code is shown below:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the client</span>
+<span class="k">with</span> <span class="n">DxlClient</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+
+    <span class="c1"># Connect to the fabric</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+    <span class="c1"># Create the McAfee Threat Intelligence Exchange (TIE) client</span>
+    <span class="n">tie_client</span> <span class="o">=</span> <span class="n">TieClient</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># Hashes for the file whose reputation will be set.</span>
+    <span class="c1">#</span>
+    <span class="n">hashes</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">HashType</span><span class="o">.</span><span class="n">MD5</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">FILE</span> <span class="n">MD5</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">HashType</span><span class="o">.</span><span class="n">SHA1</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">FILE</span> <span class="n">SHA1</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">HashType</span><span class="o">.</span><span class="n">SHA256</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">FILE</span> <span class="n">SHA256</span><span class="o">&gt;</span>
+    <span class="p">}</span>
+    <span class="c1">#</span>
+    <span class="c1"># Request reputation for the file</span>
+    <span class="c1">#</span>
+    <span class="n">reputations_dict</span> <span class="o">=</span> <span class="n">tie_client</span><span class="o">.</span><span class="n">get_file_reputation</span><span class="p">(</span><span class="n">hashes</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="c1"># Check if there&#39;s any definitive reputation (different to Not Set [0] and Unknown [50])</span>
+    <span class="c1"># for any provider except for External Provider (providerId=15)</span>
+    <span class="c1">#</span>
+    <span class="n">has_definitive_reputation</span> <span class="o">=</span> \
+        <span class="nb">any</span><span class="p">([</span><span class="n">rep</span><span class="p">[</span><span class="n">ReputationProp</span><span class="o">.</span><span class="n">TRUST_LEVEL</span><span class="p">]</span> <span class="o">!=</span> <span class="n">TrustLevel</span><span class="o">.</span><span class="n">NOT_SET</span>
+             <span class="ow">and</span> <span class="n">rep</span><span class="p">[</span><span class="n">ReputationProp</span><span class="o">.</span><span class="n">TRUST_LEVEL</span><span class="p">]</span> <span class="o">!=</span> <span class="n">TrustLevel</span><span class="o">.</span><span class="n">UNKNOWN</span>
+             <span class="ow">and</span> <span class="n">rep</span><span class="p">[</span><span class="n">ReputationProp</span><span class="o">.</span><span class="n">PROVIDER_ID</span><span class="p">]</span> <span class="o">!=</span> <span class="n">FileProvider</span><span class="o">.</span><span class="n">EXTERNAL</span>
+             <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="n">reputations_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+
+    <span class="k">if</span> <span class="n">has_definitive_reputation</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Abort: There is a reputation from another provider for the file, External Reputation is not necessary.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">#</span>
+        <span class="c1"># Set the External reputation for a the file &quot;random.exe&quot; to Might Be Trusted</span>
+        <span class="c1">#</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tie_client</span><span class="o">.</span><span class="n">set_external_file_reputation</span><span class="p">(</span>
+                <span class="n">TrustLevel</span><span class="o">.</span><span class="n">MIGHT_BE_TRUSTED</span><span class="p">,</span>
+                <span class="n">hashes</span><span class="p">,</span>
+                <span class="n">FileType</span><span class="o">.</span><span class="n">PEEXE</span><span class="p">,</span>
+                <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;random.exe&quot;</span><span class="p">,</span>
+                <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;External Reputation set via OpenDXL&quot;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Event Sent&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Error: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Once a connection is established to the DXL fabric, a <a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient" title="dxltieclient.client.TieClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">dxltieclient.client.TieClient</span></code></a> instance is created
+which will be used to communicate with the TIE DXL services.</p>
+<p>The recommended workflow is to first check the reputation for the file, and avoid setting the External Provider
+<cite>trust level</cite> if the response already includes a definitive reputation. This is because External Provider
+will be used as a fallback, only if no other reputation is available.</p>
+<p>The External Provider <cite>trust level</cite> is then established for the file by invoking the
+<a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient.set_external_file_reputation" title="dxltieclient.client.TieClient.set_external_file_reputation"><code class="xref py py-func docutils literal notranslate"><span class="pre">dxltieclient.client.TieClient.set_external_file_reputation()</span></code></a> method of the <a class="reference internal" href="dxltieclient.client.html#dxltieclient.client.TieClient" title="dxltieclient.client.TieClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">dxltieclient.client.TieClient</span></code></a>
+instance along with the <cite>hash values</cite> used to identify the file.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">filename</span></code>, <code class="docutils literal notranslate"><span class="pre">filetype</span></code> and <code class="docutils literal notranslate"><span class="pre">comment</span></code> fields are optional, but are useful in identifying the particular
+file that is associated with the hashes (especially if the file did not previously exist in the TIE repository).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Basic Set External Reputation Example</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#running">Running</a></li>
+<li><a class="reference internal" href="#details">Details</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="basicgetreputationexample.html"
+                        title="previous chapter">Basic Get Reputation Example</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="basicsetreputationexample.html"
+                        title="next chapter">Basic Set Reputation Example</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/basicsetexternalreputationexample.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="basicsetreputationexample.html" title="Basic Set Reputation Example"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="basicgetreputationexample.html" title="Basic Get Reputation Example"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">McAfee Threat Intelligence Exchange (TIE) DXL Client Library 0.3.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, McAfee LLC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>
